@@ -1363,14 +1363,16 @@ function createCarousel(
       lensUniforms.uBlueRing.value = lensFxFull.uBlueRing * fx * 0.08;
       lensUniforms.uRimLine.value = lensFxFull.uRimLine * fx * 0.03;
       lensUniforms.uVignette.value = lensFxFull.uVignette * fx;
-      lensUniforms.uGlow.value = lensFxFull.uGlow * fx * 0.25;
+      lensUniforms.uGlow.value = LENS.glow * fx * 0.25;
       lensUniforms.uRimTangential.value = lensFxFull.uRimTangential * fx * 0.35;
-      lensUniforms.uShimmerDepth.value = lensFxFull.uShimmerDepth * fx * 0.25;
+      lensUniforms.uShimmerDepth.value = LENS.shimmerDepth * fx * 0.25;
     } else {
       lensUniforms.uSizeX.value = LENS.sizeX;
       lensUniforms.uSizeY.value = LENS.sizeY;
       lensUniforms.uRingWidth.value = LENS.ringWidth;
       lensUniforms.uWhiteGlow.value = LENS.whiteGlow;
+      lensUniforms.uGlow.value = LENS.glow;
+      lensUniforms.uShimmerDepth.value = LENS.shimmerDepth;
       for (const key of LENS_FX_KEYS) {
         lensUniforms[key].value = lensFxFull[key] * fx;
       }
