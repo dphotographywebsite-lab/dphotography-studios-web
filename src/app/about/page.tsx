@@ -108,14 +108,14 @@ export default function AboutPage() {
             </div>
 
             {/* Dual Brand Architecture */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+            <div className="grid grid-cols-2 gap-2.5 sm:gap-4 pt-2">
               <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={9} scaleOnHover={1.03} glare={0.28} shadow={0.45} className="h-full">
-                <div className="p-5 rounded-2xl spatial-bento-card space-y-2 h-full w-full">
-                  <Camera className="w-5 h-5 text-[#d4af37]" />
-                  <h3 className="font-monument text-sm text-white uppercase">
+                <div className="p-3.5 sm:p-5 rounded-2xl spatial-bento-card space-y-1.5 sm:space-y-2 h-full w-full">
+                  <Camera className="w-4 h-4 sm:w-5 sm:h-5 text-[#d4af37]" />
+                  <h3 className="font-monument text-xs sm:text-sm text-white uppercase">
                     DPhotography Studios & Films
                   </h3>
-                  <p className="text-xs text-white/70 leading-relaxed">
+                  <p className="text-[11px] sm:text-xs text-white/70 leading-relaxed">
                     Bodas de Lujo, Quinceañeras, Retratos Editoriales en Estudio,
                     Maternidad y Familia.
                   </p>
@@ -123,12 +123,12 @@ export default function AboutPage() {
               </TiltedCard>
 
               <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={9} scaleOnHover={1.03} glare={0.28} shadow={0.45} className="h-full">
-                <div className="p-5 rounded-2xl spatial-bento-card space-y-2 h-full w-full">
-                  <Disc className="w-5 h-5 text-[#d4af37]" />
-                  <h3 className="font-monument text-sm text-[#f3dc8a] uppercase">
+                <div className="p-3.5 sm:p-5 rounded-2xl spatial-bento-card space-y-1.5 sm:space-y-2 h-full w-full">
+                  <Disc className="w-4 h-4 sm:w-5 sm:h-5 text-[#d4af37]" />
+                  <h3 className="font-monument text-xs sm:text-sm text-[#f3dc8a] uppercase">
                     División DMedia Records
                   </h3>
-                  <p className="text-xs text-white/70 leading-relaxed">
+                  <p className="text-[11px] sm:text-xs text-white/70 leading-relaxed">
                     Videos Musicales Oficiales, Visuales para Artistas,
                     Cortometrajes y Campañas Comerciales.
                   </p>
@@ -138,8 +138,8 @@ export default function AboutPage() {
           </div>
 
           {/* Dual Portrait Showcase (6 cols) */}
-          <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 items-center">
-            <div className="space-y-4">
+          <div className="lg:col-span-6 grid grid-cols-2 gap-2.5 sm:gap-5 items-center">
+            <div className="space-y-2.5 sm:space-y-4">
               <TiltedCard
                 imageSrc="/brand/creator-tuxedo-portrait.jpg"
                 altText="Fundador en Traje de Etiqueta con Cámara"
@@ -153,7 +153,7 @@ export default function AboutPage() {
                 className="aspect-[3/4] border border-[#d4af37]/40 shadow-2xl"
               />
               <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={8} scaleOnHover={1.02} glare={0.22} shadow={0.35}>
-                <div className="p-4 rounded-2xl spatial-bento-card text-xs text-center w-full">
+                <div className="p-2.5 sm:p-4 rounded-2xl spatial-bento-card text-[10px] sm:text-xs text-center w-full">
                   <strong className="text-[#f3dc8a] block uppercase tracking-widest">
                     El Estándar Editorial
                   </strong>
@@ -164,7 +164,7 @@ export default function AboutPage() {
               </TiltedCard>
             </div>
 
-            <div className="space-y-4 sm:pt-8">
+            <div className="space-y-2.5 sm:space-y-4 pt-4 sm:pt-8">
               <TiltedCard
                 imageSrc="/brand/creator-directors-chair-cinema-rig.jpg"
                 altText="Fundador en Silla de Director con Rig de Cine Tilta"
@@ -178,7 +178,7 @@ export default function AboutPage() {
                 className="aspect-[3/4] border border-white/15 shadow-2xl"
               />
               <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={8} scaleOnHover={1.02} glare={0.22} shadow={0.35}>
-                <div className="p-4 rounded-2xl spatial-bento-card text-xs text-center w-full">
+                <div className="p-2.5 sm:p-4 rounded-2xl spatial-bento-card text-[10px] sm:text-xs text-center w-full">
                   <strong className="text-[#f3dc8a] block uppercase tracking-widest">
                     Producción Cinematográfica
                   </strong>
@@ -193,9 +193,9 @@ export default function AboutPage() {
       </section>
 
       {/* 2. Detrás de Cámaras y Equipo de Cine Flotante */}
-      <section className="px-4 sm:px-8">
-        <div className="max-w-[1400px] mx-auto space-y-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 px-2">
+      <section className="px-5 sm:px-8">
+        <div className="max-w-[1400px] mx-auto space-y-8 sm:space-y-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 px-1">
             <div className="space-y-2">
               <span className="text-[11px] tracking-[0.26em] uppercase text-[#d4af37] font-semibold flex items-center gap-2">
                 <Aperture className="w-4 h-4" />
@@ -205,13 +205,13 @@ export default function AboutPage() {
                 Nuestro Proceso y Equipo de Producción
               </h2>
             </div>
-            <p className="font-editorial italic text-xl text-[#e2cf97] max-w-md">
+            <p className="font-editorial italic text-lg sm:text-xl text-[#e2cf97] max-w-md">
               Cámaras de cine de última generación, lentes luminosos y
               estabilizadores profesionales.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-6">
             {btsGallery.map((item, idx) => (
               <TiltedCard
                 key={idx}
@@ -227,12 +227,12 @@ export default function AboutPage() {
                 className="aspect-[3/4] spatial-bento-card"
               >
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent pointer-events-none" />
-                <TiltedCardLayer depth={24} className="flex flex-col justify-end p-4">
-                  <div className="p-4 bg-black/55 backdrop-blur-md border border-white/10">
-                    <span className="text-[10px] tracking-[0.2em] uppercase text-[#f3dc8a] font-mono block">
+                <TiltedCardLayer depth={24} className="flex flex-col justify-end p-2.5 sm:p-4">
+                  <div className="p-2.5 sm:p-4 bg-black/65 backdrop-blur-md border border-white/10">
+                    <span className="text-[8px] sm:text-[10px] tracking-[0.16em] sm:tracking-[0.2em] uppercase text-[#f3dc8a] font-mono block">
                       {item.tag}
                     </span>
-                    <h3 className="font-monument text-lg text-white mt-0.5">
+                    <h3 className="font-monument text-xs sm:text-lg text-white mt-0.5 leading-snug">
                       {item.title}
                     </h3>
                   </div>
@@ -244,8 +244,8 @@ export default function AboutPage() {
       </section>
 
       {/* 3. El Equipo Detrás de la Visión */}
-      <section className="px-4 sm:px-8">
-        <div className="max-w-[1400px] mx-auto space-y-12">
+      <section className="px-5 sm:px-8">
+        <div className="max-w-[1400px] mx-auto space-y-8 sm:space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <span className="text-[11px] tracking-[0.26em] uppercase text-[#d4af37] font-semibold flex items-center justify-center gap-2">
               <Users className="w-4 h-4" />
@@ -254,13 +254,13 @@ export default function AboutPage() {
             <h2 className="font-monument display-headline text-white uppercase">
               Un Equipo Coordinado de Fotografía y Cine
             </h2>
-            <p className="font-editorial italic text-xl text-[#c8ccd8]">
+            <p className="font-editorial italic text-lg sm:text-xl text-[#c8ccd8]">
               Entrenados para trabajar en perfecta sincronía, logrando que
               fotografía y video se complementen en cada momento.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="mobile-snap-row grid grid-cols-1 md:grid-cols-3 gap-6">
             {teamMembers.map((member, idx) => (
               <TiltedCard
                 key={idx}
@@ -270,7 +270,7 @@ export default function AboutPage() {
                 scaleOnHover={1.03}
                 glare={0.35}
                 shadow={0.5}
-                className="h-full"
+                className="mobile-snap-card h-full"
               >
                 <div className="spatial-bento-card overflow-hidden flex flex-col h-full w-full">
                   <div className="aspect-[4/5] overflow-hidden bg-black">

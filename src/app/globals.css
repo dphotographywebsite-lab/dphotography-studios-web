@@ -230,3 +230,45 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #d4af37;
 }
+
+/* ============================================================================
+   MOBILE EDITORIAL LAYOUT UTILITIES (Horizontal Snap Reels & No-Scrollbar)
+============================================================================ */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .mobile-snap-row {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 0.85rem;
+    padding-bottom: 0.5rem;
+    margin-inline: -0.25rem;
+    padding-inline: 0.25rem;
+    scrollbar-width: none;
+  }
+
+  .mobile-snap-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mobile-snap-card {
+    flex: 0 0 78vw !important;
+    max-width: 300px !important;
+    scroll-snap-align: start;
+  }
+
+  .mobile-snap-card-wide {
+    flex: 0 0 83vw !important;
+    max-width: 325px !important;
+    scroll-snap-align: start;
+  }
+}

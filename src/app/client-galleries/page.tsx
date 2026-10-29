@@ -207,12 +207,12 @@ export default function ClientGalleriesPage() {
       </section>
 
       {/* Pixieset Features & Client Instructions */}
-      <section className="py-12 px-4 sm:px-8">
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-          <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={8} scaleOnHover={1.03} glare={0.28} shadow={0.45} className="h-full">
-            <div className="glass-surface rounded-3xl p-7 space-y-3 h-full w-full">
-              <Download className="w-7 h-7 text-[#d4af37]" />
-              <h3 className="font-monument text-lg text-white">
+      <section className="py-10 sm:py-12 px-5 sm:px-8">
+        <div className="max-w-[1400px] mx-auto mobile-snap-row grid grid-cols-1 md:grid-cols-3 gap-8">
+          <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={8} scaleOnHover={1.03} glare={0.28} shadow={0.45} className="mobile-snap-card h-full">
+            <div className="glass-surface rounded-3xl p-5 sm:p-7 space-y-2.5 sm:space-y-3 h-full w-full">
+              <Download className="w-6 h-6 sm:w-7 sm:h-7 text-[#d4af37]" />
+              <h3 className="font-monument text-base sm:text-lg text-white">
                 Descarga en Alta Resolución y Redes
               </h3>
               <p className="text-xs sm:text-sm text-[#b8bcc8] leading-relaxed">
@@ -223,10 +223,10 @@ export default function ClientGalleriesPage() {
             </div>
           </TiltedCard>
 
-          <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={8} scaleOnHover={1.03} glare={0.28} shadow={0.45} className="h-full">
-            <div className="glass-surface rounded-3xl p-7 space-y-3 h-full w-full">
-              <Share2 className="w-7 h-7 text-[#d4af37]" />
-              <h3 className="font-monument text-lg text-white">
+          <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={8} scaleOnHover={1.03} glare={0.28} shadow={0.45} className="mobile-snap-card h-full">
+            <div className="glass-surface rounded-3xl p-5 sm:p-7 space-y-2.5 sm:space-y-3 h-full w-full">
+              <Share2 className="w-6 h-6 sm:w-7 sm:h-7 text-[#d4af37]" />
+              <h3 className="font-monument text-base sm:text-lg text-white">
                 Comparte con Familia e Invitados
               </h3>
               <p className="text-xs sm:text-sm text-[#b8bcc8] leading-relaxed">
@@ -236,10 +236,10 @@ export default function ClientGalleriesPage() {
             </div>
           </TiltedCard>
 
-          <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={8} scaleOnHover={1.03} glare={0.28} shadow={0.45} className="h-full">
-            <div className="glass-surface rounded-3xl p-7 space-y-3 h-full w-full">
-              <ShoppingBag className="w-7 h-7 text-[#d4af37]" />
-              <h3 className="font-monument text-lg text-white">
+          <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={8} scaleOnHover={1.03} glare={0.28} shadow={0.45} className="mobile-snap-card h-full">
+            <div className="glass-surface rounded-3xl p-5 sm:p-7 space-y-2.5 sm:space-y-3 h-full w-full">
+              <ShoppingBag className="w-6 h-6 sm:w-7 sm:h-7 text-[#d4af37]" />
+              <h3 className="font-monument text-base sm:text-lg text-white">
                 Tienda de Cuadros e Impresiones
               </h3>
               <p className="text-xs sm:text-sm text-[#b8bcc8] leading-relaxed">

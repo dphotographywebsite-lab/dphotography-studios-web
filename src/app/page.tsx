@@ -86,7 +86,7 @@ export default function HomePage() {
   const featuredPackages = packages.filter((p) => p.popular);
 
   return (
-    <div className="w-full overflow-x-clip pb-16 sm:pb-24 space-y-20 sm:space-y-32">
+    <div className="w-full overflow-x-clip pb-14 sm:pb-24 space-y-14 sm:space-y-32">
       {/* =====================================================================
           1. HERO ESPACIAL INTEGRADO AL LIENZO ÚNICO
       ===================================================================== */}
@@ -139,13 +139,13 @@ export default function HomePage() {
       {/* =====================================================================
           3. CINEMATOGRAFÍA 4K Y SALA DE PROYECCIÓN (Esquinas Rectas Editorial)
       ===================================================================== */}
-      <section className="px-4 sm:px-8 relative z-10">
-        <div className="max-w-[1400px] mx-auto space-y-10 sm:space-y-14">
+      <section className="px-5 sm:px-8 relative z-10">
+        <div className="max-w-[1400px] mx-auto space-y-7 sm:space-y-14">
           <div
             data-reveal="up"
-            className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/15 pb-6"
+            className="flex flex-col md:flex-row md:items-end justify-between gap-3 border-b border-white/15 pb-4 sm:pb-6"
           >
-            <div className="space-y-2">
+            <div className="space-y-1.5">
               <span className="text-[10px] font-mono tracking-[0.28em] uppercase text-[#d4af37] block">
                 01 / CINEMATOGRAFÍA 4K & DMEDIA RECORDS
               </span>
@@ -153,10 +153,15 @@ export default function HomePage() {
                 Producciones de Cine
               </h2>
             </div>
-            <Link href="/films" className="editorial-link self-start md:self-auto">
-              <span>Archivo Completo de Películas</span>
-              <span>→</span>
-            </Link>
+            <div className="flex items-center justify-between md:justify-end gap-4">
+              <span className="md:hidden text-[9px] font-mono tracking-[0.22em] uppercase text-white/45">
+                DESLIZA LAS PELÍCULAS →
+              </span>
+              <Link href="/films" className="editorial-link self-start md:self-auto">
+                <span>Archivo Completo</span>
+                <span>→</span>
+              </Link>
+            </div>
           </div>
 
           {/* Marco Panorámico de Showreel (Esquinas rectas 0px) */}
@@ -171,7 +176,7 @@ export default function HomePage() {
           >
             <div
               data-reveal="image"
-              className="cursor-pointer group relative overflow-hidden border border-white/15 min-h-[320px] sm:min-h-[440px] lg:aspect-[21/9] p-6 sm:p-10 flex flex-col justify-between bg-black w-full"
+              className="cursor-pointer group relative overflow-hidden border border-white/15 min-h-[210px] sm:min-h-[440px] lg:aspect-[21/9] p-4 sm:p-10 flex flex-col justify-between bg-black w-full"
             >
               <img
                 src="/brand/creator-directors-chair-cinema-rig.jpg"
@@ -180,21 +185,21 @@ export default function HomePage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#050508] via-[#050508]/25 to-[#050508]/70" />
 
-              <div className="relative z-10 flex items-center justify-between text-[10px] tracking-[0.24em] uppercase font-mono text-white/75">
-                <span>SHOWREEL OFICIAL • 4K ANAMÓRFICO</span>
+              <div className="relative z-10 flex items-center justify-between text-[9px] sm:text-[10px] tracking-[0.22em] uppercase font-mono text-white/75">
+                <span>SHOWREEL OFICIAL • 4K</span>
                 <span className="text-[#f3dc8a]">01:15 MASTER</span>
               </div>
 
-              <div className="relative z-10 flex flex-col items-center justify-center text-center gap-4 my-auto py-4">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 border border-[#d4af37] bg-black/60 group-hover:bg-[#d4af37] text-[#f3dc8a] group-hover:text-black flex items-center justify-center transition-colors duration-300">
-                  <Play className="w-6 h-6 fill-current ml-0.5" />
+              <div className="relative z-10 flex flex-col items-center justify-center text-center gap-2.5 sm:gap-4 my-auto py-2 sm:py-4">
+                <div className="w-11 h-11 sm:w-16 sm:h-16 border border-[#d4af37] bg-black/60 group-hover:bg-[#d4af37] text-[#f3dc8a] group-hover:text-black flex items-center justify-center transition-colors duration-300">
+                  <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-current ml-0.5" />
                 </div>
-                <h3 className="font-monument text-lg sm:text-3xl text-white uppercase tracking-[0.14em]">
+                <h3 className="font-monument text-sm sm:text-3xl text-white uppercase tracking-[0.14em]">
                   Reproducir Showreel Cinematográfico
                 </h3>
               </div>
 
-              <div className="relative z-10 flex items-center justify-between text-[10px] font-mono tracking-[0.2em] uppercase text-white/60">
+              <div className="relative z-10 flex items-center justify-between text-[9px] sm:text-[10px] font-mono tracking-[0.2em] uppercase text-white/60">
                 <span className="hidden sm:inline">
                   SONY ALPHA CINEMA • ANILLO TILTA • DRON 4K
                 </span>
@@ -203,10 +208,10 @@ export default function HomePage() {
             </div>
           </TiltedCard>
 
-          {/* 3 Películas Destacadas en Retícula Arquitectónica */}
+          {/* 3 Películas Destacadas: Carrusel Horizontal en Mobile, 3 Columnas en Desktop */}
           <div
             data-reveal="stagger"
-            className="grid grid-cols-1 lg:grid-cols-3 gap-6"
+            className="mobile-snap-row grid grid-cols-1 lg:grid-cols-3 gap-6"
           >
             {featuredFilms.map((film, idx) => (
               <TiltedCard
@@ -218,6 +223,7 @@ export default function HomePage() {
                 shadow={0.5}
                 captionText={t(film.title)}
                 onClick={() => openFilm(film)}
+                className="mobile-snap-card"
               >
                 <div className="cursor-pointer group spatial-bento-card flex flex-col justify-between w-full h-full">
                   <div>
@@ -229,29 +235,29 @@ export default function HomePage() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
 
-                      <div className="absolute top-3 left-3 text-[10px] font-mono tracking-[0.2em] uppercase text-[#f3dc8a] bg-black/75 px-2.5 py-1 border border-white/15">
+                      <div className="absolute top-2.5 left-2.5 text-[9px] sm:text-[10px] font-mono tracking-[0.18em] uppercase text-[#f3dc8a] bg-black/75 px-2 py-0.5 border border-white/15">
                         0{idx + 1} • {t(film.categoryLabel)}
                       </div>
-                      <div className="absolute bottom-3 right-3 text-[10px] font-mono text-white/80 bg-black/80 px-2 py-0.5">
+                      <div className="absolute bottom-2.5 right-2.5 text-[9px] sm:text-[10px] font-mono text-white/80 bg-black/80 px-2 py-0.5">
                         {film.duration}
                       </div>
                     </div>
 
-                    <div className="p-6 space-y-2">
-                      <div className="flex items-center justify-between text-[10px] font-mono tracking-[0.18em] uppercase text-white/50">
+                    <div className="p-4 sm:p-6 space-y-1.5 sm:space-y-2">
+                      <div className="flex items-center justify-between text-[9px] sm:text-[10px] font-mono tracking-[0.16em] uppercase text-white/50">
                         <span>{film.division}</span>
                         <span>{film.location}</span>
                       </div>
-                      <h3 className="font-monument text-base sm:text-lg text-white group-hover:text-[#f3dc8a] transition-colors">
+                      <h3 className="font-monument text-sm sm:text-lg text-white group-hover:text-[#f3dc8a] transition-colors">
                         {t(film.title)}
                       </h3>
-                      <p className="font-editorial italic text-base text-[#e0cd95]">
+                      <p className="font-editorial italic text-sm sm:text-base text-[#e0cd95] line-clamp-2">
                         {t(film.subtitle)}
                       </p>
                     </div>
                   </div>
 
-                  <div className="px-6 py-4 border-t border-white/10 flex items-center justify-between text-[10px] font-mono tracking-[0.2em] uppercase text-white/70 group-hover:text-[#f3dc8a] transition-colors">
+                  <div className="px-4 sm:px-6 py-3 sm:py-4 border-t border-white/10 flex items-center justify-between text-[9px] sm:text-[10px] font-mono tracking-[0.2em] uppercase text-white/70 group-hover:text-[#f3dc8a] transition-colors">
                     <span>REPRODUCIR PELÍCULA</span>
                     <span>→</span>
                   </div>
@@ -265,19 +271,19 @@ export default function HomePage() {
       {/* =====================================================================
           4. EL ESTUDIO Y DIRECCIÓN CREATIVA (Editorial Arquitectónico)
       ===================================================================== */}
-      <section className="px-4 sm:px-8 relative z-10">
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-14 items-center">
-          {/* Mosaico Fotográfico de Esquinas Rectas con TiltedCard */}
+      <section className="px-5 sm:px-8 relative z-10">
+        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-7 sm:gap-14 items-center">
+          {/* Mosaico Fotográfico Compacto 2x2 en Mobile con TiltedCard */}
           <div
             data-reveal="stagger"
-            className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-12 gap-4 items-center"
+            className="lg:col-span-7 grid grid-cols-12 gap-2.5 sm:gap-4 items-stretch"
           >
-            <div className="sm:col-span-7">
+            <div className="col-span-7">
               <TiltedCard
                 imageSrc="/brand/creator-tuxedo-portrait.jpg"
                 altText="Director de DPhotography Studios"
                 captionText="DIRECCIÓN DE ETIQUETA"
-                containerHeight="440px"
+                containerHeight="100%"
                 containerWidth="100%"
                 imageHeight="100%"
                 imageWidth="100%"
@@ -285,26 +291,27 @@ export default function HomePage() {
                 scaleOnHover={1.04}
                 glare={0.5}
                 shadow={0.5}
+                className="min-h-[260px] sm:min-h-[460px] h-full"
               >
                 <TiltedCardLayer depth={28}>
-                  <div className="absolute bottom-0 inset-x-0 p-4 bg-black/80 backdrop-blur-md border-t border-white/15">
-                    <span className="text-[10px] font-mono tracking-[0.2em] uppercase text-[#f3dc8a] block">
-                      DIRECCIÓN CREATIVA DE ETIQUETA
+                  <div className="absolute bottom-0 inset-x-0 p-2.5 sm:p-4 bg-black/80 backdrop-blur-md border-t border-white/15">
+                    <span className="text-[8px] sm:text-[10px] font-mono tracking-[0.16em] sm:tracking-[0.2em] uppercase text-[#f3dc8a] block">
+                      DIRECCIÓN DE ETIQUETA
                     </span>
-                    <span className="text-[11px] text-white/70">
-                      Louisville, Kentucky
+                    <span className="text-[10px] sm:text-[11px] text-white/70">
+                      Louisville, KY
                     </span>
                   </div>
                 </TiltedCardLayer>
               </TiltedCard>
             </div>
 
-            <div className="sm:col-span-5 grid grid-cols-2 sm:grid-cols-1 gap-4">
+            <div className="col-span-5 flex flex-col gap-2.5 sm:gap-4">
               <TiltedCard
                 imageSrc="/brand/creator-crouching-tilta-rig.jpg"
                 altText="Rig de cine Tilta DPhotography Studios"
                 captionText="RIG TILTA • 4K"
-                containerHeight="250px"
+                containerHeight="100%"
                 containerWidth="100%"
                 imageHeight="100%"
                 imageWidth="100%"
@@ -312,9 +319,10 @@ export default function HomePage() {
                 scaleOnHover={1.05}
                 glare={0.5}
                 shadow={0.5}
+                className="min-h-[124px] sm:min-h-[222px] flex-1"
               >
                 <TiltedCardLayer depth={24}>
-                  <div className="absolute bottom-0 inset-x-0 px-3 py-2 bg-black/80 border-t border-white/10 text-[9px] font-mono tracking-[0.2em] uppercase text-[#f3dc8a]">
+                  <div className="absolute bottom-0 inset-x-0 px-2.5 py-1.5 sm:px-3 sm:py-2 bg-black/80 border-t border-white/10 text-[8px] sm:text-[9px] font-mono tracking-[0.16em] uppercase text-[#f3dc8a]">
                     RIG TILTA • 4K
                   </div>
                 </TiltedCardLayer>
@@ -324,7 +332,7 @@ export default function HomePage() {
                 imageSrc="/brand/creator-gimbal-profile.jpg"
                 altText="Operador de gimbal DMedia Records"
                 captionText="DMEDIA RECORDS"
-                containerHeight="250px"
+                containerHeight="100%"
                 containerWidth="100%"
                 imageHeight="100%"
                 imageWidth="100%"
@@ -332,9 +340,10 @@ export default function HomePage() {
                 scaleOnHover={1.05}
                 glare={0.5}
                 shadow={0.5}
+                className="min-h-[124px] sm:min-h-[222px] flex-1"
               >
                 <TiltedCardLayer depth={24}>
-                  <div className="absolute bottom-0 inset-x-0 px-3 py-2 bg-black/80 border-t border-white/10 text-[9px] font-mono tracking-[0.2em] uppercase text-white/80">
+                  <div className="absolute bottom-0 inset-x-0 px-2.5 py-1.5 sm:px-3 sm:py-2 bg-black/80 border-t border-white/10 text-[8px] sm:text-[9px] font-mono tracking-[0.16em] uppercase text-white/80">
                     DMEDIA RECORDS
                   </div>
                 </TiltedCardLayer>
@@ -343,7 +352,7 @@ export default function HomePage() {
           </div>
 
           {/* Manifiesto Editorial */}
-          <div data-reveal="up" className="lg:col-span-5 space-y-6">
+          <div data-reveal="up" className="lg:col-span-5 space-y-4 sm:space-y-6">
             <span className="text-[10px] font-mono tracking-[0.28em] uppercase text-[#d4af37] block">
               02 / EL ESTUDIO Y EL DIRECTOR
             </span>
@@ -352,19 +361,19 @@ export default function HomePage() {
               Elegancia Editorial y Rigor Cinematográfico
             </h2>
 
-            <p className="font-editorial italic text-xl sm:text-2xl text-[#e2cf97]">
+            <p className="font-editorial italic text-lg sm:text-2xl text-[#e2cf97]">
               “Cada cliente merece sentirse como el protagonista de una obra de
               cine.”
             </p>
 
-            <p className="text-sm sm:text-base text-[#b8bcc8] leading-relaxed">
+            <p className="text-xs sm:text-base text-[#b8bcc8] leading-relaxed">
               Con sede en Louisville, Kentucky, DPhotography Studios & Films
               integra iluminación de estudio, óptica de cine y dirección
               artística en bodas, quinceañeras, retratos editoriales y videos
               musicales a través de nuestra división DMedia Records.
             </p>
 
-            <div className="pt-2">
+            <div className="pt-1 sm:pt-2">
               <Link href="/about" className="editorial-link">
                 <span>Conocer la Historia del Estudio</span>
                 <span>→</span>
@@ -375,14 +384,14 @@ export default function HomePage() {
       </section>
 
       {/* =====================================================================
-          5. EXPERIENCIA Y TESTIMONIOS (Retícula Limpia de Líneas Rectas)
+          5. EXPERIENCIA Y TESTIMONIOS (Cuadrícula 2x3 + Carrusel en Mobile)
       ===================================================================== */}
-      <section className="px-4 sm:px-8 relative z-10">
-        <div className="max-w-[1400px] mx-auto space-y-16">
-          <div className="space-y-8">
+      <section className="px-5 sm:px-8 relative z-10">
+        <div className="max-w-[1400px] mx-auto space-y-12 sm:space-y-16">
+          <div className="space-y-5 sm:space-y-8">
             <div
               data-reveal="up"
-              className="border-b border-white/15 pb-5 flex flex-col sm:flex-row sm:items-end justify-between gap-3"
+              className="border-b border-white/15 pb-4 sm:pb-5 flex flex-col sm:flex-row sm:items-end justify-between gap-2"
             >
               <div>
                 <span className="text-[10px] font-mono tracking-[0.28em] uppercase text-[#d4af37] block">
@@ -396,7 +405,7 @@ export default function HomePage() {
 
             <div
               data-reveal="stagger"
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+              className="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-4"
             >
               {EXPERIENCE_STEPS.map((item) => (
                 <TiltedCard
@@ -407,15 +416,16 @@ export default function HomePage() {
                   glare={0.45}
                   shadow={0.45}
                   captionText={`PASO ${item.step}`}
+                  className="h-full"
                 >
-                  <div className="p-6 sm:p-8 border border-white/15 bg-black/45 backdrop-blur-md space-y-3 w-full h-full">
-                    <span className="font-mono text-xs tracking-[0.24em] text-[#d4af37] block">
+                  <div className="p-3.5 sm:p-8 border border-white/15 bg-black/45 backdrop-blur-md space-y-1.5 sm:space-y-3 w-full h-full">
+                    <span className="font-mono text-[10px] sm:text-xs tracking-[0.22em] text-[#d4af37] block">
                       /{item.step}
                     </span>
-                    <h3 className="font-monument text-base sm:text-lg text-white">
+                    <h3 className="font-monument text-xs sm:text-lg text-white leading-snug">
                       {t(item.title)}
                     </h3>
-                    <p className="text-xs sm:text-sm text-[#a8acb8] leading-relaxed">
+                    <p className="text-[11px] sm:text-sm text-[#a8acb8] leading-relaxed line-clamp-3 sm:line-clamp-none">
                       {t(item.description)}
                     </p>
                   </div>
@@ -424,42 +434,54 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Testimonios en 3 Columnas Arquitectónicas */}
-          <div
-            data-reveal="stagger"
-            className="grid grid-cols-1 md:grid-cols-3 gap-6"
-          >
-            {testimonials.map((item) => (
-              <TiltedCard
-                key={item.id}
-                containerHeight="auto"
-                rotateAmplitude={11}
-                scaleOnHover={1.035}
-                glare={0.5}
-                shadow={0.5}
-                captionText={item.client}
-              >
-                <div className="spatial-bento-card p-6 sm:p-8 flex flex-col justify-between space-y-6 w-full h-full">
-                  <p className="font-editorial italic text-lg sm:text-xl text-white/90 leading-relaxed">
-                    “{t(item.quote)}”
-                  </p>
+          {/* Testimonios: Swipe Horizontal en Mobile, 3 Columnas en Desktop */}
+          <div className="space-y-3">
+            <div className="flex items-center justify-between md:hidden">
+              <span className="text-[9px] font-mono tracking-[0.22em] uppercase text-[#d4af37]">
+                RESEÑAS DE CLIENTES
+              </span>
+              <span className="text-[9px] font-mono tracking-[0.22em] uppercase text-white/45">
+                DESLIZA →
+              </span>
+            </div>
 
-                  <div className="pt-4 border-t border-white/10 flex items-center justify-between">
-                    <div>
-                      <h4 className="font-monument text-xs tracking-[0.16em] text-[#f3dc8a] uppercase">
-                        {item.client}
-                      </h4>
-                      <span className="text-[11px] text-white/55 block mt-0.5">
-                        {t(item.role)}
+            <div
+              data-reveal="stagger"
+              className="mobile-snap-row grid grid-cols-1 md:grid-cols-3 gap-6"
+            >
+              {testimonials.map((item) => (
+                <TiltedCard
+                  key={item.id}
+                  containerHeight="auto"
+                  rotateAmplitude={11}
+                  scaleOnHover={1.035}
+                  glare={0.5}
+                  shadow={0.5}
+                  captionText={item.client}
+                  className="mobile-snap-card"
+                >
+                  <div className="spatial-bento-card p-5 sm:p-8 flex flex-col justify-between space-y-4 sm:space-y-6 w-full h-full">
+                    <p className="font-editorial italic text-base sm:text-xl text-white/90 leading-relaxed">
+                      “{t(item.quote)}”
+                    </p>
+
+                    <div className="pt-3 sm:pt-4 border-t border-white/10 flex items-center justify-between">
+                      <div>
+                        <h4 className="font-monument text-[11px] sm:text-xs tracking-[0.14em] text-[#f3dc8a] uppercase">
+                          {item.client}
+                        </h4>
+                        <span className="text-[10px] sm:text-[11px] text-white/55 block mt-0.5">
+                          {t(item.role)}
+                        </span>
+                      </div>
+                      <span className="text-[10px] font-mono text-[#d4af37]">
+                        ★★★★★
                       </span>
                     </div>
-                    <span className="text-[10px] font-mono text-[#d4af37]">
-                      ★★★★★
-                    </span>
                   </div>
-                </div>
-              </TiltedCard>
-            ))}
+                </TiltedCard>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -467,14 +489,14 @@ export default function HomePage() {
       {/* =====================================================================
           6. COLECCIONES E INVERSIÓN + CIERRE EDITORIAL
       ===================================================================== */}
-      <section className="px-4 sm:px-8 relative z-10">
-        <div className="max-w-[1400px] mx-auto space-y-20">
-          <div className="space-y-10">
+      <section className="px-5 sm:px-8 relative z-10">
+        <div className="max-w-[1400px] mx-auto space-y-14 sm:space-y-20">
+          <div className="space-y-6 sm:space-y-10">
             <div
               data-reveal="up"
-              className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/15 pb-6"
+              className="flex flex-col md:flex-row md:items-end justify-between gap-3 border-b border-white/15 pb-4 sm:pb-6"
             >
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <span className="text-[10px] font-mono tracking-[0.28em] uppercase text-[#d4af37] block">
                   04 / INVERSIÓN Y COLECCIONES
                 </span>
@@ -482,18 +504,23 @@ export default function HomePage() {
                   Colecciones Destacadas
                 </h2>
               </div>
-              <Link
-                href="/packages"
-                className="editorial-link self-start md:self-auto"
-              >
-                <span>Ver las 8 Categorías de Paquetes</span>
-                <span>→</span>
-              </Link>
+              <div className="flex items-center justify-between md:justify-end gap-4">
+                <span className="lg:hidden text-[9px] font-mono tracking-[0.22em] uppercase text-white/45">
+                  DESLIZA PAQUETES →
+                </span>
+                <Link
+                  href="/packages"
+                  className="editorial-link self-start md:self-auto"
+                >
+                  <span>Ver las 8 Categorías</span>
+                  <span>→</span>
+                </Link>
+              </div>
             </div>
 
             <div
               data-reveal="stagger"
-              className="grid grid-cols-1 lg:grid-cols-3 gap-6"
+              className="mobile-snap-row grid grid-cols-1 lg:grid-cols-3 gap-6"
             >
               {featuredPackages.map((pkg) => (
                 <TiltedCard
@@ -504,10 +531,11 @@ export default function HomePage() {
                   glare={0.5}
                   shadow={0.5}
                   captionText={pkg.startingPrice}
+                  className="mobile-snap-card-wide"
                 >
-                  <div className="spatial-bento-card p-6 sm:p-8 flex flex-col justify-between w-full h-full">
-                    <div className="space-y-5">
-                      <div className="flex items-center justify-between text-[10px] font-mono tracking-[0.2em] uppercase text-[#d4af37]">
+                  <div className="spatial-bento-card p-5 sm:p-8 flex flex-col justify-between w-full h-full">
+                    <div className="space-y-4 sm:space-y-5">
+                      <div className="flex items-center justify-between text-[9px] sm:text-[10px] font-mono tracking-[0.18em] uppercase text-[#d4af37]">
                         <span>{t(pkg.categoryName)}</span>
                         <span className="text-white/55">
                           {t(pkg.durationLabel)}
@@ -515,42 +543,42 @@ export default function HomePage() {
                       </div>
 
                       <div>
-                        <h3 className="font-monument text-lg sm:text-xl text-white">
+                        <h3 className="font-monument text-base sm:text-xl text-white">
                           {t(pkg.tierName)}
                         </h3>
-                        <p className="font-editorial italic text-base sm:text-lg text-[#e0cd95] mt-1">
+                        <p className="font-editorial italic text-sm sm:text-lg text-[#e0cd95] mt-1 line-clamp-2">
                           {t(pkg.tagline)}
                         </p>
                       </div>
 
-                      <div className="py-4 border-y border-white/10 flex items-baseline justify-between">
-                        <span className="text-[10px] font-mono uppercase tracking-[0.22em] text-white/50">
+                      <div className="py-3 sm:py-4 border-y border-white/10 flex items-baseline justify-between">
+                        <span className="text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.2em] text-white/50">
                           INVERSIÓN DESDE
                         </span>
-                        <span className="font-monument text-2xl sm:text-3xl text-[#f3dc8a]">
+                        <span className="font-monument text-xl sm:text-3xl text-[#f3dc8a]">
                           {pkg.startingPrice}
                         </span>
                       </div>
 
-                      <ul className="space-y-2.5 text-xs text-[#c5c8d4]">
-                        {pkg.deliverables.es.slice(0, 5).map((item, i) => (
+                      <ul className="space-y-2 text-[11px] sm:text-xs text-[#c5c8d4]">
+                        {pkg.deliverables.es.slice(0, 4).map((item, i) => (
                           <li
                             key={i}
-                            className="flex items-start gap-2.5 border-b border-white/[0.05] pb-2 last:border-0"
+                            className="flex items-start gap-2 border-b border-white/[0.05] pb-1.5 last:border-0"
                           >
                             <span className="text-[#d4af37] font-mono text-[10px] mt-0.5">
                               —
                             </span>
-                            <span>{item}</span>
+                            <span className="line-clamp-2">{item}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
 
-                    <div className="pt-6 mt-6 border-t border-white/10">
+                    <div className="pt-4 sm:pt-6 mt-4 sm:mt-6 border-t border-white/10">
                       <Link
                         href={`/contact?package=${pkg.id}`}
-                        className="btn-gold block w-full py-3.5 px-4 text-[11px] text-center"
+                        className="btn-gold block w-full py-3 sm:py-3.5 px-4 text-[10px] sm:text-[11px] text-center"
                       >
                         Solicitar Disponibilidad
                       </Link>

@@ -490,7 +490,7 @@ function ContactContent() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-6">
             {socialPosts.map((post, i) => (
               <TiltedCard
                 key={i}
@@ -514,15 +514,15 @@ function ContactContent() {
                       alt={post.caption}
                       className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
                     />
-                    <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/75 text-[#f3dc8a] text-[10px] uppercase tracking-widest">
+                    <div className="absolute top-2 right-2 sm:top-3 sm:right-3 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-black/75 text-[#f3dc8a] text-[8px] sm:text-[10px] uppercase tracking-widest">
                       {post.platform}
                     </div>
                   </div>
-                  <div className="p-4 space-y-1.5">
-                    <span className="text-[11px] font-bold text-[#f3dc8a]">
+                  <div className="p-2.5 sm:p-4 space-y-1 sm:space-y-1.5">
+                    <span className="text-[9px] sm:text-[11px] font-bold text-[#f3dc8a] block truncate">
                       {post.handle}
                     </span>
-                    <p className="text-xs text-white/80 line-clamp-2">
+                    <p className="text-[10px] sm:text-xs text-white/80 line-clamp-2">
                       {post.caption}
                     </p>
                   </div>

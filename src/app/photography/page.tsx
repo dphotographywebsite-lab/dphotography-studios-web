@@ -29,10 +29,10 @@ function PhotographyPortfolioContent() {
       : projectGalleries.filter((g) => g.categorySlug === selectedCategory);
 
   return (
-    <div className="pt-28 pb-20 space-y-20">
+    <div className="pt-24 sm:pt-28 pb-16 sm:pb-20 space-y-12 sm:space-y-20">
       {/* Encabezado Espacial Flotante */}
-      <section className="px-4 sm:px-8">
-        <div className="max-w-[1400px] mx-auto text-center space-y-5">
+      <section className="px-5 sm:px-8">
+        <div className="max-w-[1400px] mx-auto text-center space-y-4 sm:space-y-5">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full spatial-capsule text-[#f3dc8a] text-[10px] tracking-[0.14em] sm:tracking-[0.26em] uppercase font-semibold">
             <Camera className="w-3.5 h-3.5 text-[#d4af37] shrink-0" />
             <span>ARCHIVO FOTOGRÁFICO Y CATÁLOGO DE HISTORIAS</span>
@@ -42,17 +42,17 @@ function PhotographyPortfolioContent() {
             Historias Visuales Eternas
           </h1>
 
-          <p className="font-editorial italic text-xl sm:text-3xl text-[#e2cf97] max-w-3xl mx-auto">
+          <p className="font-editorial italic text-lg sm:text-3xl text-[#e2cf97] max-w-3xl mx-auto">
             Cada galería flota en su propia cápsula visual con su historia,
             locación e iluminación editorial.
           </p>
 
-          {/* Barra de Filtros en Cápsula de Cristal */}
-          <div className="pt-4 flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
+          {/* Barra de Filtros Deslizable en Mobile */}
+          <div className="pt-3 flex items-center sm:justify-center gap-2 sm:gap-2.5 overflow-x-auto no-scrollbar sm:flex-wrap pb-1">
             <button
               type="button"
               onClick={() => setSelectedCategory('all')}
-              className={`cursor-pointer px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-full text-[10px] sm:text-xs tracking-[0.14em] sm:tracking-[0.18em] uppercase font-semibold transition-colors ${
+              className={`cursor-pointer shrink-0 px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-full text-[10px] sm:text-xs tracking-[0.14em] sm:tracking-[0.18em] uppercase font-semibold transition-colors ${
                 selectedCategory === 'all'
                   ? 'btn-gold'
                   : 'spatial-capsule text-white/80 hover:text-white hover:border-[#d4af37]/45'
@@ -65,7 +65,7 @@ function PhotographyPortfolioContent() {
                 key={cat.slug}
                 type="button"
                 onClick={() => setSelectedCategory(cat.slug)}
-                className={`cursor-pointer px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-full text-[10px] sm:text-xs tracking-[0.14em] sm:tracking-[0.18em] uppercase font-semibold transition-colors ${
+                className={`cursor-pointer shrink-0 px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-full text-[10px] sm:text-xs tracking-[0.14em] sm:tracking-[0.18em] uppercase font-semibold transition-colors ${
                   selectedCategory === cat.slug
                     ? 'btn-gold'
                     : 'spatial-capsule text-white/80 hover:text-white hover:border-[#d4af37]/45'
@@ -79,8 +79,8 @@ function PhotographyPortfolioContent() {
       </section>
 
       {/* Galerías Abiertas sobre el Lienzo */}
-      <section className="px-4 sm:px-8">
-        <div className="max-w-[1400px] mx-auto space-y-16">
+      <section className="px-5 sm:px-8">
+        <div className="max-w-[1400px] mx-auto space-y-12 sm:space-y-16">
           {filteredGalleries.map((gallery, index) => (
             <div
               key={gallery.id}
@@ -175,8 +175,8 @@ function PhotographyPortfolioContent() {
       </section>
 
       {/* Álbumes Italianos y Cuadros de Colección (Flotando en el Lienzo) */}
-      <section className="px-4 sm:px-8">
-        <div className="max-w-[1400px] mx-auto space-y-10">
+      <section className="px-5 sm:px-8">
+        <div className="max-w-[1400px] mx-auto space-y-8 sm:space-y-10">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <span className="text-[11px] tracking-[0.26em] uppercase text-[#d4af37] font-semibold block">
               IMPRESIONES FINE-ART Y ÁLBUMES DE LUJO
@@ -184,14 +184,14 @@ function PhotographyPortfolioContent() {
             <h2 className="font-monument display-headline text-white uppercase">
               Álbumes Italianos y Cuadros de Colección
             </h2>
-            <p className="font-editorial italic text-xl text-[#d8c488]">
+            <p className="font-editorial italic text-lg sm:text-xl text-[#d8c488]">
               Tus fotografías merecen vivir más allá de una pantalla: álbumes
               artesanales en piel italiana, cuadros acrílicos y ampliaciones de
               galería.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="mobile-snap-row grid grid-cols-1 md:grid-cols-3 gap-6">
             <TiltedCard
               containerHeight="auto"
               rotateAmplitude={11}
@@ -199,10 +199,11 @@ function PhotographyPortfolioContent() {
               glare={0.5}
               shadow={0.5}
               captionText="ÁLBUMES ITALIANOS"
+              className="mobile-snap-card"
             >
-              <div className="spatial-bento-card p-8 space-y-4 w-full h-full">
-                <BookOpen className="w-8 h-8 text-[#d4af37]" />
-                <h3 className="font-monument text-xl text-white">
+              <div className="spatial-bento-card p-6 sm:p-8 space-y-3 sm:space-y-4 w-full h-full">
+                <BookOpen className="w-7 h-7 sm:w-8 sm:h-8 text-[#d4af37]" />
+                <h3 className="font-monument text-base sm:text-xl text-white">
                   Álbumes Artesanales de Boda y XV
                 </h3>
                 <p className="text-xs sm:text-sm text-[#b8bcc8] leading-relaxed">
@@ -219,10 +220,11 @@ function PhotographyPortfolioContent() {
               glare={0.5}
               shadow={0.5}
               captionText="CUADROS DE RECEPCIÓN"
+              className="mobile-snap-card"
             >
-              <div className="spatial-bento-card p-8 space-y-4 w-full h-full">
-                <Frame className="w-8 h-8 text-[#d4af37]" />
-                <h3 className="font-monument text-xl text-white">
+              <div className="spatial-bento-card p-6 sm:p-8 space-y-3 sm:space-y-4 w-full h-full">
+                <Frame className="w-7 h-7 sm:w-8 sm:h-8 text-[#d4af37]" />
+                <h3 className="font-monument text-base sm:text-xl text-white">
                   Cuadros Gigantes de Recepción
                 </h3>
                 <p className="text-xs sm:text-sm text-[#b8bcc8] leading-relaxed">
@@ -240,10 +242,11 @@ function PhotographyPortfolioContent() {
               glare={0.5}
               shadow={0.5}
               captionText="ACRÍLICO Y METAL"
+              className="mobile-snap-card"
             >
-              <div className="spatial-bento-card p-8 space-y-4 w-full h-full">
-                <Layers className="w-8 h-8 text-[#d4af37]" />
-                <h3 className="font-monument text-xl text-white">
+              <div className="spatial-bento-card p-6 sm:p-8 space-y-3 sm:space-y-4 w-full h-full">
+                <Layers className="w-7 h-7 sm:w-8 sm:h-8 text-[#d4af37]" />
+                <h3 className="font-monument text-base sm:text-xl text-white">
                   Arte en Acrílico Cristal y Metal
                 </h3>
                 <p className="text-xs sm:text-sm text-[#b8bcc8] leading-relaxed">

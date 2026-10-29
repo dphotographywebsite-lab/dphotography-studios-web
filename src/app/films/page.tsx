@@ -102,43 +102,43 @@ export default function FilmsPage() {
               </p>
             </div>
 
-            <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+            <div className="lg:col-span-5 grid grid-cols-2 gap-2.5 sm:gap-3 text-xs">
               <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={8} scaleOnHover={1.03} glare={0.25} shadow={0.35} className="h-full">
-                <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 h-full w-full">
-                  <span className="text-[10px] uppercase tracking-widest text-[#d4af37] block">
+                <div className="p-3 sm:p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 h-full w-full">
+                  <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-[#d4af37] block">
                     Dirección
                   </span>
-                  <span className="font-medium text-white mt-1 block">
+                  <span className="font-medium text-white mt-1 block text-[11px] sm:text-xs">
                     {stageFilm.credits.director}
                   </span>
                 </div>
               </TiltedCard>
               <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={8} scaleOnHover={1.03} glare={0.25} shadow={0.35} className="h-full">
-                <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 h-full w-full">
-                  <span className="text-[10px] uppercase tracking-widest text-[#d4af37] block">
+                <div className="p-3 sm:p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 h-full w-full">
+                  <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-[#d4af37] block">
                     Cinefotógrafo (DP)
                   </span>
-                  <span className="font-medium text-white mt-1 block">
+                  <span className="font-medium text-white mt-1 block text-[11px] sm:text-xs">
                     {stageFilm.credits.cinematographer}
                   </span>
                 </div>
               </TiltedCard>
               <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={8} scaleOnHover={1.03} glare={0.25} shadow={0.35} className="h-full">
-                <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 h-full w-full">
-                  <span className="text-[10px] uppercase tracking-widest text-[#d4af37] block">
+                <div className="p-3 sm:p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 h-full w-full">
+                  <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-[#d4af37] block">
                     Edición y Color
                   </span>
-                  <span className="font-medium text-white mt-1 block">
+                  <span className="font-medium text-white mt-1 block text-[11px] sm:text-xs">
                     {stageFilm.credits.editor}
                   </span>
                 </div>
               </TiltedCard>
               <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={8} scaleOnHover={1.03} glare={0.25} shadow={0.35} className="h-full">
-                <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 h-full w-full">
-                  <span className="text-[10px] uppercase tracking-widest text-[#d4af37] block">
+                <div className="p-3 sm:p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 h-full w-full">
+                  <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-[#d4af37] block">
                     Casa Productora
                   </span>
-                  <span className="font-medium text-[#f3dc8a] mt-1 block">
+                  <span className="font-medium text-[#f3dc8a] mt-1 block text-[11px] sm:text-xs">
                     {stageFilm.credits.productionCompany}
                   </span>
                 </div>
@@ -149,15 +149,15 @@ export default function FilmsPage() {
       </section>
 
       {/* Category Filter Pills & Catalog Grid */}
-      <section className="px-4 sm:px-8 pb-24">
-        <div className="max-w-[1400px] mx-auto space-y-12">
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
+      <section className="px-5 sm:px-8 pb-16 sm:pb-24">
+        <div className="max-w-[1400px] mx-auto space-y-8 sm:space-y-12">
+          <div className="flex items-center sm:justify-center gap-2 sm:gap-2.5 overflow-x-auto no-scrollbar sm:flex-wrap pb-1">
             {filmCategories.map((cat) => (
               <button
                 key={cat.slug}
                 type="button"
                 onClick={() => setSelectedCategory(cat.slug)}
-                className={`cursor-pointer px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-full text-[10px] sm:text-xs tracking-[0.14em] sm:tracking-[0.18em] uppercase font-semibold transition-all ${
+                className={`cursor-pointer shrink-0 px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-full text-[10px] sm:text-xs tracking-[0.14em] sm:tracking-[0.18em] uppercase font-semibold transition-all ${
                   selectedCategory === cat.slug
                     ? 'btn-gold'
                     : 'glass-surface text-white/80 hover:text-white hover:border-[#d4af37]/40'
@@ -168,7 +168,7 @@ export default function FilmsPage() {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="mobile-snap-row grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredFilms.map((film) => (
               <TiltedCard
                 key={film.id}
@@ -178,7 +178,7 @@ export default function FilmsPage() {
                 scaleOnHover={1.025}
                 glare={0.32}
                 shadow={0.5}
-                className="h-full"
+                className="mobile-snap-card-wide h-full"
               >
                 <div className="glass-dark-luxe glass-interactive rounded-3xl overflow-hidden flex flex-col justify-between h-full w-full">
                   <div>
@@ -308,25 +308,25 @@ export default function FilmsPage() {
               cámaras y cortometrajes.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-2 text-xs">
+            <div className="grid grid-cols-2 gap-2.5 sm:gap-4 pt-2 text-xs">
               <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={9} scaleOnHover={1.03} glare={0.28} shadow={0.4} className="h-full">
-                <div className="p-4 rounded-2xl glass-surface h-full w-full">
-                  <Video className="w-5 h-5 text-[#d4af37] mb-2" />
-                  <strong className="text-white block">
+                <div className="p-3.5 sm:p-4 rounded-2xl glass-surface h-full w-full">
+                  <Video className="w-5 h-5 text-[#d4af37] mb-1.5 sm:mb-2" />
+                  <strong className="text-white block text-[11px] sm:text-xs">
                     Rigs de Cine Tilta y Gimbal
                   </strong>
-                  <span className="text-white/65">
+                  <span className="text-white/65 text-[10px] sm:text-xs">
                     Movimiento fluido de cámara y monitoreo profesional en set
                   </span>
                 </div>
               </TiltedCard>
               <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={9} scaleOnHover={1.03} glare={0.28} shadow={0.4} className="h-full">
-                <div className="p-4 rounded-2xl glass-surface h-full w-full">
-                  <Sliders className="w-5 h-5 text-[#d4af37] mb-2" />
-                  <strong className="text-white block">
+                <div className="p-3.5 sm:p-4 rounded-2xl glass-surface h-full w-full">
+                  <Sliders className="w-5 h-5 text-[#d4af37] mb-1.5 sm:mb-2" />
+                  <strong className="text-white block text-[11px] sm:text-xs">
                     Efectos Visuales y Colorización
                   </strong>
-                  <span className="text-white/65">
+                  <span className="text-white/65 text-[10px] sm:text-xs">
                     Acabado de color teatral y tráilers verticales para
                     Reels/TikTok
                   </span>

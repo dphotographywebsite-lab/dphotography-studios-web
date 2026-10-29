@@ -64,13 +64,13 @@ export default function PackagesPage() {
           </p>
 
           {/* Category Tabs */}
-          <div className="pt-6 flex flex-wrap items-center justify-center gap-2.5">
+          <div className="pt-4 flex items-center sm:justify-center gap-2 overflow-x-auto no-scrollbar sm:flex-wrap pb-1">
             {filterTabs.map((tab) => (
               <button
                 key={tab.slug}
                 type="button"
                 onClick={() => setSelectedFilter(tab.slug)}
-                className={`cursor-pointer px-5 py-2.5 rounded-full text-xs tracking-[0.18em] uppercase font-semibold transition-all ${
+                className={`cursor-pointer shrink-0 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-[10px] sm:text-xs tracking-[0.15em] sm:tracking-[0.18em] uppercase font-semibold transition-all ${
                   selectedFilter === tab.slug
                     ? 'btn-gold'
                     : 'glass-surface text-white/80 hover:text-white hover:border-[#d4af37]/40'
@@ -84,8 +84,8 @@ export default function PackagesPage() {
       </section>
 
       {/* Packages Grid */}
-      <section className="py-20 px-4 sm:px-8">
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <section className="py-10 sm:py-20 px-5 sm:px-8">
+        <div className="max-w-[1400px] mx-auto mobile-snap-row grid grid-cols-1 lg:grid-cols-2 gap-8">
           {filteredPackages.map((pkg) => (
             <TiltedCard
               key={pkg.id}
@@ -95,9 +95,10 @@ export default function PackagesPage() {
               glare={0.45}
               shadow={0.5}
               captionText={pkg.startingPrice}
+              className="mobile-snap-card-wide"
             >
               <div
-                className={`p-8 sm:p-10 flex flex-col justify-between transition-all w-full h-full ${
+                className={`p-5 sm:p-10 flex flex-col justify-between transition-all w-full h-full ${
                   pkg.popular
                     ? 'glass-dark-luxe border-2 border-[#d4af37]/60 shadow-[0_25px_70px_rgba(0,0,0,0.7),0_0_40px_rgba(212,175,55,0.18)]'
                     : 'glass-surface border border-white/15'
