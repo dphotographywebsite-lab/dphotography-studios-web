@@ -181,6 +181,8 @@ export default function HomePage() {
               <img
                 src="/brand/creator-directors-chair-cinema-rig.jpg"
                 alt="Showreel 2026 DPhotography Studios"
+                loading="lazy"
+                decoding="async"
                 className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-1000 filter brightness-[0.55]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#050508] via-[#050508]/25 to-[#050508]/70" />
@@ -241,6 +243,8 @@ export default function HomePage() {
                       <img
                         src={film.thumbnail}
                         alt={t(film.title)}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 filter brightness-[0.82]"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />

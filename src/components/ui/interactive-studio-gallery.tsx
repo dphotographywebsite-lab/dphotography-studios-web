@@ -40,6 +40,7 @@ export default function InteractiveStudioGallery() {
         lensHeight={0.99}
         bend={0.36}
         dispersion={0.35}
+        dpr={isMobile ? 1.25 : 1.5}
         autoplay
       />
     </section>

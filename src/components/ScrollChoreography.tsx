@@ -20,17 +20,17 @@ export default function ScrollChoreography() {
       upElements.forEach((el) => {
         gsap.fromTo(
           el,
-          { y: 34, autoAlpha: 0 },
+          { y: 20, autoAlpha: 0 },
           {
             y: 0,
             autoAlpha: 1,
-            duration: 0.9,
-            ease: 'power3.out',
+            duration: 0.6,
+            ease: 'power2.out',
             force3D: true,
             scrollTrigger: {
               trigger: el,
-              start: 'top 88%',
-              toggleActions: 'play none none reverse',
+              start: 'top 90%',
+              once: true,
             },
           }
         );
@@ -45,18 +45,18 @@ export default function ScrollChoreography() {
         if (!children.length) return;
         gsap.fromTo(
           children,
-          { y: 36, autoAlpha: 0 },
+          { y: 22, autoAlpha: 0 },
           {
             y: 0,
             autoAlpha: 1,
-            duration: 0.85,
-            stagger: 0.09,
-            ease: 'power3.out',
+            duration: 0.6,
+            stagger: 0.06,
+            ease: 'power2.out',
             force3D: true,
             scrollTrigger: {
               trigger: group,
-              start: 'top 86%',
-              toggleActions: 'play none none reverse',
+              start: 'top 90%',
+              once: true,
             },
           }
         );
@@ -69,17 +69,17 @@ export default function ScrollChoreography() {
       imageFrames.forEach((frame) => {
         gsap.fromTo(
           frame,
-          { scale: 1.05, autoAlpha: 0 },
+          { scale: 1.02, autoAlpha: 0 },
           {
             scale: 1,
             autoAlpha: 1,
-            duration: 1.15,
-            ease: 'power3.out',
+            duration: 0.7,
+            ease: 'power2.out',
             force3D: true,
             scrollTrigger: {
               trigger: frame,
-              start: 'top 88%',
-              toggleActions: 'play none none reverse',
+              start: 'top 90%',
+              once: true,
             },
           }
         );
@@ -93,13 +93,13 @@ export default function ScrollChoreography() {
           { scaleX: 0, transformOrigin: '0% 50%' },
           {
             scaleX: 1,
-            duration: 1.1,
+            duration: 0.75,
             ease: 'expo.out',
             force3D: true,
             scrollTrigger: {
               trigger: line,
-              start: 'top 90%',
-              toggleActions: 'play none none reverse',
+              start: 'top 92%',
+              once: true,
             },
           }
         );

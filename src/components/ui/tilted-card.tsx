@@ -72,7 +72,7 @@ const step = (
   dt: number
 ) => {
   const velocityKey = `v${key}` as keyof PhysicsState;
-  const steps = Math.max(1, Math.ceil(dt / (1 / 240)));
+  const steps = Math.max(1, Math.ceil(dt / (1 / 120)));
   const h = dt / steps;
   for (let index = 0; index < steps; index++) {
     state[velocityKey] +=
@@ -180,8 +180,8 @@ const TiltedCard: React.FC<TiltedCardProps> = ({
   reverse = false,
   trackWindow = false,
   floating = false,
-  gyroscope = true,
-  intro = true,
+  gyroscope = false,
+  intro = false,
   introDelay = 0,
   onClick,
   className = '',
@@ -222,8 +222,10 @@ const TiltedCard: React.FC<TiltedCardProps> = ({
   settingsRef.current = settings;
 
   useEffect(() => {
-    wakeRef.current?.();
-  });
+    if (controlled || backContent) {
+      wakeRef.current?.();
+    }
+  }, [isFlipped, controlled, backContent]);
 
   useEffect(() => {
     const figure = figureRef.current;
@@ -612,6 +614,14 @@ const TiltedCard: React.FC<TiltedCardProps> = ({
         request.call(window.DeviceOrientationEvent).catch(() => {});
     };
 
+    const detachWindowDrag = () => {
+      window.removeEventListener('pointerup', onUp);
+      window.removeEventListener('pointercancel', onCancel);
+      if (!settingsRef.current.trackWindow) {
+        window.removeEventListener('pointermove', onWindowMove);
+      }
+    };
+
     const onDown = (event: PointerEvent) => {
       press.active = true;
       press.moved = false;
@@ -624,10 +634,16 @@ const TiltedCard: React.FC<TiltedCardProps> = ({
           ? (figure.closest('.mobile-snap-row') as HTMLElement | null)
           : null;
       press.scrollLeft = press.snapRow ? press.snapRow.scrollLeft : 0;
+      window.addEventListener('pointerup', onUp, { passive: true });
+      window.addEventListener('pointercancel', onCancel, { passive: true });
+      if (!settingsRef.current.trackWindow && press.snapRow) {
+        window.addEventListener('pointermove', onWindowMove, { passive: true });
+      }
       askMotion();
       wake();
     };
     const onUp = () => {
+      detachWindowDrag();
       if (!press.active) return;
       press.active = false;
       if (press.snapRow) {
@@ -638,6 +654,7 @@ const TiltedCard: React.FC<TiltedCardProps> = ({
       wake();
     };
     const onCancel = () => {
+      detachWindowDrag();
       press.active = false;
       press.moved = true;
       if (press.snapRow) {
@@ -681,35 +698,38 @@ const TiltedCard: React.FC<TiltedCardProps> = ({
     figure.addEventListener('pointerdown', onDown);
     figure.addEventListener('focus', onFocus);
     figure.addEventListener('blur', onBlur);
-    window.addEventListener('pointerup', onUp, { passive: true });
-    window.addEventListener('pointercancel', onCancel, { passive: true });
-    window.addEventListener('pointermove', onWindowMove, { passive: true });
-    document.documentElement.addEventListener('pointerleave', onWindowLeave);
-    window.addEventListener('deviceorientation', onOrientation);
+    if (settingsRef.current.trackWindow) {
+      window.addEventListener('pointermove', onWindowMove, { passive: true });
+      document.documentElement.addEventListener('pointerleave', onWindowLeave);
+    }
+    if (settingsRef.current.gyroscope) {
+      window.addEventListener('deviceorientation', onOrientation);
+    }
 
-    const observer = new IntersectionObserver((entries) => {
-      visible = entries.some((entry) => entry.isIntersecting);
-      if (visible && !entered && introAt < 0)
-        introAt = performance.now() + settingsRef.current.introDelay;
+    let observer: IntersectionObserver | null = null;
+    if (settingsRef.current.intro || settingsRef.current.floating) {
+      observer = new IntersectionObserver((entries) => {
+        visible = entries.some((entry) => entry.isIntersecting);
+        if (visible && !entered && introAt < 0)
+          introAt = performance.now() + settingsRef.current.introDelay;
+        wake();
+      });
+      observer.observe(figure);
       wake();
-    });
-    observer.observe(figure);
-
-    wake();
+    }
 
     return () => {
       cancelAnimationFrame(raf);
       wakeRef.current = null;
       flipRef.current = null;
-      observer.disconnect();
+      observer?.disconnect();
+      detachWindowDrag();
       figure.removeEventListener('pointerenter', onEnter);
       figure.removeEventListener('pointermove', onMove);
       figure.removeEventListener('pointerleave', onLeave);
       figure.removeEventListener('pointerdown', onDown);
       figure.removeEventListener('focus', onFocus);
       figure.removeEventListener('blur', onBlur);
-      window.removeEventListener('pointerup', onUp);
-      window.removeEventListener('pointercancel', onCancel);
       window.removeEventListener('pointermove', onWindowMove);
       document.documentElement.removeEventListener(
         'pointerleave',
@@ -810,6 +830,8 @@ const TiltedCard: React.FC<TiltedCardProps> = ({
               className="tilted-card__img"
               src={imageSrc}
               alt={altText}
+              loading="lazy"
+              decoding="async"
               draggable={false}
               style={
                 {
