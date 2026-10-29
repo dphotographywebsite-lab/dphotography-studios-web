@@ -49,6 +49,7 @@ export interface FlexCarouselProps {
   interval?: number;
   captions?: boolean;
   captureWheel?: boolean;
+  dpr?: number;
   onChange?: (index: number, item: FlexCarouselItem) => void;
   onSelect?: (index: number, item: FlexCarouselItem) => void;
   className?: string;
@@ -503,7 +504,10 @@ const FlexCarousel: React.FC<FlexCarouselProps> = ({
     if (!container) return undefined;
 
     const renderer = new Renderer({
-      dpr: Math.min(window.devicePixelRatio || 1, 2),
+      dpr: Math.min(
+        window.devicePixelRatio || 1,
+        window.innerWidth < 640 ? 1.25 : 1.5
+      ),
       alpha: true,
       premultipliedAlpha: true,
       antialias: false,
