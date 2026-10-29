@@ -209,10 +209,20 @@ export default function HomePage() {
           </TiltedCard>
 
           {/* 3 Películas Destacadas: Carrusel Horizontal en Mobile, 3 Columnas en Desktop */}
-          <div
-            data-reveal="stagger"
-            className="mobile-snap-row grid grid-cols-1 lg:grid-cols-3 gap-6"
-          >
+          <div className="pt-5 sm:pt-8 space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="text-[9px] sm:text-[10px] font-mono tracking-[0.22em] uppercase text-[#d4af37]">
+                ESTRENOS DESTACADOS
+              </span>
+              <span className="lg:hidden text-[9px] font-mono tracking-[0.22em] uppercase text-white/45">
+                DESLIZA →
+              </span>
+            </div>
+
+            <div
+              data-reveal="stagger"
+              className="mobile-snap-row grid grid-cols-1 lg:grid-cols-3 gap-6"
+            >
             {featuredFilms.map((film, idx) => (
               <TiltedCard
                 key={film.id}
@@ -264,6 +274,7 @@ export default function HomePage() {
                 </div>
               </TiltedCard>
             ))}
+            </div>
           </div>
         </div>
       </section>

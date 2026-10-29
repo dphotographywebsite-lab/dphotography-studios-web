@@ -267,7 +267,14 @@ const TiltedCard: React.FC<TiltedCardProps> = ({
       vx: 0,
       last: 0,
     };
-    const press = { active: false, x: 0, y: 0, moved: false };
+    const press = {
+      active: false,
+      x: 0,
+      y: 0,
+      moved: false,
+      snapRow: null as HTMLElement | null,
+      scrollLeft: 0,
+    };
     const tilt = {
       gamma: 0,
       beta: 0,
@@ -302,9 +309,13 @@ const TiltedCard: React.FC<TiltedCardProps> = ({
       time += dt;
       let busy = false;
 
-      const amplitude = s.amplitude * (reduced ? 0.3 : 1);
-      const hovering = pointer.inside && pointer.mouse;
-      const touching = press.active && !pointer.mouse;
+      const isSmallScreen = window.innerWidth < 768;
+      const inSnapRow = isSmallScreen && Boolean(figure.closest('.mobile-snap-row'));
+      const amplitude =
+        s.amplitude * (reduced ? 0.3 : inSnapRow ? 0.35 : 1);
+      const hovering =
+        pointer.inside && pointer.mouse && !(press.active && press.moved && press.snapRow);
+      const touching = false;
       const following =
         hovering || touching || (s.trackWindow && pointer.seen && !coarse);
       let inputX = 0;
@@ -510,9 +521,10 @@ const TiltedCard: React.FC<TiltedCardProps> = ({
     };
 
     const onEnter = (event: PointerEvent) => {
-      pointer.inside = true;
       pointer.mouse =
         event.pointerType === 'mouse' || event.pointerType === 'pen';
+      if (!pointer.mouse) return;
+      pointer.inside = true;
       const spot = locate(event, figure);
       pointer.x = spot.x;
       pointer.y = spot.y;
@@ -525,7 +537,15 @@ const TiltedCard: React.FC<TiltedCardProps> = ({
     const onMove = (event: PointerEvent) => {
       pointer.mouse =
         event.pointerType === 'mouse' || event.pointerType === 'pen';
-      if (!pointer.inside && pointer.mouse) {
+      if (
+        press.active &&
+        Math.hypot(event.clientX - press.x, event.clientY - press.y) >
+          FLIP_THRESHOLD
+      ) {
+        press.moved = true;
+      }
+      if (!pointer.mouse) return;
+      if (!pointer.inside) {
         pointer.inside = true;
         const spot = locate(event, figure);
         pointer.x = spot.x;
@@ -535,12 +555,6 @@ const TiltedCard: React.FC<TiltedCardProps> = ({
         pointer.vx = 0;
       }
       track(event);
-      if (
-        press.active &&
-        Math.hypot(event.clientX - press.x, event.clientY - press.y) >
-          FLIP_THRESHOLD
-      )
-        press.moved = true;
       wake();
     };
     const onLeave = () => {
@@ -549,6 +563,14 @@ const TiltedCard: React.FC<TiltedCardProps> = ({
       wake();
     };
     const onWindowMove = (event: PointerEvent) => {
+      if (press.active && press.snapRow && pointer.mouse) {
+        const dx = event.clientX - press.x;
+        if (Math.abs(dx) > FLIP_THRESHOLD) {
+          press.moved = true;
+          press.snapRow.style.scrollSnapType = 'none';
+          press.snapRow.scrollLeft = press.scrollLeft - dx;
+        }
+      }
       if (
         pointer.inside &&
         pointer.mouse &&
@@ -597,23 +619,31 @@ const TiltedCard: React.FC<TiltedCardProps> = ({
       press.y = event.clientY;
       pointer.mouse =
         event.pointerType === 'mouse' || event.pointerType === 'pen';
-      if (!pointer.mouse) {
-        pointer.inside = true;
-        track(event);
-      }
+      press.snapRow =
+        window.innerWidth < 768
+          ? (figure.closest('.mobile-snap-row') as HTMLElement | null)
+          : null;
+      press.scrollLeft = press.snapRow ? press.snapRow.scrollLeft : 0;
       askMotion();
       wake();
     };
-    const onUp = (event: PointerEvent) => {
+    const onUp = () => {
       if (!press.active) return;
       press.active = false;
-      if (event.pointerType !== 'mouse' && event.pointerType !== 'pen')
-        pointer.inside = false;
+      if (press.snapRow) {
+        press.snapRow.style.scrollSnapType = '';
+        press.snapRow = null;
+      }
+      if (!pointer.mouse) pointer.inside = false;
       wake();
     };
     const onCancel = () => {
       press.active = false;
       press.moved = true;
+      if (press.snapRow) {
+        press.snapRow.style.scrollSnapType = '';
+        press.snapRow = null;
+      }
       pointer.inside = false;
       wake();
     };
@@ -725,6 +755,13 @@ const TiltedCard: React.FC<TiltedCardProps> = ({
         Math.max(0, parallax)
     ) + 1;
 
+  const onClickCapture = (event: React.MouseEvent) => {
+    if (flipRef.current && !flipRef.current()) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  };
+
   return (
     <figure
       ref={figureRef}
@@ -741,6 +778,7 @@ const TiltedCard: React.FC<TiltedCardProps> = ({
       role={interactive ? 'button' : undefined}
       aria-pressed={flippable ? isFlipped : undefined}
       aria-label={interactive ? captionText || altText : undefined}
+      onClickCapture={onClickCapture}
       onClick={interactive ? activate : undefined}
       onKeyDown={onKeyDown}
     >
