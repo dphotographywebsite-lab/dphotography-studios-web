@@ -1,0 +1,232 @@
+@import "tailwindcss";
+
+:root {
+  --bg-obsidian: #050508;
+  --bg-charcoal: #0b0c12;
+  --gold-primary: #d4af37;
+  --gold-light: #f3dc8a;
+  --gold-muted: #9a7b2c;
+  --text-ivory: #f8f6f0;
+  --text-muted: #9ca0ab;
+
+  /* Dynamic Fluid Typography Scale — Editorial Architectural Scale */
+  --font-size-hero: clamp(1.65rem, 5vw + 0.45rem, 5.25rem);
+  --font-size-display: clamp(1.35rem, 3.2vw + 0.4rem, 3.2rem);
+  --font-size-body: clamp(0.9rem, 0.5vw + 0.75rem, 1.05rem);
+  --font-size-micro: clamp(0.625rem, 0.35vw + 0.48rem, 0.75rem);
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-obsidian);
+  color: var(--text-ivory);
+  overflow-x: clip;
+  max-width: 100vw;
+}
+
+body {
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  background-color: transparent;
+  color: var(--text-ivory);
+  overflow-x: clip;
+  max-width: 100vw;
+  selection-background-color: #d4af37;
+}
+
+::selection {
+  background: rgba(212, 175, 55, 0.28);
+  color: #fff;
+}
+
+/* ============================================================================
+   ARCHITECTURAL SHARP CORNERS (0px Border Radius Across All Surfaces)
+   Elimina por completo las terminaciones redondeadas tipo "vibecode".
+============================================================================ */
+*:not(.nimbus-nav):not(.nimbus-nav *) {
+  border-radius: 0px !important;
+}
+
+/* Tri-Typeface Utility Classes */
+.font-monument {
+  font-family: var(--font-cinzel), Georgia, serif;
+  letter-spacing: 0.08em;
+  line-height: 1.12;
+  overflow-wrap: break-word;
+}
+
+@media (min-width: 640px) {
+  .font-monument {
+    letter-spacing: 0.14em;
+    line-height: 1.05;
+  }
+}
+
+.font-editorial {
+  font-family: var(--font-cormorant), Georgia, serif;
+}
+
+.font-ui {
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+.hero-headline {
+  font-size: var(--font-size-hero);
+  line-height: 1.08;
+  letter-spacing: 0.05em;
+}
+
+@media (min-width: 640px) {
+  .hero-headline {
+    line-height: 1.03;
+    letter-spacing: 0.08em;
+  }
+}
+
+.display-headline {
+  font-size: var(--font-size-display);
+  line-height: 1.12;
+  letter-spacing: 0.04em;
+}
+
+@media (min-width: 640px) {
+  .display-headline {
+    line-height: 1.08;
+    letter-spacing: 0.06em;
+  }
+}
+
+/* Gold Metallic Text Shimmer */
+.text-gold-gradient {
+  background: linear-gradient(
+    135deg,
+    #f9e8a2 0%,
+    #d4af37 38%,
+    #b58922 68%,
+    #f6e08b 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================================================
+   ARCHITECTURAL MONOLITH SURFACES (Sharp-Edged Editorial Glass)
+============================================================================ */
+
+.spatial-island {
+  background: rgba(10, 11, 15, 0.72);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.spatial-bento-card {
+  background: rgba(10, 11, 16, 0.62);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s ease,
+    background-color 0.35s ease;
+}
+
+.spatial-bento-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(212, 175, 55, 0.55);
+  background: rgba(14, 15, 22, 0.78);
+}
+
+.spatial-capsule {
+  background: rgba(10, 11, 16, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.glass-surface {
+  background: rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.glass-dark-luxe {
+  background: rgba(9, 10, 14, 0.8);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+.glass-interactive {
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s ease;
+}
+
+.glass-interactive:hover {
+  transform: translateY(-4px);
+  border-color: rgba(212, 175, 55, 0.55);
+}
+
+/* Sharp Architectural Button */
+.btn-gold {
+  background: #d4af37;
+  color: #050508;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border: 1px solid #e5c453;
+  transition:
+    background-color 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.28s ease;
+}
+
+.btn-gold:hover {
+  background: #f3dc8a;
+  color: #050508;
+}
+
+.btn-gold:active {
+  background: #b89428;
+}
+
+/* Hairline Editorial Link */
+.editorial-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #f8f6f0;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.5);
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.editorial-link:hover {
+  color: #f3dc8a;
+  border-color: #f3dc8a;
+}
+
+:focus-visible {
+  outline: 1px solid #d4af37;
+  outline-offset: 3px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #050508;
+}
+::-webkit-scrollbar-thumb {
+  background: #232019;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d4af37;
+}

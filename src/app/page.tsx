@@ -1,0 +1,528 @@
+'use client';
+
+import React from 'react';
+import Link from 'next/link';
+import { useStudio } from '@/context/StudioContext';
+import {
+  TiltedGridHero,
+  TiltedGridImage,
+} from '@/components/ui/tilted-grid-hero';
+import InteractiveStudioGallery from '@/components/ui/interactive-studio-gallery';
+import {
+  FILM_PRODUCTIONS,
+  EXPERIENCE_STEPS,
+  TESTIMONIALS_DATA,
+  PACKAGES_DATA,
+} from '@/data/studioData';
+import { Play } from 'lucide-react';
+
+const HERO_REEL_IMAGES: TiltedGridImage[] = [
+  {
+    src: '/fotos/boda-47.jpg',
+    alt: 'Fotografía de Bodas — DPhotography Studios',
+  },
+  {
+    src: '/fotos/quince-caballo-10.jpg',
+    alt: 'Quinceañera Editorial — DPhotography Studios',
+  },
+  {
+    src: '/fotos/melissa-4.jpg',
+    alt: 'Retrato Musical en Estudio — DPhotography Studios',
+  },
+  {
+    src: '/fotos/chelsea-7.jpg',
+    alt: 'Marca Personal y Retrato Editorial — DPhotography Studios',
+  },
+  {
+    src: '/fotos/boda-60.jpg',
+    alt: 'Retrato de Novia en Hora Dorada — DPhotography Studios',
+  },
+  {
+    src: '/fotos/randy-26.jpg',
+    alt: 'Retrato Artístico en Estudio — DPhotography Studios',
+  },
+  {
+    src: '/fotos/vane-2.jpg',
+    alt: 'Retrato Urbano de Moda — DPhotography Studios',
+  },
+  {
+    src: '/fotos/yelena-14.jpg',
+    alt: 'Sesión Deportiva y Editorial — DPhotography Studios',
+  },
+  {
+    src: '/fotos/quince-47.jpg',
+    alt: 'Quinceañera de Lujo — DPhotography Studios',
+  },
+  {
+    src: '/fotos/foto-1-2.jpg',
+    alt: 'Editorial de Belleza en Estudio — DPhotography Studios',
+  },
+  {
+    src: '/fotos/edicion-02.jpg',
+    alt: 'Retrato Artístico en Estudio — DPhotography Studios',
+  },
+  {
+    src: '/fotos/originales-20.jpg',
+    alt: 'Sesión en Locación Louisville — DPhotography Studios',
+  },
+  {
+    src: '/fotos/edit-11.jpg',
+    alt: 'Sesión Musical en Exterior — DPhotography Studios',
+  },
+  {
+    src: '/fotos/concierto-6159.jpg',
+    alt: 'Cobertura de Eventos y Conciertos en Vivo — DPhotography Studios',
+  },
+  {
+    src: '/fotos/foto-9.jpg',
+    alt: 'Retrato al Atardecer — DPhotography Studios',
+  },
+  {
+    src: '/fotos/edicion-3.jpg',
+    alt: 'Sesión de Graduación — DPhotography Studios',
+  },
+];
+
+export default function HomePage() {
+  const { t, openFilm, openShowreel } = useStudio();
+
+  const featuredFilms = FILM_PRODUCTIONS.filter((f) => f.featuredOnHome);
+  const featuredPackages = PACKAGES_DATA.filter((p) => p.popular);
+
+  return (
+    <div className="w-full overflow-x-clip pb-16 sm:pb-24 space-y-20 sm:space-y-32">
+      {/* =====================================================================
+          1. HERO ESPACIAL INTEGRADO AL LIENZO ÚNICO
+      ===================================================================== */}
+      <section className="relative pt-10 sm:pt-14">
+        <TiltedGridHero
+          images={HERO_REEL_IMAGES}
+          speed={4}
+          tileHeight={32}
+          aspectRatio={16 / 10}
+          gap={5}
+          axis={48}
+          curve={80}
+          fade={10}
+          className="h-[80svh] sm:h-[90vh] min-h-[520px] sm:min-h-[680px] max-h-[960px] w-full bg-transparent"
+          style={{
+            maskImage:
+              'linear-gradient(to bottom, #000 0%, #000 82%, transparent 100%)',
+            WebkitMaskImage:
+              'linear-gradient(to bottom, #000 0%, #000 82%, transparent 100%)',
+          }}
+        >
+          <div className="pointer-events-none relative z-10 flex h-full w-full items-end justify-center overflow-hidden">
+            {/* Logo centrado encima de la foto del personaje en móvil */}
+            <div className="sm:hidden absolute top-3 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center">
+              <img
+                src="/brand/dps-logo-texture.png"
+                alt="DPhotography Studios"
+                draggable={false}
+                className="w-40 xs:w-44 h-auto object-contain select-none drop-shadow-[0_10px_28px_rgba(0,0,0,0.95)]"
+              />
+            </div>
+
+            <div className="absolute bottom-12 sm:bottom-16 left-1/2 -translate-x-1/2 w-[280px] sm:w-[540px] h-[280px] sm:h-[540px] bg-[#d4af37]/15 blur-[120px]" />
+
+            <img
+              src="/brand/creator-cutout.png"
+              alt="DPhotography Studios & Films"
+              draggable={false}
+              className="relative z-10 h-[70%] sm:h-[88%] md:h-[96%] w-auto max-w-none object-contain object-bottom sm:-translate-y-2 md:scale-[1.04] origin-bottom select-none drop-shadow-[0_24px_60px_rgba(0,0,0,0.95)]"
+            />
+          </div>
+        </TiltedGridHero>
+      </section>
+
+      {/* =====================================================================
+          2. GALERÍA INTERACTIVA CON LENTE DE CRISTAL LÍQUIDO (Debajo del Hero)
+      ===================================================================== */}
+      <InteractiveStudioGallery />
+
+      {/* =====================================================================
+          3. CINEMATOGRAFÍA 4K Y SALA DE PROYECCIÓN (Esquinas Rectas Editorial)
+      ===================================================================== */}
+      <section className="px-4 sm:px-8 relative z-10">
+        <div className="max-w-[1400px] mx-auto space-y-10 sm:space-y-14">
+          <div
+            data-reveal="up"
+            className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/15 pb-6"
+          >
+            <div className="space-y-2">
+              <span className="text-[10px] font-mono tracking-[0.28em] uppercase text-[#d4af37] block">
+                01 / CINEMATOGRAFÍA 4K & DMEDIA RECORDS
+              </span>
+              <h2 className="font-monument display-headline text-white uppercase">
+                Producciones de Cine
+              </h2>
+            </div>
+            <Link href="/films" className="editorial-link self-start md:self-auto">
+              <span>Archivo Completo de Películas</span>
+              <span>→</span>
+            </Link>
+          </div>
+
+          {/* Marco Panorámico de Showreel (Esquinas rectas 0px) */}
+          <div
+            data-reveal="image"
+            onClick={openShowreel}
+            className="cursor-pointer group relative overflow-hidden border border-white/15 min-h-[320px] sm:min-h-[440px] lg:aspect-[21/9] p-6 sm:p-10 flex flex-col justify-between bg-black"
+          >
+            <img
+              src="/brand/creator-directors-chair-cinema-rig.jpg"
+              alt="Showreel 2026 DPhotography Studios"
+              className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-1000 filter brightness-[0.55]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#050508] via-[#050508]/25 to-[#050508]/70" />
+
+            <div className="relative z-10 flex items-center justify-between text-[10px] tracking-[0.24em] uppercase font-mono text-white/75">
+              <span>SHOWREEL OFICIAL • 4K ANAMÓRFICO</span>
+              <span className="text-[#f3dc8a]">01:15 MASTER</span>
+            </div>
+
+            <div className="relative z-10 flex flex-col items-center justify-center text-center gap-4 my-auto py-4">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 border border-[#d4af37] bg-black/60 group-hover:bg-[#d4af37] text-[#f3dc8a] group-hover:text-black flex items-center justify-center transition-colors duration-300">
+                <Play className="w-6 h-6 fill-current ml-0.5" />
+              </div>
+              <h3 className="font-monument text-lg sm:text-3xl text-white uppercase tracking-[0.14em]">
+                Reproducir Showreel Cinematográfico
+              </h3>
+            </div>
+
+            <div className="relative z-10 flex items-center justify-between text-[10px] font-mono tracking-[0.2em] uppercase text-white/60">
+              <span className="hidden sm:inline">
+                SONY ALPHA CINEMA • ANILLO TILTA • DRON 4K
+              </span>
+              <span className="text-[#f3dc8a]">PANTALLA COMPLETA →</span>
+            </div>
+          </div>
+
+          {/* 3 Películas Destacadas en Retícula Arquitectónica */}
+          <div
+            data-reveal="stagger"
+            className="grid grid-cols-1 lg:grid-cols-3 gap-6"
+          >
+            {featuredFilms.map((film, idx) => (
+              <div
+                key={film.id}
+                onClick={() => openFilm(film)}
+                className="cursor-pointer group spatial-bento-card flex flex-col justify-between"
+              >
+                <div>
+                  <div className="relative aspect-[16/10] overflow-hidden bg-black border-b border-white/10">
+                    <img
+                      src={film.thumbnail}
+                      alt={t(film.title)}
+                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 filter brightness-[0.82]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+
+                    <div className="absolute top-3 left-3 text-[10px] font-mono tracking-[0.2em] uppercase text-[#f3dc8a] bg-black/75 px-2.5 py-1 border border-white/15">
+                      0{idx + 1} • {t(film.categoryLabel)}
+                    </div>
+                    <div className="absolute bottom-3 right-3 text-[10px] font-mono text-white/80 bg-black/80 px-2 py-0.5">
+                      {film.duration}
+                    </div>
+                  </div>
+
+                  <div className="p-6 space-y-2">
+                    <div className="flex items-center justify-between text-[10px] font-mono tracking-[0.18em] uppercase text-white/50">
+                      <span>{film.division}</span>
+                      <span>{film.location}</span>
+                    </div>
+                    <h3 className="font-monument text-base sm:text-lg text-white group-hover:text-[#f3dc8a] transition-colors">
+                      {t(film.title)}
+                    </h3>
+                    <p className="font-editorial italic text-base text-[#e0cd95]">
+                      {t(film.subtitle)}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="px-6 py-4 border-t border-white/10 flex items-center justify-between text-[10px] font-mono tracking-[0.2em] uppercase text-white/70 group-hover:text-[#f3dc8a] transition-colors">
+                  <span>REPRODUCIR PELÍCULA</span>
+                  <span>→</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================================
+          4. EL ESTUDIO Y DIRECCIÓN CREATIVA (Editorial Arquitectónico)
+      ===================================================================== */}
+      <section className="px-4 sm:px-8 relative z-10">
+        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-14 items-center">
+          {/* Mosaico Fotográfico de Esquinas Rectas */}
+          <div
+            data-reveal="stagger"
+            className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-12 gap-4 items-center"
+          >
+            <div className="sm:col-span-7">
+              <div className="relative overflow-hidden border border-white/15 aspect-[4/5] sm:aspect-[3/4] bg-black">
+                <img
+                  src="/brand/creator-tuxedo-portrait.jpg"
+                  alt="Director de DPhotography Studios"
+                  className="w-full h-full object-cover object-top"
+                />
+                <div className="absolute bottom-0 inset-x-0 p-4 bg-black/80 backdrop-blur-md border-t border-white/15">
+                  <span className="text-[10px] font-mono tracking-[0.2em] uppercase text-[#f3dc8a] block">
+                    DIRECCIÓN CREATIVA DE ETIQUETA
+                  </span>
+                  <span className="text-[11px] text-white/70">
+                    Louisville, Kentucky
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="sm:col-span-5 grid grid-cols-2 sm:grid-cols-1 gap-4">
+              <div className="relative overflow-hidden border border-white/15 aspect-[3/4] bg-black">
+                <img
+                  src="/brand/creator-crouching-tilta-rig.jpg"
+                  alt="Rig de cine Tilta DPhotography Studios"
+                  className="w-full h-full object-cover object-top"
+                />
+                <div className="absolute bottom-0 inset-x-0 px-3 py-2 bg-black/80 border-t border-white/10 text-[9px] font-mono tracking-[0.2em] uppercase text-[#f3dc8a]">
+                  RIG TILTA • 4K
+                </div>
+              </div>
+
+              <div className="relative overflow-hidden border border-white/15 aspect-[3/4] bg-black">
+                <img
+                  src="/brand/creator-gimbal-profile.jpg"
+                  alt="Operador de gimbal DMedia Records"
+                  className="w-full h-full object-cover object-top"
+                />
+                <div className="absolute bottom-0 inset-x-0 px-3 py-2 bg-black/80 border-t border-white/10 text-[9px] font-mono tracking-[0.2em] uppercase text-white/80">
+                  DMEDIA RECORDS
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Manifiesto Editorial */}
+          <div data-reveal="up" className="lg:col-span-5 space-y-6">
+            <span className="text-[10px] font-mono tracking-[0.28em] uppercase text-[#d4af37] block">
+              02 / EL ESTUDIO Y EL DIRECTOR
+            </span>
+
+            <h2 className="font-monument display-headline text-white uppercase">
+              Elegancia Editorial y Rigor Cinematográfico
+            </h2>
+
+            <p className="font-editorial italic text-xl sm:text-2xl text-[#e2cf97]">
+              “Cada cliente merece sentirse como el protagonista de una obra de
+              cine.”
+            </p>
+
+            <p className="text-sm sm:text-base text-[#b8bcc8] leading-relaxed">
+              Con sede en Louisville, Kentucky, DPhotography Studios & Films
+              integra iluminación de estudio, óptica de cine y dirección
+              artística en bodas, quinceañeras, retratos editoriales y videos
+              musicales a través de nuestra división DMedia Records.
+            </p>
+
+            <div className="pt-2">
+              <Link href="/about" className="editorial-link">
+                <span>Conocer la Historia del Estudio</span>
+                <span>→</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================================
+          5. EXPERIENCIA Y TESTIMONIOS (Retícula Limpia de Líneas Rectas)
+      ===================================================================== */}
+      <section className="px-4 sm:px-8 relative z-10">
+        <div className="max-w-[1400px] mx-auto space-y-16">
+          <div className="space-y-8">
+            <div
+              data-reveal="up"
+              className="border-b border-white/15 pb-5 flex flex-col sm:flex-row sm:items-end justify-between gap-3"
+            >
+              <div>
+                <span className="text-[10px] font-mono tracking-[0.28em] uppercase text-[#d4af37] block">
+                  03 / METODOLOGÍA DE PRODUCCIÓN
+                </span>
+                <h2 className="font-monument display-headline text-white uppercase mt-1">
+                  De la Consulta al Estreno
+                </h2>
+              </div>
+            </div>
+
+            <div
+              data-reveal="stagger"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-white/15"
+            >
+              {EXPERIENCE_STEPS.map((item) => (
+                <div
+                  key={item.step}
+                  className="p-6 sm:p-8 border-r border-b border-white/15 bg-black/35 backdrop-blur-md space-y-3"
+                >
+                  <span className="font-mono text-xs tracking-[0.24em] text-[#d4af37] block">
+                    /{item.step}
+                  </span>
+                  <h3 className="font-monument text-base sm:text-lg text-white">
+                    {t(item.title)}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#a8acb8] leading-relaxed">
+                    {t(item.description)}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Testimonios en 3 Columnas Arquitectónicas */}
+          <div
+            data-reveal="stagger"
+            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          >
+            {TESTIMONIALS_DATA.map((item) => (
+              <div
+                key={item.id}
+                className="spatial-bento-card p-6 sm:p-8 flex flex-col justify-between space-y-6"
+              >
+                <p className="font-editorial italic text-lg sm:text-xl text-white/90 leading-relaxed">
+                  “{t(item.quote)}”
+                </p>
+
+                <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+                  <div>
+                    <h4 className="font-monument text-xs tracking-[0.16em] text-[#f3dc8a] uppercase">
+                      {item.client}
+                    </h4>
+                    <span className="text-[11px] text-white/55 block mt-0.5">
+                      {t(item.role)}
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-mono text-[#d4af37]">
+                    ★★★★★
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================================
+          6. COLECCIONES E INVERSIÓN + CIERRE EDITORIAL
+      ===================================================================== */}
+      <section className="px-4 sm:px-8 relative z-10">
+        <div className="max-w-[1400px] mx-auto space-y-20">
+          <div className="space-y-10">
+            <div
+              data-reveal="up"
+              className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/15 pb-6"
+            >
+              <div className="space-y-2">
+                <span className="text-[10px] font-mono tracking-[0.28em] uppercase text-[#d4af37] block">
+                  04 / INVERSIÓN Y COLECCIONES
+                </span>
+                <h2 className="font-monument display-headline text-white uppercase">
+                  Colecciones Destacadas
+                </h2>
+              </div>
+              <Link
+                href="/packages"
+                className="editorial-link self-start md:self-auto"
+              >
+                <span>Ver las 8 Categorías de Paquetes</span>
+                <span>→</span>
+              </Link>
+            </div>
+
+            <div
+              data-reveal="stagger"
+              className="grid grid-cols-1 lg:grid-cols-3 gap-6"
+            >
+              {featuredPackages.map((pkg) => (
+                <div
+                  key={pkg.id}
+                  className="spatial-bento-card p-6 sm:p-8 flex flex-col justify-between"
+                >
+                  <div className="space-y-5">
+                    <div className="flex items-center justify-between text-[10px] font-mono tracking-[0.2em] uppercase text-[#d4af37]">
+                      <span>{t(pkg.categoryName)}</span>
+                      <span className="text-white/55">
+                        {t(pkg.durationLabel)}
+                      </span>
+                    </div>
+
+                    <div>
+                      <h3 className="font-monument text-lg sm:text-xl text-white">
+                        {t(pkg.tierName)}
+                      </h3>
+                      <p className="font-editorial italic text-base sm:text-lg text-[#e0cd95] mt-1">
+                        {t(pkg.tagline)}
+                      </p>
+                    </div>
+
+                    <div className="py-4 border-y border-white/10 flex items-baseline justify-between">
+                      <span className="text-[10px] font-mono uppercase tracking-[0.22em] text-white/50">
+                        INVERSIÓN DESDE
+                      </span>
+                      <span className="font-monument text-2xl sm:text-3xl text-[#f3dc8a]">
+                        {pkg.startingPrice}
+                      </span>
+                    </div>
+
+                    <ul className="space-y-2.5 text-xs text-[#c5c8d4]">
+                      {pkg.deliverables.es.slice(0, 5).map((item, i) => (
+                        <li
+                          key={i}
+                          className="flex items-start gap-2.5 border-b border-white/[0.05] pb-2 last:border-0"
+                        >
+                          <span className="text-[#d4af37] font-mono text-[10px] mt-0.5">
+                            —
+                          </span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="pt-6 mt-6 border-t border-white/10">
+                    <Link
+                      href={`/contact?package=${pkg.id}`}
+                      className="btn-gold block w-full py-3.5 px-4 text-[11px] text-center"
+                    >
+                      Solicitar Disponibilidad
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Cierre Editorial Minimalista */}
+          <div
+            data-reveal="up"
+            className="pt-12 border-t border-white/15 text-center space-y-6"
+          >
+            <span className="text-[10px] font-mono tracking-[0.28em] uppercase text-[#d4af37] block">
+              LOUISVILLE, KENTUCKY • DISPONIBLES PARA VIAJAR
+            </span>
+            <h2 className="font-monument display-headline text-white uppercase max-w-3xl mx-auto">
+              Creemos Algo Extraordinario
+            </h2>
+            <div className="pt-2 flex justify-center">
+              <Link
+                href="/contact"
+                className="btn-gold px-10 py-4 text-xs tracking-[0.22em]"
+              >
+                Reservar Tu Fecha
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
