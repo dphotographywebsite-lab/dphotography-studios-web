@@ -513,7 +513,7 @@ export default function HomePage() {
             >
               <div className="space-y-1.5">
                 <span className="text-[10px] font-mono tracking-[0.28em] uppercase text-[#d4af37] block">
-                  04 / INVERSIÓN Y COLECCIONES
+                  04 / PAQUETES Y COLECCIONES
                 </span>
                 <h2 className="font-monument display-headline text-white uppercase">
                   Colecciones Destacadas
@@ -545,7 +545,7 @@ export default function HomePage() {
                   scaleOnHover={1.03}
                   glare={0.5}
                   shadow={0.5}
-                  captionText={pkg.startingPrice}
+                  captionText="CONTACTAR POR PAQUETE"
                   className="mobile-snap-card-wide"
                 >
                   <div className="spatial-bento-card p-5 sm:p-8 flex flex-col justify-between w-full h-full">
@@ -566,12 +566,12 @@ export default function HomePage() {
                         </p>
                       </div>
 
-                      <div className="py-3 sm:py-4 border-y border-white/10 flex items-baseline justify-between">
+                      <div className="py-3 sm:py-3.5 border-y border-white/10 flex items-center justify-between">
                         <span className="text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.2em] text-white/50">
-                          INVERSIÓN DESDE
+                          COBERTURA
                         </span>
-                        <span className="font-monument text-xl sm:text-3xl text-[#f3dc8a]">
-                          {pkg.startingPrice}
+                        <span className="text-[11px] sm:text-xs font-mono uppercase tracking-[0.16em] text-[#f3dc8a]">
+                          {t(pkg.durationLabel)}
                         </span>
                       </div>
 
@@ -592,10 +592,10 @@ export default function HomePage() {
 
                     <div className="pt-4 sm:pt-6 mt-4 sm:mt-6 border-t border-white/10">
                       <Link
-                        href={`/contact?package=${pkg.id}`}
+                        href={`/contact?package=${pkg.id}&service=${pkg.categorySlug}`}
                         className="btn-gold block w-full py-3 sm:py-3.5 px-4 text-[10px] sm:text-[11px] text-center"
                       >
-                        Solicitar Disponibilidad
+                        Contactar por este Paquete
                       </Link>
                     </div>
                   </div>

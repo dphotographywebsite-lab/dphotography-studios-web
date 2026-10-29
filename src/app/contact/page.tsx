@@ -34,7 +34,7 @@ function ContactContent() {
   ]);
   const [selectedPackageId, setSelectedPackageId] =
     useState(preselectedPackage);
-  const [budget, setBudget] = useState('$3,000 – $5,500');
+  const [budget, setBudget] = useState('Cobertura Completa (Fotografía + Película)');
   const [visionNotes, setVisionNotes] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
@@ -98,13 +98,13 @@ function ContactContent() {
 
     const selectedPkg = packages.find((p) => p.id === selectedPackageId);
     const pkgLabel = selectedPkg
-      ? `${t(selectedPkg.categoryName)} — ${t(selectedPkg.tierName)} (${selectedPkg.startingPrice})`
+      ? `${t(selectedPkg.categoryName)} — ${t(selectedPkg.tierName)}`
       : selectedPackageId === 'custom-production'
         ? 'Producción Especial a Medida'
         : 'Por definir / Asesoría personalizada';
 
     const lines = [
-      'Hola *DPhotography Studios & Films*, quiero cotizar y verificar disponibilidad:',
+      'Hola *DPhotography Studios & Films*, quiero contactar por un paquete y verificar disponibilidad:',
       '',
       `• *Nombre:* ${fullName || 'No especificado'}`,
       `• *Correo:* ${email || 'No especificado'}`,
@@ -112,8 +112,8 @@ function ContactContent() {
       `• *Servicios:* ${chosenServices || 'No especificado'}`,
       `• *Fecha del Evento:* ${eventDate || 'Por definir'}`,
       `• *Locación / Ciudad:* ${venueLocation || 'Louisville, KY'}`,
-      `• *Paquete:* ${pkgLabel}`,
-      `• *Presupuesto Estimado:* ${budget}`,
+      `• *Paquete de Interés:* ${pkgLabel}`,
+      `• *Modalidad de Cobertura:* ${budget}`,
       visionNotes.trim() ? `• *Detalles / Idea:* ${visionNotes.trim()}` : '',
     ].filter(Boolean);
 
@@ -356,8 +356,7 @@ function ContactContent() {
                       </option>
                       {packages.map((p) => (
                         <option key={p.id} value={p.id}>
-                          {t(p.categoryName)} — {t(p.tierName)} (
-                          {p.startingPrice})
+                          {t(p.categoryName)} — {t(p.tierName)}
                         </option>
                       ))}
                       <option value="custom-production">
@@ -369,25 +368,24 @@ function ContactContent() {
 
                   <div className="space-y-2">
                     <label className="text-[11px] uppercase tracking-widest text-[#f3dc8a] block">
-                      Presupuesto Estimado
+                      Modalidad de Cobertura
                     </label>
                     <select
                       value={budget}
                       onChange={(e) => setBudget(e.target.value)}
                       className="w-full px-4 py-3.5 rounded-xl bg-[#0e1017] border border-white/15 focus:border-[#d4af37] text-sm text-white focus:outline-none"
                     >
-                      <option value="$450 – $1,500">
-                        $450 – $1,500 (Retratos / Sesiones Individuales)
+                      <option value="Cobertura Completa (Fotografía + Película)">
+                        Cobertura Completa (Fotografía + Película)
                       </option>
-                      <option value="$1,500 – $3,000">
-                        $1,500 – $3,000 (Videos Musicales / Solo Foto o Video)
+                      <option value="Solo Fotografía o Solo Película">
+                        Solo Fotografía o Solo Película
                       </option>
-                      <option value="$3,000 – $5,500">
-                        $3,000 – $5,500 (Boda o Quinceañera Foto + Película)
+                      <option value="Sesión de Retrato / Estudio / Pre-Evento">
+                        Sesión de Retrato / Estudio / Pre-Evento
                       </option>
-                      <option value="$5,500+">
-                        $5,500+ (Colección Grand Signature / Varios Días /
-                        Comercial)
+                      <option value="Producción Especial / Video Musical / Varios Días">
+                        Producción Especial / Video Musical / Varios Días
                       </option>
                     </select>
                   </div>

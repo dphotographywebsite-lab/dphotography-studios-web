@@ -166,7 +166,7 @@ export default function Footer() {
                   href="/packages"
                   className="hover:text-[#f3dc8a] transition-colors"
                 >
-                  Paquetes y Precios
+                  Paquetes y Colecciones
                 </Link>
               </li>
             </ul>

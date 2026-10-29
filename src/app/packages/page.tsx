@@ -51,16 +51,16 @@ export default function PackagesPage() {
         <div className="max-w-[1400px] mx-auto text-center space-y-5">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-dark-luxe border border-[#d4af37]/40 text-[#f3dc8a] text-[10px] tracking-[0.26em] uppercase font-semibold">
             <Sparkles className="w-3.5 h-3.5 text-[#d4af37]" />
-            <span>INVERSIÓN Y COLECCIONES DE LUJO</span>
+            <span>COLECCIONES Y COBERTURAS DE LUJO</span>
           </div>
 
           <h1 className="font-monument hero-headline text-white uppercase">
-            Paquetes y Precios
+            Paquetes y Colecciones
           </h1>
 
           <p className="font-editorial italic text-2xl sm:text-3xl text-[#e2cf97] max-w-3xl mx-auto">
-            Inversión transparente, entregables completos de lujo y planes de
-            pago flexibles adaptados a tu celebración.
+            Entregables completos de lujo, cobertura cinematográfica y planes
+            personalizados adaptados a tu celebración.
           </p>
 
           {/* Category Tabs */}
@@ -94,7 +94,7 @@ export default function PackagesPage() {
               scaleOnHover={1.02}
               glare={0.45}
               shadow={0.5}
-              captionText={pkg.startingPrice}
+              captionText="CONTACTAR POR PAQUETE"
               className="mobile-snap-card-wide"
             >
               <div
@@ -117,7 +117,7 @@ export default function PackagesPage() {
                     )}
                   </div>
 
-                  {/* Title & Starting Price */}
+                  {/* Title & Coverage Duration */}
                   <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-white/10">
                     <div>
                       <h2 className="font-monument text-2xl text-white">
@@ -128,13 +128,10 @@ export default function PackagesPage() {
                       </p>
                     </div>
                     <div className="sm:text-right shrink-0">
-                      <span className="text-[10px] uppercase tracking-widest text-white/50 block">
-                        Inversión Desde
+                      <span className="text-[10px] uppercase tracking-widest text-[#d4af37] block">
+                        Cobertura Incluida
                       </span>
-                      <span className="font-monument text-3xl sm:text-4xl text-gold-gradient font-bold">
-                        {pkg.startingPrice}
-                      </span>
-                      <span className="text-[11px] text-white/60 block mt-0.5">
+                      <span className="font-monument text-sm sm:text-base text-[#f3dc8a] block mt-1">
                         {t(pkg.durationLabel)}
                       </span>
                     </div>
@@ -178,14 +175,14 @@ export default function PackagesPage() {
                 <div className="pt-8 mt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
                   <span className="text-xs text-white/60 flex items-center gap-1.5">
                     <ShieldCheck className="w-4 h-4 text-[#d4af37]" />
-                    Aparta tu Fecha con el 30%
+                    Atención Personalizada por WhatsApp
                   </span>
 
                   <Link
                     href={`/contact?package=${pkg.id}&service=${pkg.categorySlug}`}
                     className="btn-gold w-full sm:w-auto px-7 py-3.5 rounded-full text-xs flex items-center justify-center gap-2"
                   >
-                    <span>Solicitar Cotización</span>
+                    <span>Contactar por este Paquete</span>
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
