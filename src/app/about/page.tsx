@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import TiltedCard, { TiltedCardLayer } from '@/components/ui/tilted-card';
 import {
   Camera,
   Disc,
@@ -108,62 +109,84 @@ export default function AboutPage() {
 
             {/* Dual Brand Architecture */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-              <div className="p-5 rounded-2xl spatial-bento-card space-y-2">
-                <Camera className="w-5 h-5 text-[#d4af37]" />
-                <h3 className="font-monument text-sm text-white uppercase">
-                  DPhotography Studios & Films
-                </h3>
-                <p className="text-xs text-white/70 leading-relaxed">
-                  Bodas de Lujo, Quinceañeras, Retratos Editoriales en Estudio,
-                  Maternidad y Familia.
-                </p>
-              </div>
+              <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={9} scaleOnHover={1.03} glare={0.28} shadow={0.45} className="h-full">
+                <div className="p-5 rounded-2xl spatial-bento-card space-y-2 h-full w-full">
+                  <Camera className="w-5 h-5 text-[#d4af37]" />
+                  <h3 className="font-monument text-sm text-white uppercase">
+                    DPhotography Studios & Films
+                  </h3>
+                  <p className="text-xs text-white/70 leading-relaxed">
+                    Bodas de Lujo, Quinceañeras, Retratos Editoriales en Estudio,
+                    Maternidad y Familia.
+                  </p>
+                </div>
+              </TiltedCard>
 
-              <div className="p-5 rounded-2xl spatial-bento-card space-y-2">
-                <Disc className="w-5 h-5 text-[#d4af37]" />
-                <h3 className="font-monument text-sm text-[#f3dc8a] uppercase">
-                  División DMedia Records
-                </h3>
-                <p className="text-xs text-white/70 leading-relaxed">
-                  Videos Musicales Oficiales, Visuales para Artistas,
-                  Cortometrajes y Campañas Comerciales.
-                </p>
-              </div>
+              <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={9} scaleOnHover={1.03} glare={0.28} shadow={0.45} className="h-full">
+                <div className="p-5 rounded-2xl spatial-bento-card space-y-2 h-full w-full">
+                  <Disc className="w-5 h-5 text-[#d4af37]" />
+                  <h3 className="font-monument text-sm text-[#f3dc8a] uppercase">
+                    División DMedia Records
+                  </h3>
+                  <p className="text-xs text-white/70 leading-relaxed">
+                    Videos Musicales Oficiales, Visuales para Artistas,
+                    Cortometrajes y Campañas Comerciales.
+                  </p>
+                </div>
+              </TiltedCard>
             </div>
           </div>
 
           {/* Dual Portrait Showcase (6 cols) */}
           <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 items-center">
             <div className="space-y-4">
-              <img
-                src="/brand/creator-tuxedo-portrait.jpg"
-                alt="Fundador en Traje de Etiqueta con Cámara"
-                className="rounded-3xl border border-[#d4af37]/40 shadow-2xl w-full aspect-[3/4] object-cover object-top"
+              <TiltedCard
+                imageSrc="/brand/creator-tuxedo-portrait.jpg"
+                altText="Fundador en Traje de Etiqueta con Cámara"
+                captionText="Dirección de Etiqueta"
+                containerHeight="auto"
+                containerWidth="100%"
+                rotateAmplitude={12}
+                scaleOnHover={1.04}
+                glare={0.45}
+                shadow={0.55}
+                className="aspect-[3/4] border border-[#d4af37]/40 shadow-2xl"
               />
-              <div className="p-4 rounded-2xl spatial-bento-card text-xs text-center">
-                <strong className="text-[#f3dc8a] block uppercase tracking-widest">
-                  El Estándar Editorial
-                </strong>
-                <span className="text-white/70">
-                  Presencia formal de etiqueta en tus eventos de gala
-                </span>
-              </div>
+              <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={8} scaleOnHover={1.02} glare={0.22} shadow={0.35}>
+                <div className="p-4 rounded-2xl spatial-bento-card text-xs text-center w-full">
+                  <strong className="text-[#f3dc8a] block uppercase tracking-widest">
+                    El Estándar Editorial
+                  </strong>
+                  <span className="text-white/70">
+                    Presencia formal de etiqueta en tus eventos de gala
+                  </span>
+                </div>
+              </TiltedCard>
             </div>
 
             <div className="space-y-4 sm:pt-8">
-              <img
-                src="/brand/creator-directors-chair-cinema-rig.jpg"
-                alt="Fundador en Silla de Director con Rig de Cine Tilta"
-                className="rounded-3xl border border-white/15 shadow-2xl w-full aspect-[3/4] object-cover object-top"
+              <TiltedCard
+                imageSrc="/brand/creator-directors-chair-cinema-rig.jpg"
+                altText="Fundador en Silla de Director con Rig de Cine Tilta"
+                captionText="Producción Tilta"
+                containerHeight="auto"
+                containerWidth="100%"
+                rotateAmplitude={12}
+                scaleOnHover={1.04}
+                glare={0.45}
+                shadow={0.55}
+                className="aspect-[3/4] border border-white/15 shadow-2xl"
               />
-              <div className="p-4 rounded-2xl spatial-bento-card text-xs text-center">
-                <strong className="text-[#f3dc8a] block uppercase tracking-widest">
-                  Producción Cinematográfica
-                </strong>
-                <span className="text-white/70">
-                  Anillo Tilta, estabilizador RS3 Pro y monitor 4K
-                </span>
-              </div>
+              <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={8} scaleOnHover={1.02} glare={0.22} shadow={0.35}>
+                <div className="p-4 rounded-2xl spatial-bento-card text-xs text-center w-full">
+                  <strong className="text-[#f3dc8a] block uppercase tracking-widest">
+                    Producción Cinematográfica
+                  </strong>
+                  <span className="text-white/70">
+                    Anillo Tilta, estabilizador RS3 Pro y monitor 4K
+                  </span>
+                </div>
+              </TiltedCard>
             </div>
           </div>
         </div>
@@ -190,18 +213,22 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {btsGallery.map((item, idx) => (
-              <div
+              <TiltedCard
                 key={idx}
-                className="group spatial-bento-card overflow-hidden flex flex-col"
+                imageSrc={item.src}
+                altText={item.title}
+                captionText={item.tag}
+                containerHeight="auto"
+                containerWidth="100%"
+                rotateAmplitude={11}
+                scaleOnHover={1.035}
+                glare={0.42}
+                shadow={0.5}
+                className="aspect-[3/4] spatial-bento-card"
               >
-                <div className="relative aspect-[3/4] overflow-hidden">
-                  <img
-                    src={item.src}
-                    alt={item.title}
-                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-black/55 backdrop-blur-md border border-white/10">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent pointer-events-none" />
+                <TiltedCardLayer depth={24} className="flex flex-col justify-end p-4">
+                  <div className="p-4 bg-black/55 backdrop-blur-md border border-white/10">
                     <span className="text-[10px] tracking-[0.2em] uppercase text-[#f3dc8a] font-mono block">
                       {item.tag}
                     </span>
@@ -209,8 +236,8 @@ export default function AboutPage() {
                       {item.title}
                     </h3>
                   </div>
-                </div>
-              </div>
+                </TiltedCardLayer>
+              </TiltedCard>
             ))}
           </div>
         </div>
@@ -235,26 +262,34 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {teamMembers.map((member, idx) => (
-              <div
+              <TiltedCard
                 key={idx}
-                className="spatial-bento-card overflow-hidden flex flex-col"
+                containerHeight="auto"
+                containerWidth="100%"
+                rotateAmplitude={9}
+                scaleOnHover={1.03}
+                glare={0.35}
+                shadow={0.5}
+                className="h-full"
               >
-                <div className="aspect-[4/5] overflow-hidden bg-black">
-                  <img
-                    src={member.image}
-                    alt={member.role}
-                    className="w-full h-full object-cover object-top"
-                  />
+                <div className="spatial-bento-card overflow-hidden flex flex-col h-full w-full">
+                  <div className="aspect-[4/5] overflow-hidden bg-black">
+                    <img
+                      src={member.image}
+                      alt={member.role}
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                  <div className="p-6 space-y-2">
+                    <h3 className="font-monument text-lg text-[#f3dc8a]">
+                      {member.role}
+                    </h3>
+                    <p className="text-xs text-[#b8bcc8] leading-relaxed">
+                      {member.specialty}
+                    </p>
+                  </div>
                 </div>
-                <div className="p-6 space-y-2">
-                  <h3 className="font-monument text-lg text-[#f3dc8a]">
-                    {member.role}
-                  </h3>
-                  <p className="text-xs text-[#b8bcc8] leading-relaxed">
-                    {member.specialty}
-                  </p>
-                </div>
-              </div>
+              </TiltedCard>
             ))}
           </div>
         </div>

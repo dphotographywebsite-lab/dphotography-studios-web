@@ -4,6 +4,7 @@ import React, { useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useStudio } from '@/context/StudioContext';
+import TiltedCard, { TiltedCardLayer } from '@/components/ui/tilted-card';
 import {
   Camera,
   MapPin,
@@ -133,29 +134,39 @@ function PhotographyPortfolioContent() {
                 {t(gallery.story)}
               </p>
 
-              {/* Malla Bento de Fotos Flotantes */}
+              {/* Malla Bento de Fotos Flotantes con TiltedCard */}
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
                 {gallery.images.map((img, i) => (
-                  <div
+                  <TiltedCard
                     key={i}
+                    containerHeight="auto"
+                    rotateAmplitude={12}
+                    scaleOnHover={1.04}
+                    glare={0.5}
+                    shadow={0.5}
+                    captionText={t(img.caption)}
                     onClick={() => openGallery(gallery)}
-                    className={`cursor-pointer group relative rounded-2xl overflow-hidden border border-white/12 bg-black/50 ${
+                    className={
                       i === 0
                         ? 'col-span-2 row-span-2 aspect-[4/3]'
                         : 'aspect-[4/5]'
-                    }`}
+                    }
                   >
-                    <img
-                      src={img.url}
-                      alt={t(img.caption)}
-                      className="w-full h-full object-cover object-[center_20%] group-hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-                      <span className="font-editorial italic text-sm text-[#f3dc8a]">
-                        {t(img.caption)}
-                      </span>
+                    <div className="cursor-pointer group relative overflow-hidden border border-white/12 bg-black/50 w-full h-full">
+                      <img
+                        src={img.url}
+                        alt={t(img.caption)}
+                        className="w-full h-full object-cover object-[center_20%] group-hover:scale-105 transition-transform duration-700"
+                      />
+                      <TiltedCardLayer depth={26}>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                          <span className="font-editorial italic text-sm text-[#f3dc8a]">
+                            {t(img.caption)}
+                          </span>
+                        </div>
+                      </TiltedCardLayer>
                     </div>
-                  </div>
+                  </TiltedCard>
                 ))}
               </div>
             </div>
@@ -181,39 +192,66 @@ function PhotographyPortfolioContent() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="spatial-bento-card p-8 space-y-4">
-              <BookOpen className="w-8 h-8 text-[#d4af37]" />
-              <h3 className="font-monument text-xl text-white">
-                Álbumes Artesanales de Boda y XV
-              </h3>
-              <p className="text-xs sm:text-sm text-[#b8bcc8] leading-relaxed">
-                Páginas rígidas 12x12 con apertura panorámica encuadernadas en
-                piel italiana, terciopelo o lino con grabado en oro.
-              </p>
-            </div>
+            <TiltedCard
+              containerHeight="auto"
+              rotateAmplitude={11}
+              scaleOnHover={1.035}
+              glare={0.5}
+              shadow={0.5}
+              captionText="ÁLBUMES ITALIANOS"
+            >
+              <div className="spatial-bento-card p-8 space-y-4 w-full h-full">
+                <BookOpen className="w-8 h-8 text-[#d4af37]" />
+                <h3 className="font-monument text-xl text-white">
+                  Álbumes Artesanales de Boda y XV
+                </h3>
+                <p className="text-xs sm:text-sm text-[#b8bcc8] leading-relaxed">
+                  Páginas rígidas 12x12 con apertura panorámica encuadernadas en
+                  piel italiana, terciopelo o lino con grabado en oro.
+                </p>
+              </div>
+            </TiltedCard>
 
-            <div className="spatial-bento-card p-8 space-y-4">
-              <Frame className="w-8 h-8 text-[#d4af37]" />
-              <h3 className="font-monument text-xl text-white">
-                Cuadros Gigantes de Recepción
-              </h3>
-              <p className="text-xs sm:text-sm text-[#b8bcc8] leading-relaxed">
-                Ampliaciones enmarcadas 20x30 y 24x36 listas para lucir en un
-                caballete dorado en la entrada de tu salón de boda o
-                quinceañera.
-              </p>
-            </div>
+            <TiltedCard
+              containerHeight="auto"
+              rotateAmplitude={11}
+              scaleOnHover={1.035}
+              glare={0.5}
+              shadow={0.5}
+              captionText="CUADROS DE RECEPCIÓN"
+            >
+              <div className="spatial-bento-card p-8 space-y-4 w-full h-full">
+                <Frame className="w-8 h-8 text-[#d4af37]" />
+                <h3 className="font-monument text-xl text-white">
+                  Cuadros Gigantes de Recepción
+                </h3>
+                <p className="text-xs sm:text-sm text-[#b8bcc8] leading-relaxed">
+                  Ampliaciones enmarcadas 20x30 y 24x36 listas para lucir en un
+                  caballete dorado en la entrada de tu salón de boda o
+                  quinceañera.
+                </p>
+              </div>
+            </TiltedCard>
 
-            <div className="spatial-bento-card p-8 space-y-4">
-              <Layers className="w-8 h-8 text-[#d4af37]" />
-              <h3 className="font-monument text-xl text-white">
-                Arte en Acrílico Cristal y Metal
-              </h3>
-              <p className="text-xs sm:text-sm text-[#b8bcc8] leading-relaxed">
-                Cuadros en acrílico de alta definición y metal disponibles
-                directamente desde la tienda integrada en tu galería Pixieset.
-              </p>
-            </div>
+            <TiltedCard
+              containerHeight="auto"
+              rotateAmplitude={11}
+              scaleOnHover={1.035}
+              glare={0.5}
+              shadow={0.5}
+              captionText="ACRÍLICO Y METAL"
+            >
+              <div className="spatial-bento-card p-8 space-y-4 w-full h-full">
+                <Layers className="w-8 h-8 text-[#d4af37]" />
+                <h3 className="font-monument text-xl text-white">
+                  Arte en Acrílico Cristal y Metal
+                </h3>
+                <p className="text-xs sm:text-sm text-[#b8bcc8] leading-relaxed">
+                  Cuadros en acrílico de alta definición y metal disponibles
+                  directamente desde la tienda integrada en tu galería Pixieset.
+                </p>
+              </div>
+            </TiltedCard>
           </div>
 
           <div className="text-center pt-2">

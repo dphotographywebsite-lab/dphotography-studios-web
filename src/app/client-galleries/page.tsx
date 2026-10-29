@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useStudio } from '@/context/StudioContext';
 import { ClientGalleryItem } from '@/data/studioData';
+import TiltedCard from '@/components/ui/tilted-card';
 import {
   Lock,
   Unlock,
@@ -114,84 +115,92 @@ export default function ClientGalleriesPage() {
           {filteredGalleries.map((gal) => {
             const unlocked = isGalleryUnlocked(gal);
             return (
-              <div
+              <TiltedCard
                 key={gal.id}
+                containerHeight="auto"
+                containerWidth="100%"
+                rotateAmplitude={8}
+                scaleOnHover={1.025}
+                glare={0.34}
+                shadow={0.5}
                 onClick={() => handleOpenGallery(gal)}
-                className="cursor-pointer group glass-dark-luxe glass-interactive rounded-3xl overflow-hidden flex flex-col justify-between"
+                className="h-full"
               >
-                <div className="relative aspect-[16/10] overflow-hidden bg-black">
-                  <img
-                    src={gal.coverImage}
-                    alt={gal.clientNames}
-                    className={`w-full h-full object-cover object-top transition-all duration-700 group-hover:scale-105 ${
-                      unlocked ? 'brightness-90' : 'brightness-50 blur-[2px]'
-                    }`}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#090a10] via-transparent to-black/40" />
+                <div className="cursor-pointer group glass-dark-luxe glass-interactive rounded-3xl overflow-hidden flex flex-col justify-between h-full w-full">
+                  <div className="relative aspect-[16/10] overflow-hidden bg-black">
+                    <img
+                      src={gal.coverImage}
+                      alt={gal.clientNames}
+                      className={`w-full h-full object-cover object-top transition-all duration-700 group-hover:scale-105 ${
+                        unlocked ? 'brightness-90' : 'brightness-50 blur-[2px]'
+                      }`}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#090a10] via-transparent to-black/40" />
 
-                  <div className="absolute top-4 left-4 px-3.5 py-1.5 rounded-full bg-black/80 border border-[#d4af37]/40 text-[#f3dc8a] text-[10px] tracking-[0.2em] uppercase font-semibold">
-                    {t(gal.eventType)}
-                  </div>
+                    <div className="absolute top-4 left-4 px-3.5 py-1.5 rounded-full bg-black/80 border border-[#d4af37]/40 text-[#f3dc8a] text-[10px] tracking-[0.2em] uppercase font-semibold">
+                      {t(gal.eventType)}
+                    </div>
 
-                  <div className="absolute top-4 right-4 px-3.5 py-1.5 rounded-full bg-black/80 border border-white/15 text-xs flex items-center gap-1.5">
-                    {unlocked ? (
-                      <>
-                        <Unlock className="w-3.5 h-3.5 text-emerald-400" />
-                        <span className="text-emerald-300 text-[10px] tracking-widest uppercase font-semibold">
-                          Abierta
+                    <div className="absolute top-4 right-4 px-3.5 py-1.5 rounded-full bg-black/80 border border-white/15 text-xs flex items-center gap-1.5">
+                      {unlocked ? (
+                        <>
+                          <Unlock className="w-3.5 h-3.5 text-emerald-400" />
+                          <span className="text-emerald-300 text-[10px] tracking-widest uppercase font-semibold">
+                            Abierta
+                          </span>
+                        </>
+                      ) : (
+                        <>
+                          <Lock className="w-3.5 h-3.5 text-[#d4af37]" />
+                          <span className="text-[#f3dc8a] text-[10px] tracking-widest uppercase font-semibold">
+                            Con Contraseña
+                          </span>
+                        </>
+                      )}
+                    </div>
+
+                    {!unlocked && (
+                      <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 p-4 text-center">
+                        <div className="w-14 h-14 rounded-full bg-black/80 border border-[#d4af37] flex items-center justify-center text-[#f3dc8a]">
+                          <Lock className="w-6 h-6" />
+                        </div>
+                        <span className="text-xs tracking-[0.2em] uppercase text-white font-semibold bg-black/70 px-4 py-1.5 rounded-full">
+                          Clic para Ingresar Contraseña
                         </span>
-                      </>
-                    ) : (
-                      <>
-                        <Lock className="w-3.5 h-3.5 text-[#d4af37]" />
-                        <span className="text-[#f3dc8a] text-[10px] tracking-widest uppercase font-semibold">
-                          Con Contraseña
-                        </span>
-                      </>
+                      </div>
                     )}
                   </div>
 
-                  {!unlocked && (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 p-4 text-center">
-                      <div className="w-14 h-14 rounded-full bg-black/80 border border-[#d4af37] flex items-center justify-center text-[#f3dc8a]">
-                        <Lock className="w-6 h-6" />
+                  <div className="p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div className="space-y-1.5">
+                      <h2 className="font-monument text-xl sm:text-2xl text-white">
+                        {gal.clientNames}
+                      </h2>
+                      <div className="flex flex-wrap items-center gap-3 text-xs text-white/65">
+                        <span className="flex items-center gap-1">
+                          <MapPin className="w-3.5 h-3.5 text-[#d4af37]" />
+                          {gal.venue}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <Calendar className="w-3.5 h-3.5 text-[#d4af37]" />
+                          {gal.date}
+                        </span>
+                        <span className="flex items-center gap-1 text-[#f3dc8a]">
+                          <ImageIcon className="w-3.5 h-3.5" />
+                          {gal.photoCount} Fotos
+                        </span>
                       </div>
-                      <span className="text-xs tracking-[0.2em] uppercase text-white font-semibold bg-black/70 px-4 py-1.5 rounded-full">
-                        Clic para Ingresar Contraseña
-                      </span>
                     </div>
-                  )}
-                </div>
 
-                <div className="p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                  <div className="space-y-1.5">
-                    <h2 className="font-monument text-xl sm:text-2xl text-white">
-                      {gal.clientNames}
-                    </h2>
-                    <div className="flex flex-wrap items-center gap-3 text-xs text-white/65">
-                      <span className="flex items-center gap-1">
-                        <MapPin className="w-3.5 h-3.5 text-[#d4af37]" />
-                        {gal.venue}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Calendar className="w-3.5 h-3.5 text-[#d4af37]" />
-                        {gal.date}
-                      </span>
-                      <span className="flex items-center gap-1 text-[#f3dc8a]">
-                        <ImageIcon className="w-3.5 h-3.5" />
-                        {gal.photoCount} Fotos
-                      </span>
-                    </div>
+                    <button
+                      type="button"
+                      className="cursor-pointer btn-gold px-5 py-3 rounded-xl text-[11px] shrink-0"
+                    >
+                      {unlocked ? 'Entrar a Galería' : 'Desbloquear'}
+                    </button>
                   </div>
-
-                  <button
-                    type="button"
-                    className="cursor-pointer btn-gold px-5 py-3 rounded-xl text-[11px] shrink-0"
-                  >
-                    {unlocked ? 'Entrar a Galería' : 'Desbloquear'}
-                  </button>
                 </div>
-              </div>
+              </TiltedCard>
             );
           })}
         </div>
@@ -200,39 +209,45 @@ export default function ClientGalleriesPage() {
       {/* Pixieset Features & Client Instructions */}
       <section className="py-12 px-4 sm:px-8">
         <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="glass-surface rounded-3xl p-7 space-y-3">
-            <Download className="w-7 h-7 text-[#d4af37]" />
-            <h3 className="font-monument text-lg text-white">
-              Descarga en Alta Resolución y Redes
-            </h3>
-            <p className="text-xs sm:text-sm text-[#b8bcc8] leading-relaxed">
-              Descarga tus fotos favoritas directo a tu celular o descarga la
-              galería completa en formato de Impresión de Alta Resolución y
-              tamaño para Redes Sociales.
-            </p>
-          </div>
+          <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={8} scaleOnHover={1.03} glare={0.28} shadow={0.45} className="h-full">
+            <div className="glass-surface rounded-3xl p-7 space-y-3 h-full w-full">
+              <Download className="w-7 h-7 text-[#d4af37]" />
+              <h3 className="font-monument text-lg text-white">
+                Descarga en Alta Resolución y Redes
+              </h3>
+              <p className="text-xs sm:text-sm text-[#b8bcc8] leading-relaxed">
+                Descarga tus fotos favoritas directo a tu celular o descarga la
+                galería completa en formato de Impresión de Alta Resolución y
+                tamaño para Redes Sociales.
+              </p>
+            </div>
+          </TiltedCard>
 
-          <div className="glass-surface rounded-3xl p-7 space-y-3">
-            <Share2 className="w-7 h-7 text-[#d4af37]" />
-            <h3 className="font-monument text-lg text-white">
-              Comparte con Familia e Invitados
-            </h3>
-            <p className="text-xs sm:text-sm text-[#b8bcc8] leading-relaxed">
-              Tú tienes el control. Comparte el enlace con tus invitados
-              mientras mantienes tu PIN de descarga privado.
-            </p>
-          </div>
+          <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={8} scaleOnHover={1.03} glare={0.28} shadow={0.45} className="h-full">
+            <div className="glass-surface rounded-3xl p-7 space-y-3 h-full w-full">
+              <Share2 className="w-7 h-7 text-[#d4af37]" />
+              <h3 className="font-monument text-lg text-white">
+                Comparte con Familia e Invitados
+              </h3>
+              <p className="text-xs sm:text-sm text-[#b8bcc8] leading-relaxed">
+                Tú tienes el control. Comparte el enlace con tus invitados
+                mientras mantienes tu PIN de descarga privado.
+              </p>
+            </div>
+          </TiltedCard>
 
-          <div className="glass-surface rounded-3xl p-7 space-y-3">
-            <ShoppingBag className="w-7 h-7 text-[#d4af37]" />
-            <h3 className="font-monument text-lg text-white">
-              Tienda de Cuadros e Impresiones
-            </h3>
-            <p className="text-xs sm:text-sm text-[#b8bcc8] leading-relaxed">
-              Ordena cuadros enmarcados, lienzos canvas, acrílicos e impresiones
-              profesionales directamente desde tu galería con envío a domicilio.
-            </p>
-          </div>
+          <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={8} scaleOnHover={1.03} glare={0.28} shadow={0.45} className="h-full">
+            <div className="glass-surface rounded-3xl p-7 space-y-3 h-full w-full">
+              <ShoppingBag className="w-7 h-7 text-[#d4af37]" />
+              <h3 className="font-monument text-lg text-white">
+                Tienda de Cuadros e Impresiones
+              </h3>
+              <p className="text-xs sm:text-sm text-[#b8bcc8] leading-relaxed">
+                Ordena cuadros enmarcados, lienzos canvas, acrílicos e impresiones
+                profesionales directamente desde tu galería con envío a domicilio.
+              </p>
+            </div>
+          </TiltedCard>
         </div>
       </section>
 

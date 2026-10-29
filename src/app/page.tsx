@@ -7,6 +7,7 @@ import {
   TiltedGridHero,
   TiltedGridImage,
 } from '@/components/ui/tilted-grid-hero';
+import TiltedCard, { TiltedCardLayer } from '@/components/ui/tilted-card';
 import InteractiveStudioGallery from '@/components/ui/interactive-studio-gallery';
 import { EXPERIENCE_STEPS } from '@/data/studioData';
 import { Play } from 'lucide-react';
@@ -159,39 +160,48 @@ export default function HomePage() {
           </div>
 
           {/* Marco Panorámico de Showreel (Esquinas rectas 0px) */}
-          <div
-            data-reveal="image"
+          <TiltedCard
+            containerHeight="auto"
+            rotateAmplitude={7}
+            scaleOnHover={1.015}
+            glare={0.45}
+            shadow={0.5}
             onClick={openShowreel}
-            className="cursor-pointer group relative overflow-hidden border border-white/15 min-h-[320px] sm:min-h-[440px] lg:aspect-[21/9] p-6 sm:p-10 flex flex-col justify-between bg-black"
+            captionText="REPRODUCIR SHOWREEL 4K"
           >
-            <img
-              src="/brand/creator-directors-chair-cinema-rig.jpg"
-              alt="Showreel 2026 DPhotography Studios"
-              className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-1000 filter brightness-[0.55]"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#050508] via-[#050508]/25 to-[#050508]/70" />
+            <div
+              data-reveal="image"
+              className="cursor-pointer group relative overflow-hidden border border-white/15 min-h-[320px] sm:min-h-[440px] lg:aspect-[21/9] p-6 sm:p-10 flex flex-col justify-between bg-black w-full"
+            >
+              <img
+                src="/brand/creator-directors-chair-cinema-rig.jpg"
+                alt="Showreel 2026 DPhotography Studios"
+                className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-1000 filter brightness-[0.55]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050508] via-[#050508]/25 to-[#050508]/70" />
 
-            <div className="relative z-10 flex items-center justify-between text-[10px] tracking-[0.24em] uppercase font-mono text-white/75">
-              <span>SHOWREEL OFICIAL • 4K ANAMÓRFICO</span>
-              <span className="text-[#f3dc8a]">01:15 MASTER</span>
-            </div>
-
-            <div className="relative z-10 flex flex-col items-center justify-center text-center gap-4 my-auto py-4">
-              <div className="w-14 h-14 sm:w-16 sm:h-16 border border-[#d4af37] bg-black/60 group-hover:bg-[#d4af37] text-[#f3dc8a] group-hover:text-black flex items-center justify-center transition-colors duration-300">
-                <Play className="w-6 h-6 fill-current ml-0.5" />
+              <div className="relative z-10 flex items-center justify-between text-[10px] tracking-[0.24em] uppercase font-mono text-white/75">
+                <span>SHOWREEL OFICIAL • 4K ANAMÓRFICO</span>
+                <span className="text-[#f3dc8a]">01:15 MASTER</span>
               </div>
-              <h3 className="font-monument text-lg sm:text-3xl text-white uppercase tracking-[0.14em]">
-                Reproducir Showreel Cinematográfico
-              </h3>
-            </div>
 
-            <div className="relative z-10 flex items-center justify-between text-[10px] font-mono tracking-[0.2em] uppercase text-white/60">
-              <span className="hidden sm:inline">
-                SONY ALPHA CINEMA • ANILLO TILTA • DRON 4K
-              </span>
-              <span className="text-[#f3dc8a]">PANTALLA COMPLETA →</span>
+              <div className="relative z-10 flex flex-col items-center justify-center text-center gap-4 my-auto py-4">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 border border-[#d4af37] bg-black/60 group-hover:bg-[#d4af37] text-[#f3dc8a] group-hover:text-black flex items-center justify-center transition-colors duration-300">
+                  <Play className="w-6 h-6 fill-current ml-0.5" />
+                </div>
+                <h3 className="font-monument text-lg sm:text-3xl text-white uppercase tracking-[0.14em]">
+                  Reproducir Showreel Cinematográfico
+                </h3>
+              </div>
+
+              <div className="relative z-10 flex items-center justify-between text-[10px] font-mono tracking-[0.2em] uppercase text-white/60">
+                <span className="hidden sm:inline">
+                  SONY ALPHA CINEMA • ANILLO TILTA • DRON 4K
+                </span>
+                <span className="text-[#f3dc8a]">PANTALLA COMPLETA →</span>
+              </div>
             </div>
-          </div>
+          </TiltedCard>
 
           {/* 3 Películas Destacadas en Retícula Arquitectónica */}
           <div
@@ -199,47 +209,54 @@ export default function HomePage() {
             className="grid grid-cols-1 lg:grid-cols-3 gap-6"
           >
             {featuredFilms.map((film, idx) => (
-              <div
+              <TiltedCard
                 key={film.id}
+                containerHeight="auto"
+                rotateAmplitude={11}
+                scaleOnHover={1.035}
+                glare={0.5}
+                shadow={0.5}
+                captionText={t(film.title)}
                 onClick={() => openFilm(film)}
-                className="cursor-pointer group spatial-bento-card flex flex-col justify-between"
               >
-                <div>
-                  <div className="relative aspect-[16/10] overflow-hidden bg-black border-b border-white/10">
-                    <img
-                      src={film.thumbnail}
-                      alt={t(film.title)}
-                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 filter brightness-[0.82]"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                <div className="cursor-pointer group spatial-bento-card flex flex-col justify-between w-full h-full">
+                  <div>
+                    <div className="relative aspect-[16/10] overflow-hidden bg-black border-b border-white/10">
+                      <img
+                        src={film.thumbnail}
+                        alt={t(film.title)}
+                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 filter brightness-[0.82]"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
 
-                    <div className="absolute top-3 left-3 text-[10px] font-mono tracking-[0.2em] uppercase text-[#f3dc8a] bg-black/75 px-2.5 py-1 border border-white/15">
-                      0{idx + 1} • {t(film.categoryLabel)}
+                      <div className="absolute top-3 left-3 text-[10px] font-mono tracking-[0.2em] uppercase text-[#f3dc8a] bg-black/75 px-2.5 py-1 border border-white/15">
+                        0{idx + 1} • {t(film.categoryLabel)}
+                      </div>
+                      <div className="absolute bottom-3 right-3 text-[10px] font-mono text-white/80 bg-black/80 px-2 py-0.5">
+                        {film.duration}
+                      </div>
                     </div>
-                    <div className="absolute bottom-3 right-3 text-[10px] font-mono text-white/80 bg-black/80 px-2 py-0.5">
-                      {film.duration}
+
+                    <div className="p-6 space-y-2">
+                      <div className="flex items-center justify-between text-[10px] font-mono tracking-[0.18em] uppercase text-white/50">
+                        <span>{film.division}</span>
+                        <span>{film.location}</span>
+                      </div>
+                      <h3 className="font-monument text-base sm:text-lg text-white group-hover:text-[#f3dc8a] transition-colors">
+                        {t(film.title)}
+                      </h3>
+                      <p className="font-editorial italic text-base text-[#e0cd95]">
+                        {t(film.subtitle)}
+                      </p>
                     </div>
                   </div>
 
-                  <div className="p-6 space-y-2">
-                    <div className="flex items-center justify-between text-[10px] font-mono tracking-[0.18em] uppercase text-white/50">
-                      <span>{film.division}</span>
-                      <span>{film.location}</span>
-                    </div>
-                    <h3 className="font-monument text-base sm:text-lg text-white group-hover:text-[#f3dc8a] transition-colors">
-                      {t(film.title)}
-                    </h3>
-                    <p className="font-editorial italic text-base text-[#e0cd95]">
-                      {t(film.subtitle)}
-                    </p>
+                  <div className="px-6 py-4 border-t border-white/10 flex items-center justify-between text-[10px] font-mono tracking-[0.2em] uppercase text-white/70 group-hover:text-[#f3dc8a] transition-colors">
+                    <span>REPRODUCIR PELÍCULA</span>
+                    <span>→</span>
                   </div>
                 </div>
-
-                <div className="px-6 py-4 border-t border-white/10 flex items-center justify-between text-[10px] font-mono tracking-[0.2em] uppercase text-white/70 group-hover:text-[#f3dc8a] transition-colors">
-                  <span>REPRODUCIR PELÍCULA</span>
-                  <span>→</span>
-                </div>
-              </div>
+              </TiltedCard>
             ))}
           </div>
         </div>
@@ -250,51 +267,78 @@ export default function HomePage() {
       ===================================================================== */}
       <section className="px-4 sm:px-8 relative z-10">
         <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-14 items-center">
-          {/* Mosaico Fotográfico de Esquinas Rectas */}
+          {/* Mosaico Fotográfico de Esquinas Rectas con TiltedCard */}
           <div
             data-reveal="stagger"
             className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-12 gap-4 items-center"
           >
             <div className="sm:col-span-7">
-              <div className="relative overflow-hidden border border-white/15 aspect-[4/5] sm:aspect-[3/4] bg-black">
-                <img
-                  src="/brand/creator-tuxedo-portrait.jpg"
-                  alt="Director de DPhotography Studios"
-                  className="w-full h-full object-cover object-top"
-                />
-                <div className="absolute bottom-0 inset-x-0 p-4 bg-black/80 backdrop-blur-md border-t border-white/15">
-                  <span className="text-[10px] font-mono tracking-[0.2em] uppercase text-[#f3dc8a] block">
-                    DIRECCIÓN CREATIVA DE ETIQUETA
-                  </span>
-                  <span className="text-[11px] text-white/70">
-                    Louisville, Kentucky
-                  </span>
-                </div>
-              </div>
+              <TiltedCard
+                imageSrc="/brand/creator-tuxedo-portrait.jpg"
+                altText="Director de DPhotography Studios"
+                captionText="DIRECCIÓN DE ETIQUETA"
+                containerHeight="440px"
+                containerWidth="100%"
+                imageHeight="100%"
+                imageWidth="100%"
+                rotateAmplitude={12}
+                scaleOnHover={1.04}
+                glare={0.5}
+                shadow={0.5}
+              >
+                <TiltedCardLayer depth={28}>
+                  <div className="absolute bottom-0 inset-x-0 p-4 bg-black/80 backdrop-blur-md border-t border-white/15">
+                    <span className="text-[10px] font-mono tracking-[0.2em] uppercase text-[#f3dc8a] block">
+                      DIRECCIÓN CREATIVA DE ETIQUETA
+                    </span>
+                    <span className="text-[11px] text-white/70">
+                      Louisville, Kentucky
+                    </span>
+                  </div>
+                </TiltedCardLayer>
+              </TiltedCard>
             </div>
 
             <div className="sm:col-span-5 grid grid-cols-2 sm:grid-cols-1 gap-4">
-              <div className="relative overflow-hidden border border-white/15 aspect-[3/4] bg-black">
-                <img
-                  src="/brand/creator-crouching-tilta-rig.jpg"
-                  alt="Rig de cine Tilta DPhotography Studios"
-                  className="w-full h-full object-cover object-top"
-                />
-                <div className="absolute bottom-0 inset-x-0 px-3 py-2 bg-black/80 border-t border-white/10 text-[9px] font-mono tracking-[0.2em] uppercase text-[#f3dc8a]">
-                  RIG TILTA • 4K
-                </div>
-              </div>
+              <TiltedCard
+                imageSrc="/brand/creator-crouching-tilta-rig.jpg"
+                altText="Rig de cine Tilta DPhotography Studios"
+                captionText="RIG TILTA • 4K"
+                containerHeight="250px"
+                containerWidth="100%"
+                imageHeight="100%"
+                imageWidth="100%"
+                rotateAmplitude={12}
+                scaleOnHover={1.05}
+                glare={0.5}
+                shadow={0.5}
+              >
+                <TiltedCardLayer depth={24}>
+                  <div className="absolute bottom-0 inset-x-0 px-3 py-2 bg-black/80 border-t border-white/10 text-[9px] font-mono tracking-[0.2em] uppercase text-[#f3dc8a]">
+                    RIG TILTA • 4K
+                  </div>
+                </TiltedCardLayer>
+              </TiltedCard>
 
-              <div className="relative overflow-hidden border border-white/15 aspect-[3/4] bg-black">
-                <img
-                  src="/brand/creator-gimbal-profile.jpg"
-                  alt="Operador de gimbal DMedia Records"
-                  className="w-full h-full object-cover object-top"
-                />
-                <div className="absolute bottom-0 inset-x-0 px-3 py-2 bg-black/80 border-t border-white/10 text-[9px] font-mono tracking-[0.2em] uppercase text-white/80">
-                  DMEDIA RECORDS
-                </div>
-              </div>
+              <TiltedCard
+                imageSrc="/brand/creator-gimbal-profile.jpg"
+                altText="Operador de gimbal DMedia Records"
+                captionText="DMEDIA RECORDS"
+                containerHeight="250px"
+                containerWidth="100%"
+                imageHeight="100%"
+                imageWidth="100%"
+                rotateAmplitude={12}
+                scaleOnHover={1.05}
+                glare={0.5}
+                shadow={0.5}
+              >
+                <TiltedCardLayer depth={24}>
+                  <div className="absolute bottom-0 inset-x-0 px-3 py-2 bg-black/80 border-t border-white/10 text-[9px] font-mono tracking-[0.2em] uppercase text-white/80">
+                    DMEDIA RECORDS
+                  </div>
+                </TiltedCardLayer>
+              </TiltedCard>
             </div>
           </div>
 
@@ -352,23 +396,30 @@ export default function HomePage() {
 
             <div
               data-reveal="stagger"
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-white/15"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
             >
               {EXPERIENCE_STEPS.map((item) => (
-                <div
+                <TiltedCard
                   key={item.step}
-                  className="p-6 sm:p-8 border-r border-b border-white/15 bg-black/35 backdrop-blur-md space-y-3"
+                  containerHeight="auto"
+                  rotateAmplitude={10}
+                  scaleOnHover={1.03}
+                  glare={0.45}
+                  shadow={0.45}
+                  captionText={`PASO ${item.step}`}
                 >
-                  <span className="font-mono text-xs tracking-[0.24em] text-[#d4af37] block">
-                    /{item.step}
-                  </span>
-                  <h3 className="font-monument text-base sm:text-lg text-white">
-                    {t(item.title)}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-[#a8acb8] leading-relaxed">
-                    {t(item.description)}
-                  </p>
-                </div>
+                  <div className="p-6 sm:p-8 border border-white/15 bg-black/45 backdrop-blur-md space-y-3 w-full h-full">
+                    <span className="font-mono text-xs tracking-[0.24em] text-[#d4af37] block">
+                      /{item.step}
+                    </span>
+                    <h3 className="font-monument text-base sm:text-lg text-white">
+                      {t(item.title)}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#a8acb8] leading-relaxed">
+                      {t(item.description)}
+                    </p>
+                  </div>
+                </TiltedCard>
               ))}
             </div>
           </div>
@@ -379,28 +430,35 @@ export default function HomePage() {
             className="grid grid-cols-1 md:grid-cols-3 gap-6"
           >
             {testimonials.map((item) => (
-              <div
+              <TiltedCard
                 key={item.id}
-                className="spatial-bento-card p-6 sm:p-8 flex flex-col justify-between space-y-6"
+                containerHeight="auto"
+                rotateAmplitude={11}
+                scaleOnHover={1.035}
+                glare={0.5}
+                shadow={0.5}
+                captionText={item.client}
               >
-                <p className="font-editorial italic text-lg sm:text-xl text-white/90 leading-relaxed">
-                  “{t(item.quote)}”
-                </p>
+                <div className="spatial-bento-card p-6 sm:p-8 flex flex-col justify-between space-y-6 w-full h-full">
+                  <p className="font-editorial italic text-lg sm:text-xl text-white/90 leading-relaxed">
+                    “{t(item.quote)}”
+                  </p>
 
-                <div className="pt-4 border-t border-white/10 flex items-center justify-between">
-                  <div>
-                    <h4 className="font-monument text-xs tracking-[0.16em] text-[#f3dc8a] uppercase">
-                      {item.client}
-                    </h4>
-                    <span className="text-[11px] text-white/55 block mt-0.5">
-                      {t(item.role)}
+                  <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+                    <div>
+                      <h4 className="font-monument text-xs tracking-[0.16em] text-[#f3dc8a] uppercase">
+                        {item.client}
+                      </h4>
+                      <span className="text-[11px] text-white/55 block mt-0.5">
+                        {t(item.role)}
+                      </span>
+                    </div>
+                    <span className="text-[10px] font-mono text-[#d4af37]">
+                      ★★★★★
                     </span>
                   </div>
-                  <span className="text-[10px] font-mono text-[#d4af37]">
-                    ★★★★★
-                  </span>
                 </div>
-              </div>
+              </TiltedCard>
             ))}
           </div>
         </div>
@@ -438,60 +496,67 @@ export default function HomePage() {
               className="grid grid-cols-1 lg:grid-cols-3 gap-6"
             >
               {featuredPackages.map((pkg) => (
-                <div
+                <TiltedCard
                   key={pkg.id}
-                  className="spatial-bento-card p-6 sm:p-8 flex flex-col justify-between"
+                  containerHeight="auto"
+                  rotateAmplitude={10}
+                  scaleOnHover={1.03}
+                  glare={0.5}
+                  shadow={0.5}
+                  captionText={pkg.startingPrice}
                 >
-                  <div className="space-y-5">
-                    <div className="flex items-center justify-between text-[10px] font-mono tracking-[0.2em] uppercase text-[#d4af37]">
-                      <span>{t(pkg.categoryName)}</span>
-                      <span className="text-white/55">
-                        {t(pkg.durationLabel)}
-                      </span>
+                  <div className="spatial-bento-card p-6 sm:p-8 flex flex-col justify-between w-full h-full">
+                    <div className="space-y-5">
+                      <div className="flex items-center justify-between text-[10px] font-mono tracking-[0.2em] uppercase text-[#d4af37]">
+                        <span>{t(pkg.categoryName)}</span>
+                        <span className="text-white/55">
+                          {t(pkg.durationLabel)}
+                        </span>
+                      </div>
+
+                      <div>
+                        <h3 className="font-monument text-lg sm:text-xl text-white">
+                          {t(pkg.tierName)}
+                        </h3>
+                        <p className="font-editorial italic text-base sm:text-lg text-[#e0cd95] mt-1">
+                          {t(pkg.tagline)}
+                        </p>
+                      </div>
+
+                      <div className="py-4 border-y border-white/10 flex items-baseline justify-between">
+                        <span className="text-[10px] font-mono uppercase tracking-[0.22em] text-white/50">
+                          INVERSIÓN DESDE
+                        </span>
+                        <span className="font-monument text-2xl sm:text-3xl text-[#f3dc8a]">
+                          {pkg.startingPrice}
+                        </span>
+                      </div>
+
+                      <ul className="space-y-2.5 text-xs text-[#c5c8d4]">
+                        {pkg.deliverables.es.slice(0, 5).map((item, i) => (
+                          <li
+                            key={i}
+                            className="flex items-start gap-2.5 border-b border-white/[0.05] pb-2 last:border-0"
+                          >
+                            <span className="text-[#d4af37] font-mono text-[10px] mt-0.5">
+                              —
+                            </span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
 
-                    <div>
-                      <h3 className="font-monument text-lg sm:text-xl text-white">
-                        {t(pkg.tierName)}
-                      </h3>
-                      <p className="font-editorial italic text-base sm:text-lg text-[#e0cd95] mt-1">
-                        {t(pkg.tagline)}
-                      </p>
+                    <div className="pt-6 mt-6 border-t border-white/10">
+                      <Link
+                        href={`/contact?package=${pkg.id}`}
+                        className="btn-gold block w-full py-3.5 px-4 text-[11px] text-center"
+                      >
+                        Solicitar Disponibilidad
+                      </Link>
                     </div>
-
-                    <div className="py-4 border-y border-white/10 flex items-baseline justify-between">
-                      <span className="text-[10px] font-mono uppercase tracking-[0.22em] text-white/50">
-                        INVERSIÓN DESDE
-                      </span>
-                      <span className="font-monument text-2xl sm:text-3xl text-[#f3dc8a]">
-                        {pkg.startingPrice}
-                      </span>
-                    </div>
-
-                    <ul className="space-y-2.5 text-xs text-[#c5c8d4]">
-                      {pkg.deliverables.es.slice(0, 5).map((item, i) => (
-                        <li
-                          key={i}
-                          className="flex items-start gap-2.5 border-b border-white/[0.05] pb-2 last:border-0"
-                        >
-                          <span className="text-[#d4af37] font-mono text-[10px] mt-0.5">
-                            —
-                          </span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
                   </div>
-
-                  <div className="pt-6 mt-6 border-t border-white/10">
-                    <Link
-                      href={`/contact?package=${pkg.id}`}
-                      className="btn-gold block w-full py-3.5 px-4 text-[11px] text-center"
-                    >
-                      Solicitar Disponibilidad
-                    </Link>
-                  </div>
-                </div>
+                </TiltedCard>
               ))}
             </div>
           </div>

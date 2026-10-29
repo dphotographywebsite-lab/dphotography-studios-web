@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useStudio } from '@/context/StudioContext';
 import { FilmProduction } from '@/data/studioData';
+import TiltedCard from '@/components/ui/tilted-card';
 import {
   Play,
   Disc,
@@ -102,38 +103,46 @@ export default function FilmsPage() {
             </div>
 
             <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-              <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10">
-                <span className="text-[10px] uppercase tracking-widest text-[#d4af37] block">
-                  Dirección
-                </span>
-                <span className="font-medium text-white mt-1 block">
-                  {stageFilm.credits.director}
-                </span>
-              </div>
-              <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10">
-                <span className="text-[10px] uppercase tracking-widest text-[#d4af37] block">
-                  Cinefotógrafo (DP)
-                </span>
-                <span className="font-medium text-white mt-1 block">
-                  {stageFilm.credits.cinematographer}
-                </span>
-              </div>
-              <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10">
-                <span className="text-[10px] uppercase tracking-widest text-[#d4af37] block">
-                  Edición y Color
-                </span>
-                <span className="font-medium text-white mt-1 block">
-                  {stageFilm.credits.editor}
-                </span>
-              </div>
-              <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10">
-                <span className="text-[10px] uppercase tracking-widest text-[#d4af37] block">
-                  Casa Productora
-                </span>
-                <span className="font-medium text-[#f3dc8a] mt-1 block">
-                  {stageFilm.credits.productionCompany}
-                </span>
-              </div>
+              <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={8} scaleOnHover={1.03} glare={0.25} shadow={0.35} className="h-full">
+                <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 h-full w-full">
+                  <span className="text-[10px] uppercase tracking-widest text-[#d4af37] block">
+                    Dirección
+                  </span>
+                  <span className="font-medium text-white mt-1 block">
+                    {stageFilm.credits.director}
+                  </span>
+                </div>
+              </TiltedCard>
+              <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={8} scaleOnHover={1.03} glare={0.25} shadow={0.35} className="h-full">
+                <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 h-full w-full">
+                  <span className="text-[10px] uppercase tracking-widest text-[#d4af37] block">
+                    Cinefotógrafo (DP)
+                  </span>
+                  <span className="font-medium text-white mt-1 block">
+                    {stageFilm.credits.cinematographer}
+                  </span>
+                </div>
+              </TiltedCard>
+              <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={8} scaleOnHover={1.03} glare={0.25} shadow={0.35} className="h-full">
+                <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 h-full w-full">
+                  <span className="text-[10px] uppercase tracking-widest text-[#d4af37] block">
+                    Edición y Color
+                  </span>
+                  <span className="font-medium text-white mt-1 block">
+                    {stageFilm.credits.editor}
+                  </span>
+                </div>
+              </TiltedCard>
+              <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={8} scaleOnHover={1.03} glare={0.25} shadow={0.35} className="h-full">
+                <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 h-full w-full">
+                  <span className="text-[10px] uppercase tracking-widest text-[#d4af37] block">
+                    Casa Productora
+                  </span>
+                  <span className="font-medium text-[#f3dc8a] mt-1 block">
+                    {stageFilm.credits.productionCompany}
+                  </span>
+                </div>
+              </TiltedCard>
             </div>
           </div>
         </div>
@@ -161,111 +170,119 @@ export default function FilmsPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredFilms.map((film) => (
-              <div
+              <TiltedCard
                 key={film.id}
-                className="glass-dark-luxe glass-interactive rounded-3xl overflow-hidden flex flex-col justify-between"
+                containerHeight="auto"
+                containerWidth="100%"
+                rotateAmplitude={8}
+                scaleOnHover={1.025}
+                glare={0.32}
+                shadow={0.5}
+                className="h-full"
               >
-                <div>
-                  <div
-                    onClick={() => openFilm(film)}
-                    className="cursor-pointer relative aspect-[16/10] bg-black overflow-hidden group"
-                  >
-                    <img
-                      src={film.thumbnail}
-                      alt={t(film.title)}
-                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 filter brightness-[0.8]"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0b0c12] via-transparent to-black/30" />
+                <div className="glass-dark-luxe glass-interactive rounded-3xl overflow-hidden flex flex-col justify-between h-full w-full">
+                  <div>
+                    <div
+                      onClick={() => openFilm(film)}
+                      className="cursor-pointer relative aspect-[16/10] bg-black overflow-hidden group"
+                    >
+                      <img
+                        src={film.thumbnail}
+                        alt={t(film.title)}
+                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 filter brightness-[0.8]"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0b0c12] via-transparent to-black/30" />
 
-                    <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-black/75 border border-[#d4af37]/40 text-[#f3dc8a] text-[10px] tracking-[0.18em] uppercase font-semibold">
-                      {t(film.categoryLabel)}
-                    </div>
-                    <div className="absolute top-3 right-3 px-2.5 py-1 rounded-md bg-black/80 text-white text-[10px] font-mono">
-                      {film.duration}
-                    </div>
+                      <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-black/75 border border-[#d4af37]/40 text-[#f3dc8a] text-[10px] tracking-[0.18em] uppercase font-semibold">
+                        {t(film.categoryLabel)}
+                      </div>
+                      <div className="absolute top-3 right-3 px-2.5 py-1 rounded-md bg-black/80 text-white text-[10px] font-mono">
+                        {film.duration}
+                      </div>
 
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-14 h-14 rounded-full bg-[#d4af37] text-black flex items-center justify-center shadow-[0_0_30px_rgba(212,175,55,0.65)] group-hover:scale-110 transition-transform">
-                        <Play className="w-6 h-6 fill-black ml-0.5" />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-14 h-14 rounded-full bg-[#d4af37] text-black flex items-center justify-center shadow-[0_0_30px_rgba(212,175,55,0.65)] group-hover:scale-110 transition-transform">
+                          <Play className="w-6 h-6 fill-black ml-0.5" />
+                        </div>
                       </div>
                     </div>
+
+                    <div className="p-6 space-y-3">
+                      <div className="flex items-center justify-between text-[10px] tracking-[0.2em] uppercase text-[#d4af37]">
+                        <span>{film.division}</span>
+                        <span>{film.year}</span>
+                      </div>
+                      <h3 className="font-monument text-lg text-white">
+                        {t(film.title)}
+                      </h3>
+                      <p className="font-editorial italic text-base text-[#e2cf97]">
+                        {t(film.subtitle)}
+                      </p>
+                      <p className="text-xs text-[#b0b4c2] leading-relaxed">
+                        {t(film.description)}
+                      </p>
+                    </div>
                   </div>
 
-                  <div className="p-6 space-y-3">
-                    <div className="flex items-center justify-between text-[10px] tracking-[0.2em] uppercase text-[#d4af37]">
-                      <span>{film.division}</span>
-                      <span>{film.year}</span>
+                  {/* Credits + Action Bar */}
+                  <div className="p-6 pt-4 border-t border-white/10 space-y-4 bg-white/[0.01]">
+                    <div className="grid grid-cols-2 gap-2 text-[11px]">
+                      <div>
+                        <span className="text-white/40 uppercase block text-[9px] tracking-widest">
+                          Dirección
+                        </span>
+                        <span className="text-white/90 font-medium">
+                          {film.credits.director}
+                        </span>
+                      </div>
+                      <div>
+                        <span className="text-white/40 uppercase block text-[9px] tracking-widest">
+                          Cinefotógrafo
+                        </span>
+                        <span className="text-white/90 font-medium">
+                          {film.credits.cinematographer}
+                        </span>
+                      </div>
+                      <div>
+                        <span className="text-white/40 uppercase block text-[9px] tracking-widest">
+                          Edición y Color
+                        </span>
+                        <span className="text-white/90 font-medium">
+                          {film.credits.editor}
+                        </span>
+                      </div>
+                      <div>
+                        <span className="text-white/40 uppercase block text-[9px] tracking-widest">
+                          Producción
+                        </span>
+                        <span className="text-[#f3dc8a] font-medium">
+                          {film.division}
+                        </span>
+                      </div>
                     </div>
-                    <h3 className="font-monument text-lg text-white">
-                      {t(film.title)}
-                    </h3>
-                    <p className="font-editorial italic text-base text-[#e2cf97]">
-                      {t(film.subtitle)}
-                    </p>
-                    <p className="text-xs text-[#b0b4c2] leading-relaxed">
-                      {t(film.description)}
-                    </p>
+
+                    <div className="flex gap-2.5">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSelectedStageId(film.id);
+                          openFilm(film);
+                        }}
+                        className="cursor-pointer btn-gold flex-1 py-2.5 px-4 rounded-xl text-[11px] flex items-center justify-center gap-1.5"
+                      >
+                        <Play className="w-3.5 h-3.5 fill-black" />
+                        <span>Ver Película</span>
+                      </button>
+                      <Link
+                        href={`/contact?service=${film.categorySlug}`}
+                        className="px-4 py-2.5 rounded-xl border border-white/15 hover:border-[#d4af37] text-[11px] uppercase tracking-widest text-white/80 hover:text-white transition-all"
+                      >
+                        Cotizar
+                      </Link>
+                    </div>
                   </div>
                 </div>
-
-                {/* Credits + Action Bar */}
-                <div className="p-6 pt-4 border-t border-white/10 space-y-4 bg-white/[0.01]">
-                  <div className="grid grid-cols-2 gap-2 text-[11px]">
-                    <div>
-                      <span className="text-white/40 uppercase block text-[9px] tracking-widest">
-                        Dirección
-                      </span>
-                      <span className="text-white/90 font-medium">
-                        {film.credits.director}
-                      </span>
-                    </div>
-                    <div>
-                      <span className="text-white/40 uppercase block text-[9px] tracking-widest">
-                        Cinefotógrafo
-                      </span>
-                      <span className="text-white/90 font-medium">
-                        {film.credits.cinematographer}
-                      </span>
-                    </div>
-                    <div>
-                      <span className="text-white/40 uppercase block text-[9px] tracking-widest">
-                        Edición y Color
-                      </span>
-                      <span className="text-white/90 font-medium">
-                        {film.credits.editor}
-                      </span>
-                    </div>
-                    <div>
-                      <span className="text-white/40 uppercase block text-[9px] tracking-widest">
-                        Producción
-                      </span>
-                      <span className="text-[#f3dc8a] font-medium">
-                        {film.division}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-2.5">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setSelectedStageId(film.id);
-                        openFilm(film);
-                      }}
-                      className="cursor-pointer btn-gold flex-1 py-2.5 px-4 rounded-xl text-[11px] flex items-center justify-center gap-1.5"
-                    >
-                      <Play className="w-3.5 h-3.5 fill-black" />
-                      <span>Ver Película</span>
-                    </button>
-                    <Link
-                      href={`/contact?service=${film.categorySlug}`}
-                      className="px-4 py-2.5 rounded-xl border border-white/15 hover:border-[#d4af37] text-[11px] uppercase tracking-widest text-white/80 hover:text-white transition-all"
-                    >
-                      Cotizar
-                    </Link>
-                  </div>
-                </div>
-              </div>
+              </TiltedCard>
             ))}
           </div>
         </div>
@@ -292,25 +309,29 @@ export default function FilmsPage() {
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-2 text-xs">
-              <div className="p-4 rounded-2xl glass-surface">
-                <Video className="w-5 h-5 text-[#d4af37] mb-2" />
-                <strong className="text-white block">
-                  Rigs de Cine Tilta y Gimbal
-                </strong>
-                <span className="text-white/65">
-                  Movimiento fluido de cámara y monitoreo profesional en set
-                </span>
-              </div>
-              <div className="p-4 rounded-2xl glass-surface">
-                <Sliders className="w-5 h-5 text-[#d4af37] mb-2" />
-                <strong className="text-white block">
-                  Efectos Visuales y Colorización
-                </strong>
-                <span className="text-white/65">
-                  Acabado de color teatral y tráilers verticales para
-                  Reels/TikTok
-                </span>
-              </div>
+              <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={9} scaleOnHover={1.03} glare={0.28} shadow={0.4} className="h-full">
+                <div className="p-4 rounded-2xl glass-surface h-full w-full">
+                  <Video className="w-5 h-5 text-[#d4af37] mb-2" />
+                  <strong className="text-white block">
+                    Rigs de Cine Tilta y Gimbal
+                  </strong>
+                  <span className="text-white/65">
+                    Movimiento fluido de cámara y monitoreo profesional en set
+                  </span>
+                </div>
+              </TiltedCard>
+              <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={9} scaleOnHover={1.03} glare={0.28} shadow={0.4} className="h-full">
+                <div className="p-4 rounded-2xl glass-surface h-full w-full">
+                  <Sliders className="w-5 h-5 text-[#d4af37] mb-2" />
+                  <strong className="text-white block">
+                    Efectos Visuales y Colorización
+                  </strong>
+                  <span className="text-white/65">
+                    Acabado de color teatral y tráilers verticales para
+                    Reels/TikTok
+                  </span>
+                </div>
+              </TiltedCard>
             </div>
 
             <div className="pt-3">
@@ -325,15 +346,29 @@ export default function FilmsPage() {
           </div>
 
           <div className="lg:col-span-6 grid grid-cols-2 gap-3 sm:gap-4">
-            <img
-              src="/brand/creator-crouching-tilta-rig.jpg"
-              alt="Rig de cine DMedia Records"
-              className="rounded-3xl border border-[#d4af37]/35 w-full aspect-[3/4] object-cover object-top"
+            <TiltedCard
+              imageSrc="/brand/creator-crouching-tilta-rig.jpg"
+              altText="Rig de cine DMedia Records"
+              captionText="Tilta Cinema Rig"
+              containerHeight="auto"
+              containerWidth="100%"
+              rotateAmplitude={12}
+              scaleOnHover={1.04}
+              glare={0.45}
+              shadow={0.55}
+              className="aspect-[3/4] border border-[#d4af37]/35"
             />
-            <img
-              src="/brand/creator-directors-chair-cinema-rig.jpg"
-              alt="Silla de Director DPhotography Studios"
-              className="rounded-3xl border border-white/15 w-full aspect-[3/4] object-cover object-top mt-4 sm:mt-8"
+            <TiltedCard
+              imageSrc="/brand/creator-directors-chair-cinema-rig.jpg"
+              altText="Silla de Director DPhotography Studios"
+              captionText="Dirección en Set"
+              containerHeight="auto"
+              containerWidth="100%"
+              rotateAmplitude={12}
+              scaleOnHover={1.04}
+              glare={0.45}
+              shadow={0.55}
+              className="aspect-[3/4] border border-white/15 mt-4 sm:mt-8"
             />
           </div>
         </div>

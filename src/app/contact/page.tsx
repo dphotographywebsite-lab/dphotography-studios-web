@@ -3,6 +3,7 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useStudio } from '@/context/StudioContext';
+import TiltedCard from '@/components/ui/tilted-card';
 import {
   Sparkles,
   MapPin,
@@ -373,61 +374,65 @@ function ContactContent() {
 
           {/* Right Column: Studio Direct Info, Louisville Badge & Portrait (4 cols) */}
           <div className="lg:col-span-4 space-y-6">
-            <div className="glass-dark-luxe rounded-3xl p-7 space-y-5 border border-[#d4af37]/35">
-              <div className="flex items-center gap-3.5">
-                <img
-                  src="/brand/creator-tuxedo-portrait.jpg"
-                  alt="Director DPhotography Studios"
-                  className="w-16 h-16 rounded-2xl object-cover object-top border border-[#d4af37]"
-                />
-                <div>
-                  <span className="text-[10px] tracking-[0.22em] uppercase text-[#d4af37] font-semibold block">
-                    ATENCIÓN DIRECTA DEL ESTUDIO
-                  </span>
-                  <h3 className="font-monument text-lg text-white">
-                    DPhotography Studios
-                  </h3>
-                  <span className="text-xs text-white/65">
-                    Atención en Español e Inglés • Louisville, KY
-                  </span>
+            <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={7} scaleOnHover={1.025} glare={0.32} shadow={0.5}>
+              <div className="glass-dark-luxe rounded-3xl p-7 space-y-5 border border-[#d4af37]/35 w-full">
+                <div className="flex items-center gap-3.5">
+                  <img
+                    src="/brand/creator-tuxedo-portrait.jpg"
+                    alt="Director DPhotography Studios"
+                    className="w-16 h-16 rounded-2xl object-cover object-top border border-[#d4af37]"
+                  />
+                  <div>
+                    <span className="text-[10px] tracking-[0.22em] uppercase text-[#d4af37] font-semibold block">
+                      ATENCIÓN DIRECTA DEL ESTUDIO
+                    </span>
+                    <h3 className="font-monument text-lg text-white">
+                      DPhotography Studios
+                    </h3>
+                    <span className="text-xs text-white/65">
+                      Atención en Español e Inglés • Louisville, KY
+                    </span>
+                  </div>
+                </div>
+
+                <div className="space-y-3 pt-2 border-t border-white/10 text-xs text-[#c5c8d4]">
+                  <p className="flex items-center gap-3">
+                    <MapPin className="w-4 h-4 text-[#d4af37] shrink-0" />
+                    <span>
+                      Louisville, Kentucky (Disponibles en Todo el País y
+                      Destinos)
+                    </span>
+                  </p>
+                  <p className="flex items-center gap-3">
+                    <Phone className="w-4 h-4 text-[#d4af37] shrink-0" />
+                    <span>(502) 555-0194 (Llamadas / SMS / WhatsApp)</span>
+                  </p>
+                  <p className="flex items-center gap-3">
+                    <Mail className="w-4 h-4 text-[#d4af37] shrink-0" />
+                    <span>booking@dphotographystudios.com</span>
+                  </p>
+                  <p className="flex items-center gap-3">
+                    <Clock className="w-4 h-4 text-[#d4af37] shrink-0" />
+                    <span>Tiempo de Respuesta: Menos de 6 Horas</span>
+                  </p>
                 </div>
               </div>
-
-              <div className="space-y-3 pt-2 border-t border-white/10 text-xs text-[#c5c8d4]">
-                <p className="flex items-center gap-3">
-                  <MapPin className="w-4 h-4 text-[#d4af37] shrink-0" />
-                  <span>
-                    Louisville, Kentucky (Disponibles en Todo el País y
-                    Destinos)
-                  </span>
-                </p>
-                <p className="flex items-center gap-3">
-                  <Phone className="w-4 h-4 text-[#d4af37] shrink-0" />
-                  <span>(502) 555-0194 (Llamadas / SMS / WhatsApp)</span>
-                </p>
-                <p className="flex items-center gap-3">
-                  <Mail className="w-4 h-4 text-[#d4af37] shrink-0" />
-                  <span>booking@dphotographystudios.com</span>
-                </p>
-                <p className="flex items-center gap-3">
-                  <Clock className="w-4 h-4 text-[#d4af37] shrink-0" />
-                  <span>Tiempo de Respuesta: Menos de 6 Horas</span>
-                </p>
-              </div>
-            </div>
+            </TiltedCard>
 
             {/* DMedia Records Direct Box */}
-            <div className="glass-surface rounded-3xl p-7 space-y-3 border border-white/15">
-              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#f3dc8a]">
-                <Disc className="w-4 h-4 text-[#d4af37]" />
-                <span>Reservas DMedia Records</span>
+            <TiltedCard containerHeight="auto" containerWidth="100%" rotateAmplitude={7} scaleOnHover={1.025} glare={0.28} shadow={0.45}>
+              <div className="glass-surface rounded-3xl p-7 space-y-3 border border-white/15 w-full">
+                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#f3dc8a]">
+                  <Disc className="w-4 h-4 text-[#d4af37]" />
+                  <span>Reservas DMedia Records</span>
+                </div>
+                <p className="text-xs text-white/75 leading-relaxed">
+                  Artistas, managers y disqueras interesados en Videos Musicales
+                  pueden incluir el enlace de su canción o idea en las notas del
+                  formulario.
+                </p>
               </div>
-              <p className="text-xs text-white/75 leading-relaxed">
-                Artistas, managers y disqueras interesados en Videos Musicales
-                pueden incluir el enlace de su canción o idea en las notas del
-                formulario.
-              </p>
-            </div>
+            </TiltedCard>
           </div>
         </div>
       </section>
@@ -487,32 +492,42 @@ function ContactContent() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {socialPosts.map((post, i) => (
-              <a
+              <TiltedCard
                 key={i}
-                href="https://instagram.com"
-                target="_blank"
-                rel="noreferrer"
-                className="group glass-dark-luxe glass-interactive rounded-2xl overflow-hidden flex flex-col justify-between"
+                containerHeight="auto"
+                containerWidth="100%"
+                rotateAmplitude={10}
+                scaleOnHover={1.035}
+                glare={0.38}
+                shadow={0.5}
+                className="h-full"
               >
-                <div className="aspect-[4/5] overflow-hidden bg-black relative">
-                  <img
-                    src={post.img}
-                    alt={post.caption}
-                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/75 text-[#f3dc8a] text-[10px] uppercase tracking-widest">
-                    {post.platform}
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group glass-dark-luxe glass-interactive rounded-2xl overflow-hidden flex flex-col justify-between h-full w-full"
+                >
+                  <div className="aspect-[4/5] overflow-hidden bg-black relative">
+                    <img
+                      src={post.img}
+                      alt={post.caption}
+                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/75 text-[#f3dc8a] text-[10px] uppercase tracking-widest">
+                      {post.platform}
+                    </div>
                   </div>
-                </div>
-                <div className="p-4 space-y-1.5">
-                  <span className="text-[11px] font-bold text-[#f3dc8a]">
-                    {post.handle}
-                  </span>
-                  <p className="text-xs text-white/80 line-clamp-2">
-                    {post.caption}
-                  </p>
-                </div>
-              </a>
+                  <div className="p-4 space-y-1.5">
+                    <span className="text-[11px] font-bold text-[#f3dc8a]">
+                      {post.handle}
+                    </span>
+                    <p className="text-xs text-white/80 line-clamp-2">
+                      {post.caption}
+                    </p>
+                  </div>
+                </a>
+              </TiltedCard>
             ))}
           </div>
         </div>

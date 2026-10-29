@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useStudio } from '@/context/StudioContext';
+import TiltedCard from '@/components/ui/tilted-card';
 import {
   Sparkles,
   CheckCircle2,
@@ -86,100 +87,109 @@ export default function PackagesPage() {
       <section className="py-20 px-4 sm:px-8">
         <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
           {filteredPackages.map((pkg) => (
-            <div
+            <TiltedCard
               key={pkg.id}
-              className={`rounded-3xl p-8 sm:p-10 flex flex-col justify-between transition-all ${
-                pkg.popular
-                  ? 'glass-dark-luxe border-2 border-[#d4af37]/60 shadow-[0_25px_70px_rgba(0,0,0,0.7),0_0_40px_rgba(212,175,55,0.18)]'
-                  : 'glass-surface border border-white/15'
-              }`}
+              containerHeight="auto"
+              rotateAmplitude={8}
+              scaleOnHover={1.02}
+              glare={0.45}
+              shadow={0.5}
+              captionText={pkg.startingPrice}
             >
-              <div className="space-y-6">
-                {/* Top Badges */}
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <span className="px-3.5 py-1 rounded-full bg-[#d4af37]/20 border border-[#d4af37]/45 text-[#f3dc8a] text-[10px] tracking-[0.22em] uppercase font-semibold">
-                    {t(pkg.categoryName)}
-                  </span>
-                  {pkg.popular && (
-                    <span className="px-3.5 py-1 rounded-full bg-[#d4af37] text-[#070709] text-[10px] tracking-[0.2em] uppercase font-bold">
-                      MÁS SOLICITADO
+              <div
+                className={`p-8 sm:p-10 flex flex-col justify-between transition-all w-full h-full ${
+                  pkg.popular
+                    ? 'glass-dark-luxe border-2 border-[#d4af37]/60 shadow-[0_25px_70px_rgba(0,0,0,0.7),0_0_40px_rgba(212,175,55,0.18)]'
+                    : 'glass-surface border border-white/15'
+                }`}
+              >
+                <div className="space-y-6">
+                  {/* Top Badges */}
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <span className="px-3.5 py-1 rounded-full bg-[#d4af37]/20 border border-[#d4af37]/45 text-[#f3dc8a] text-[10px] tracking-[0.22em] uppercase font-semibold">
+                      {t(pkg.categoryName)}
                     </span>
-                  )}
-                </div>
-
-                {/* Title & Starting Price */}
-                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-white/10">
-                  <div>
-                    <h2 className="font-monument text-2xl text-white">
-                      {t(pkg.tierName)}
-                    </h2>
-                    <p className="font-editorial italic text-lg text-[#e2cf97] mt-1">
-                      {t(pkg.tagline)}
-                    </p>
-                  </div>
-                  <div className="sm:text-right shrink-0">
-                    <span className="text-[10px] uppercase tracking-widest text-white/50 block">
-                      Inversión Desde
-                    </span>
-                    <span className="font-monument text-3xl sm:text-4xl text-gold-gradient font-bold">
-                      {pkg.startingPrice}
-                    </span>
-                    <span className="text-[11px] text-white/60 block mt-0.5">
-                      {t(pkg.durationLabel)}
-                    </span>
-                  </div>
-                </div>
-
-                {/* What's Included */}
-                <div className="space-y-3">
-                  <h3 className="text-[11px] tracking-[0.22em] uppercase text-[#f3dc8a] font-semibold">
-                    QUÉ INCLUYE ESTA COLECCIÓN
-                  </h3>
-                  <ul className="space-y-2.5 text-xs sm:text-sm text-[#d2d5e0]">
-                    {pkg.deliverables.es.map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-2.5">
-                        <CheckCircle2 className="w-4 h-4 text-[#d4af37] shrink-0 mt-0.5" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Optional Extras */}
-                <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 space-y-2">
-                  <span className="text-[10px] tracking-[0.2em] uppercase text-[#d4af37] font-semibold flex items-center gap-1.5">
-                    <PlusCircle className="w-3.5 h-3.5" />
-                    Extras Opcionales Disponibles
-                  </span>
-                  <div className="flex flex-wrap gap-2">
-                    {pkg.optionalExtras.es.map((extra, idx) => (
-                      <span
-                        key={idx}
-                        className="px-3 py-1 rounded-lg bg-black/50 border border-white/10 text-[11px] text-white/80"
-                      >
-                        + {extra}
+                    {pkg.popular && (
+                      <span className="px-3.5 py-1 rounded-full bg-[#d4af37] text-[#070709] text-[10px] tracking-[0.2em] uppercase font-bold">
+                        MÁS SOLICITADO
                       </span>
-                    ))}
+                    )}
+                  </div>
+
+                  {/* Title & Starting Price */}
+                  <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-white/10">
+                    <div>
+                      <h2 className="font-monument text-2xl text-white">
+                        {t(pkg.tierName)}
+                      </h2>
+                      <p className="font-editorial italic text-lg text-[#e2cf97] mt-1">
+                        {t(pkg.tagline)}
+                      </p>
+                    </div>
+                    <div className="sm:text-right shrink-0">
+                      <span className="text-[10px] uppercase tracking-widest text-white/50 block">
+                        Inversión Desde
+                      </span>
+                      <span className="font-monument text-3xl sm:text-4xl text-gold-gradient font-bold">
+                        {pkg.startingPrice}
+                      </span>
+                      <span className="text-[11px] text-white/60 block mt-0.5">
+                        {t(pkg.durationLabel)}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* What's Included */}
+                  <div className="space-y-3">
+                    <h3 className="text-[11px] tracking-[0.22em] uppercase text-[#f3dc8a] font-semibold">
+                      QUÉ INCLUYE ESTA COLECCIÓN
+                    </h3>
+                    <ul className="space-y-2.5 text-xs sm:text-sm text-[#d2d5e0]">
+                      {pkg.deliverables.es.map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-2.5">
+                          <CheckCircle2 className="w-4 h-4 text-[#d4af37] shrink-0 mt-0.5" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Optional Extras */}
+                  <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 space-y-2">
+                    <span className="text-[10px] tracking-[0.2em] uppercase text-[#d4af37] font-semibold flex items-center gap-1.5">
+                      <PlusCircle className="w-3.5 h-3.5" />
+                      Extras Opcionales Disponibles
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      {pkg.optionalExtras.es.map((extra, idx) => (
+                        <span
+                          key={idx}
+                          className="px-3 py-1 rounded-lg bg-black/50 border border-white/10 text-[11px] text-white/80"
+                        >
+                          + {extra}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Request a Quote Button */}
-              <div className="pt-8 mt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-                <span className="text-xs text-white/60 flex items-center gap-1.5">
-                  <ShieldCheck className="w-4 h-4 text-[#d4af37]" />
-                  Aparta tu Fecha con el 30%
-                </span>
+                {/* Request a Quote Button */}
+                <div className="pt-8 mt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <span className="text-xs text-white/60 flex items-center gap-1.5">
+                    <ShieldCheck className="w-4 h-4 text-[#d4af37]" />
+                    Aparta tu Fecha con el 30%
+                  </span>
 
-                <Link
-                  href={`/contact?package=${pkg.id}&service=${pkg.categorySlug}`}
-                  className="btn-gold w-full sm:w-auto px-7 py-3.5 rounded-full text-xs flex items-center justify-center gap-2"
-                >
-                  <span>Solicitar Cotización</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
+                  <Link
+                    href={`/contact?package=${pkg.id}&service=${pkg.categorySlug}`}
+                    className="btn-gold w-full sm:w-auto px-7 py-3.5 rounded-full text-xs flex items-center justify-center gap-2"
+                  >
+                    <span>Solicitar Cotización</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
               </div>
-            </div>
+            </TiltedCard>
           ))}
         </div>
       </section>
@@ -235,17 +245,25 @@ export default function PackagesPage() {
 
           <div className="space-y-4">
             {faqs.map((item, idx) => (
-              <div
+              <TiltedCard
                 key={idx}
-                className="glass-surface rounded-2xl p-6 sm:p-7 space-y-2 border border-white/10"
+                containerHeight="auto"
+                containerWidth="100%"
+                rotateAmplitude={4}
+                scaleOnHover={1.015}
+                glare={0.22}
+                shadow={0.4}
+                className="w-full"
               >
-                <h3 className="font-monument text-base sm:text-lg text-[#f3dc8a]">
-                  {t(item.q)}
-                </h3>
-                <p className="text-xs sm:text-sm text-[#c3c6d2] leading-relaxed">
-                  {t(item.a)}
-                </p>
-              </div>
+                <div className="glass-surface rounded-2xl p-6 sm:p-7 space-y-2 border border-white/10 w-full">
+                  <h3 className="font-monument text-base sm:text-lg text-[#f3dc8a]">
+                    {t(item.q)}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#c3c6d2] leading-relaxed">
+                    {t(item.a)}
+                  </p>
+                </div>
+              </TiltedCard>
             ))}
           </div>
         </div>
