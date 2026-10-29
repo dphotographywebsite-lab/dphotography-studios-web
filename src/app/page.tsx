@@ -99,17 +99,17 @@ export default function HomePage() {
           axis={48}
           curve={80}
           fade={10}
-          className="h-[80svh] sm:h-[90vh] min-h-[520px] sm:min-h-[680px] max-h-[960px] w-full bg-transparent"
+          className="h-[66svh] sm:h-[90vh] min-h-[430px] sm:min-h-[680px] max-h-[960px] w-full bg-transparent"
           style={{
             maskImage:
-              'linear-gradient(to bottom, #000 0%, #000 82%, transparent 100%)',
+              'linear-gradient(to bottom, #000 0%, #000 84%, transparent 100%)',
             WebkitMaskImage:
-              'linear-gradient(to bottom, #000 0%, #000 82%, transparent 100%)',
+              'linear-gradient(to bottom, #000 0%, #000 84%, transparent 100%)',
           }}
         >
           <div className="pointer-events-none relative z-10 flex h-full w-full items-end justify-center overflow-hidden">
             {/* Logo centrado encima de la foto del personaje en móvil */}
-            <div className="sm:hidden absolute top-3 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center">
+            <div className="sm:hidden absolute top-2 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center">
               <img
                 src="/brand/dps-logo-texture.png"
                 alt="DPhotography Studios"
@@ -118,13 +118,13 @@ export default function HomePage() {
               />
             </div>
 
-            <div className="absolute bottom-12 sm:bottom-16 left-1/2 -translate-x-1/2 w-[280px] sm:w-[540px] h-[280px] sm:h-[540px] bg-[#d4af37]/15 blur-[120px]" />
+            <div className="absolute bottom-10 sm:bottom-16 left-1/2 -translate-x-1/2 w-[260px] sm:w-[540px] h-[260px] sm:h-[540px] bg-[#d4af37]/15 blur-[120px]" />
 
             <img
               src="/brand/creator-cutout.png"
               alt="DPhotography Studios & Films"
               draggable={false}
-              className="relative z-10 h-[70%] sm:h-[88%] md:h-[96%] w-auto max-w-none object-contain object-bottom sm:-translate-y-2 md:scale-[1.04] origin-bottom select-none drop-shadow-[0_24px_60px_rgba(0,0,0,0.95)]"
+              className="relative z-10 h-[76%] sm:h-[88%] md:h-[96%] w-auto max-w-none object-contain object-bottom sm:-translate-y-2 md:scale-[1.04] origin-bottom select-none drop-shadow-[0_24px_60px_rgba(0,0,0,0.95)]"
             />
           </div>
         </TiltedGridHero>
