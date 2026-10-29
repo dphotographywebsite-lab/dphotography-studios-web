@@ -130,28 +130,32 @@ function ContactContent() {
   const socialPosts = [
     {
       img: '/brand/creator-tuxedo-portrait.jpg',
-      handle: '@dphotographystudios',
+      handle: '@dphotography.studios_',
       platform: 'Instagram',
+      url: 'https://www.instagram.com/dphotography.studios_?dlrf=MTIxMTlsb2ZqbTNqZA==',
       caption:
         'Retratos de etiqueta en estudio y temporada de bodas en Louisville ✨',
     },
     {
       img: '/brand/creator-crouching-tilta-rig.jpg',
-      handle: '@dmediarecords',
-      platform: 'YouTube / Reels',
+      handle: '@dphotograhy.studios',
+      platform: 'TikTok',
+      url: 'https://www.tiktok.com/@dphotograhy.studios?_r=1&_t=ZT-9Ax0jkDKBwb',
       caption:
         'En el set con el anillo Tilta + Sony Cinema para nuestro nuevo video musical 🎬',
     },
     {
       img: '/fotos/boda-47.jpg',
-      handle: '@dphotographystudios',
+      handle: '@dphotograhy.studios',
       platform: 'TikTok / Reels',
+      url: 'https://www.tiktok.com/@dphotograhy.studios?_r=1&_t=ZT-9Ax0jkDKBwb',
       caption: 'Estreno Tráiler de Boda 4K — Louisville KY 💍',
     },
     {
       img: '/fotos/quince-caballo-10.jpg',
-      handle: '@dphotographystudios',
-      platform: 'Instagram',
+      handle: 'DPhotography Studios',
+      platform: 'Facebook',
+      url: 'https://www.facebook.com/share/14rkM8CorgP/',
       caption:
         'Sesión Real Pre-Quince Editorial Ecuestre en Kentucky 👑',
     },
@@ -498,13 +502,13 @@ function ContactContent() {
                 NUESTRAS REDES SOCIALES OFICIALES
               </span>
               <h2 className="font-monument display-headline text-white uppercase">
-                Síguenos en Instagram, YouTube, TikTok y Facebook
+                Síguenos en Instagram, TikTok y Facebook
               </h2>
             </div>
 
             <div className="flex flex-wrap gap-3">
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/dphotography.studios_?dlrf=MTIxMTlsb2ZqbTNqZA=="
                 target="_blank"
                 rel="noreferrer"
                 className="px-5 py-2.5 rounded-full glass-dark-luxe hover:border-[#d4af37] text-xs font-semibold flex items-center gap-2"
@@ -513,25 +517,23 @@ function ContactContent() {
                 <span>Instagram</span>
               </a>
               <a
-                href="https://youtube.com"
+                href="https://www.tiktok.com/@dphotograhy.studios?_r=1&_t=ZT-9Ax0jkDKBwb"
                 target="_blank"
                 rel="noreferrer"
                 className="px-5 py-2.5 rounded-full glass-dark-luxe hover:border-[#d4af37] text-xs font-semibold flex items-center gap-2"
               >
-                <Youtube className="w-4 h-4 text-[#d4af37]" />
-                <span>YouTube 4K</span>
-              </a>
-              <a
-                href="https://tiktok.com"
-                target="_blank"
-                rel="noreferrer"
-                className="px-5 py-2.5 rounded-full glass-dark-luxe hover:border-[#d4af37] text-xs font-semibold flex items-center gap-2"
-              >
-                <Sparkles className="w-4 h-4 text-[#d4af37]" />
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-4 h-4 text-[#d4af37]"
+                  aria-hidden="true"
+                >
+                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
+                </svg>
                 <span>TikTok</span>
               </a>
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/share/14rkM8CorgP/"
                 target="_blank"
                 rel="noreferrer"
                 className="px-5 py-2.5 rounded-full glass-dark-luxe hover:border-[#d4af37] text-xs font-semibold flex items-center gap-2"
@@ -555,7 +557,7 @@ function ContactContent() {
                 className="h-full"
               >
                 <a
-                  href="https://instagram.com"
+                  href={post.url}
                   target="_blank"
                   rel="noreferrer"
                   className="group glass-dark-luxe glass-interactive rounded-2xl overflow-hidden flex flex-col justify-between h-full w-full"

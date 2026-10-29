@@ -4,7 +4,6 @@ import React from 'react';
 import Link from 'next/link';
 import {
   Instagram,
-  Youtube,
   Facebook,
   MapPin,
   Mail,
@@ -12,7 +11,6 @@ import {
   Sparkles,
   Film,
   Camera,
-  Lock,
   Disc,
 } from 'lucide-react';
 
@@ -54,7 +52,7 @@ export default function Footer() {
             {/* Social Media (44x44pt ergonomic targets) */}
             <div className="flex items-center gap-3 pt-1">
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/dphotography.studios_?dlrf=MTIxMTlsb2ZqbTNqZA=="
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Instagram"
@@ -63,16 +61,23 @@ export default function Footer() {
                 <Instagram className="w-4 h-4" />
               </a>
               <a
-                href="https://youtube.com"
+                href="https://www.tiktok.com/@dphotograhy.studios?_r=1&_t=ZT-9Ax0jkDKBwb"
                 target="_blank"
                 rel="noreferrer"
-                aria-label="YouTube"
+                aria-label="TikTok"
                 className="w-11 h-11 rounded-full bg-white/[0.04] border border-white/10 hover:border-[#d4af37] hover:text-[#f3dc8a] flex items-center justify-center transition-colors"
               >
-                <Youtube className="w-4 h-4" />
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-4 h-4"
+                  aria-hidden="true"
+                >
+                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
+                </svg>
               </a>
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/share/14rkM8CorgP/"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Facebook"
