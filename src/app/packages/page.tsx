@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useStudio } from '@/context/StudioContext';
-import { PACKAGES_DATA, FAQ_ITEMS } from '@/data/studioData';
 import {
   Sparkles,
   CheckCircle2,
@@ -15,7 +14,7 @@ import {
 } from 'lucide-react';
 
 export default function PackagesPage() {
-  const { t } = useStudio();
+  const { t, packages, faqs } = useStudio();
   const [selectedFilter, setSelectedFilter] = useState<string>('all');
 
   const filterTabs = [
@@ -27,7 +26,7 @@ export default function PackagesPage() {
     { slug: 'commercial-events', label: 'Comerciales y Eventos' },
   ];
 
-  const filteredPackages = PACKAGES_DATA.filter((pkg) => {
+  const filteredPackages = packages.filter((pkg) => {
     if (selectedFilter === 'all') return true;
     if (selectedFilter === 'weddings-group') {
       return (
@@ -235,7 +234,7 @@ export default function PackagesPage() {
           </div>
 
           <div className="space-y-4">
-            {FAQ_ITEMS.map((item, idx) => (
+            {faqs.map((item, idx) => (
               <div
                 key={idx}
                 className="glass-surface rounded-2xl p-6 sm:p-7 space-y-2 border border-white/10"

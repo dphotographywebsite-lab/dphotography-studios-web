@@ -251,6 +251,13 @@ export default function Footer() {
             >
               Reservar
             </Link>
+            <span>•</span>
+            <Link
+              href="/admin"
+              className="hover:text-[#f3dc8a] transition-colors text-white/45"
+            >
+              Panel Admin
+            </Link>
           </div>
         </div>
       </div>

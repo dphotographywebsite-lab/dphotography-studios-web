@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useStudio } from '@/context/StudioContext';
-import { FILM_PRODUCTIONS, FilmProduction } from '@/data/studioData';
+import { FilmProduction } from '@/data/studioData';
 import {
   Play,
   Disc,
@@ -14,11 +14,11 @@ import {
 } from 'lucide-react';
 
 export default function FilmsPage() {
-  const { t, openFilm } = useStudio();
+  const { t, openFilm, films } = useStudio();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [stageFilm, setStageFilm] = useState<FilmProduction>(
-    FILM_PRODUCTIONS[0]
-  );
+  const [selectedStageId, setSelectedStageId] = useState<string>('');
+  const stageFilm: FilmProduction | undefined =
+    films.find((f) => f.id === selectedStageId) || films[0];
 
   const filmCategories = [
     { slug: 'all', label: 'Todas las Películas' },
@@ -31,8 +31,10 @@ export default function FilmsPage() {
 
   const filteredFilms =
     selectedCategory === 'all'
-      ? FILM_PRODUCTIONS
-      : FILM_PRODUCTIONS.filter((f) => f.categorySlug === selectedCategory);
+      ? films
+      : films.filter((f) => f.categorySlug === selectedCategory);
+
+  if (!stageFilm) return null;
 
   return (
     <div className="pt-28 pb-20 space-y-16">
@@ -247,7 +249,7 @@ export default function FilmsPage() {
                     <button
                       type="button"
                       onClick={() => {
-                        setStageFilm(film);
+                        setSelectedStageId(film.id);
                         openFilm(film);
                       }}
                       className="cursor-pointer btn-gold flex-1 py-2.5 px-4 rounded-xl text-[11px] flex items-center justify-center gap-1.5"

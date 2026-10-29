@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useStudio } from '@/context/StudioContext';
-import { CLIENT_GALLERIES_DATA, ClientGalleryItem } from '@/data/studioData';
+import { ClientGalleryItem } from '@/data/studioData';
 import {
   Lock,
   Unlock,
@@ -19,7 +19,7 @@ import {
 } from 'lucide-react';
 
 export default function ClientGalleriesPage() {
-  const { t } = useStudio();
+  const { t, clientGalleries } = useStudio();
   const [searchCode, setSearchCode] = useState('');
   const [unlockedIds, setUnlockedIds] = useState<string[]>([]);
   const [activeGalleryModal, setActiveGalleryModal] =
@@ -27,7 +27,7 @@ export default function ClientGalleriesPage() {
   const [passwordInput, setPasswordInput] = useState('');
   const [passwordError, setPasswordError] = useState(false);
 
-  const filteredGalleries = CLIENT_GALLERIES_DATA.filter((g) => {
+  const filteredGalleries = clientGalleries.filter((g) => {
     if (!searchCode.trim()) return true;
     const q = searchCode.toLowerCase();
     return (

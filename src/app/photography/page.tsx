@@ -4,7 +4,6 @@ import React, { useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useStudio } from '@/context/StudioContext';
-import { PHOTO_CATEGORIES, PROJECT_GALLERIES } from '@/data/studioData';
 import {
   Camera,
   MapPin,
@@ -21,12 +20,12 @@ function PhotographyPortfolioContent() {
   const initialCategory = searchParams.get('category') || 'all';
   const [selectedCategory, setSelectedCategory] =
     useState<string>(initialCategory);
-  const { t, openGallery } = useStudio();
+  const { t, openGallery, projectGalleries, photoCategories } = useStudio();
 
   const filteredGalleries =
     selectedCategory === 'all'
-      ? PROJECT_GALLERIES
-      : PROJECT_GALLERIES.filter((g) => g.categorySlug === selectedCategory);
+      ? projectGalleries
+      : projectGalleries.filter((g) => g.categorySlug === selectedCategory);
 
   return (
     <div className="pt-28 pb-20 space-y-20">
@@ -60,7 +59,7 @@ function PhotographyPortfolioContent() {
             >
               Todas las Colecciones
             </button>
-            {PHOTO_CATEGORIES.map((cat) => (
+            {photoCategories.map((cat) => (
               <button
                 key={cat.slug}
                 type="button"

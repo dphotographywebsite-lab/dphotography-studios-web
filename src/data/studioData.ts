@@ -1217,7 +1217,21 @@ export const EXPERIENCE_STEPS = [
   },
 ];
 
-export const TESTIMONIALS_DATA = [
+export interface TestimonialItem {
+  id: string;
+  client: string;
+  role: BilingualText;
+  quote: BilingualText;
+  rating: number;
+  image: string;
+}
+
+export interface FAQItem {
+  q: BilingualText;
+  a: BilingualText;
+}
+
+export const TESTIMONIALS_DATA: TestimonialItem[] = [
   {
     id: 't1',
     client: 'Sophia y Alexander M.',
@@ -1264,7 +1278,7 @@ export const TESTIMONIALS_DATA = [
   },
 ];
 
-export const FAQ_ITEMS = [
+export const FAQ_ITEMS: FAQItem[] = [
   {
     q: {
       en: '¿Con cuánta anticipación debemos reservar nuestra Boda o Quinceañera?',

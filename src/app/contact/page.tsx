@@ -3,7 +3,6 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useStudio } from '@/context/StudioContext';
-import { PACKAGES_DATA } from '@/data/studioData';
 import {
   Sparkles,
   MapPin,
@@ -19,7 +18,7 @@ import {
 } from 'lucide-react';
 
 function ContactContent() {
-  const { t } = useStudio();
+  const { t, packages } = useStudio();
   const searchParams = useSearchParams();
   const preselectedPackage = searchParams.get('package') || '';
   const preselectedService = searchParams.get('service') || '';
@@ -308,7 +307,7 @@ function ContactContent() {
                       <option value="">
                         Ayúdame a elegir / Paquete Personalizado
                       </option>
-                      {PACKAGES_DATA.map((p) => (
+                      {packages.map((p) => (
                         <option key={p.id} value={p.id}>
                           {t(p.categoryName)} — {t(p.tierName)} (
                           {p.startingPrice})

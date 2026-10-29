@@ -8,12 +8,7 @@ import {
   TiltedGridImage,
 } from '@/components/ui/tilted-grid-hero';
 import InteractiveStudioGallery from '@/components/ui/interactive-studio-gallery';
-import {
-  FILM_PRODUCTIONS,
-  EXPERIENCE_STEPS,
-  TESTIMONIALS_DATA,
-  PACKAGES_DATA,
-} from '@/data/studioData';
+import { EXPERIENCE_STEPS } from '@/data/studioData';
 import { Play } from 'lucide-react';
 
 const HERO_REEL_IMAGES: TiltedGridImage[] = [
@@ -84,10 +79,10 @@ const HERO_REEL_IMAGES: TiltedGridImage[] = [
 ];
 
 export default function HomePage() {
-  const { t, openFilm, openShowreel } = useStudio();
+  const { t, openFilm, openShowreel, films, packages, testimonials } = useStudio();
 
-  const featuredFilms = FILM_PRODUCTIONS.filter((f) => f.featuredOnHome);
-  const featuredPackages = PACKAGES_DATA.filter((p) => p.popular);
+  const featuredFilms = films.filter((f) => f.featuredOnHome);
+  const featuredPackages = packages.filter((p) => p.popular);
 
   return (
     <div className="w-full overflow-x-clip pb-16 sm:pb-24 space-y-20 sm:space-y-32">
@@ -383,7 +378,7 @@ export default function HomePage() {
             data-reveal="stagger"
             className="grid grid-cols-1 md:grid-cols-3 gap-6"
           >
-            {TESTIMONIALS_DATA.map((item) => (
+            {testimonials.map((item) => (
               <div
                 key={item.id}
                 className="spatial-bento-card p-6 sm:p-8 flex flex-col justify-between space-y-6"
