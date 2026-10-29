@@ -88,8 +88,42 @@ function ContactContent() {
     );
   };
 
+  const WHATSAPP_NUMBER = '17022739854';
+
+  const buildWhatsAppUrl = () => {
+    const chosenServices = serviceOptions
+      .filter((s) => selectedServices.includes(s.id))
+      .map((s) => s.label)
+      .join(', ');
+
+    const selectedPkg = packages.find((p) => p.id === selectedPackageId);
+    const pkgLabel = selectedPkg
+      ? `${t(selectedPkg.categoryName)} — ${t(selectedPkg.tierName)} (${selectedPkg.startingPrice})`
+      : selectedPackageId === 'custom-production'
+        ? 'Producción Especial a Medida'
+        : 'Por definir / Asesoría personalizada';
+
+    const lines = [
+      'Hola *DPhotography Studios & Films*, quiero cotizar y verificar disponibilidad:',
+      '',
+      `• *Nombre:* ${fullName || 'No especificado'}`,
+      `• *Correo:* ${email || 'No especificado'}`,
+      `• *Teléfono:* ${phone || 'No especificado'}`,
+      `• *Servicios:* ${chosenServices || 'No especificado'}`,
+      `• *Fecha del Evento:* ${eventDate || 'Por definir'}`,
+      `• *Locación / Ciudad:* ${venueLocation || 'Louisville, KY'}`,
+      `• *Paquete:* ${pkgLabel}`,
+      `• *Presupuesto Estimado:* ${budget}`,
+      visionNotes.trim() ? `• *Detalles / Idea:* ${visionNotes.trim()}` : '',
+    ].filter(Boolean);
+
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join('\n'))}`;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const waUrl = buildWhatsAppUrl();
+    window.open(waUrl, '_blank', 'noopener,noreferrer');
     setSubmitted(true);
   };
 
@@ -155,25 +189,37 @@ function ContactContent() {
                   <CheckCircle2 className="w-10 h-10" />
                 </div>
                 <h2 className="font-monument text-2xl sm:text-3xl text-white uppercase">
-                  ¡Solicitud Recibida! — Bienvenido a DPhotography Studios
+                  ¡Solicitud Lista en WhatsApp! — DPhotography Studios
                 </h2>
                 <p className="font-editorial italic text-2xl text-[#e2cf97] max-w-xl mx-auto">
-                  ¡Gracias, {fullName || 'por escribirnos'}! Estamos verificando
-                  disponibilidad para {eventDate || 'tu fecha'} en{' '}
-                  {venueLocation}.
+                  ¡Gracias, {fullName || 'por escribirnos'}! Hemos abierto tu
+                  chat de WhatsApp al +1 (702) 273-9854 con todos los datos de
+                  tu evento ({eventDate || 'fecha por confirmar'} en{' '}
+                  {venueLocation}).
                 </p>
                 <p className="text-xs sm:text-sm text-white/70 max-w-lg mx-auto">
-                  Recibirás un mensaje y correo muy pronto para agendar tu
-                  consulta privada en nuestro estudio de Louisville o por
-                  videollamada.
+                  Si la ventana de WhatsApp no se abrió automáticamente en tu
+                  dispositivo, pulsa el botón dorado de abajo para enviarnos el
+                  mensaje directamente.
                 </p>
-                <button
-                  type="button"
-                  onClick={() => setSubmitted(false)}
-                  className="cursor-pointer btn-gold px-8 py-3.5 rounded-full text-xs"
-                >
-                  Enviar Otra Consulta
-                </button>
+                <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+                  <a
+                    href={buildWhatsAppUrl()}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="cursor-pointer btn-gold px-8 py-3.5 text-xs inline-flex items-center gap-2"
+                  >
+                    <Send className="w-4 h-4" />
+                    <span>Abrir WhatsApp (+1 702 273-9854)</span>
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => setSubmitted(false)}
+                    className="cursor-pointer px-6 py-3.5 border border-white/20 text-xs uppercase tracking-widest text-white/80 hover:text-white"
+                  >
+                    Editar Datos
+                  </button>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-8">
@@ -366,7 +412,7 @@ function ContactContent() {
                   className="cursor-pointer btn-gold w-full py-4 rounded-2xl text-xs flex items-center justify-center gap-2.5"
                 >
                   <Send className="w-4 h-4" />
-                  <span>ENVIAR SOLICITUD Y VERIFICAR FECHA</span>
+                  <span>ENVIAR SOLICITUD POR WHATSAPP • +1 (702) 273-9854</span>
                 </button>
               </form>
             )}
@@ -405,7 +451,14 @@ function ContactContent() {
                   </p>
                   <p className="flex items-center gap-3">
                     <Phone className="w-4 h-4 text-[#d4af37] shrink-0" />
-                    <span>(502) 555-0194 (Llamadas / SMS / WhatsApp)</span>
+                    <a
+                      href="https://wa.me/17022739854"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="hover:text-[#f3dc8a] transition-colors"
+                    >
+                      +1 (702) 273-9854 (WhatsApp / Llamadas / SMS)
+                    </a>
                   </p>
                   <p className="flex items-center gap-3">
                     <Mail className="w-4 h-4 text-[#d4af37] shrink-0" />

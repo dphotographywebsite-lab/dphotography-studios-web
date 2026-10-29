@@ -38,7 +38,6 @@ export default function Navbar() {
       fx: 'spin',
     },
     { route: '/about', label: 'Estudio', icon: NimbusIcons.user, fx: 'wave' },
-    { route: '/client-galleries', label: 'Clientes', fx: 'pop' },
     { route: '/contact', label: 'Contacto', fx: 'pop' },
   ];
 

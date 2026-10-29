@@ -84,10 +84,20 @@ export default function AdminDashboardPage() {
     resetCmsToDefaults,
   } = useStudio();
 
-  // Autenticación simple de Estudio
-  const [unlocked, setUnlocked] = useState<boolean>(true);
+  // Autenticación con contraseña del Estudio
+  const [unlocked, setUnlocked] = useState<boolean>(false);
   const [pinInput, setPinInput] = useState<string>('');
   const [pinError, setPinError] = useState<boolean>(false);
+
+  useEffect(() => {
+    try {
+      if (sessionStorage.getItem('dps_admin_unlocked') === 'true') {
+        setUnlocked(true);
+      }
+    } catch {
+      // ignore storage errors
+    }
+  }, []);
 
   // Pestaña activa
   const [activeTab, setActiveTab] = useState<AdminTab>('packages');
@@ -312,24 +322,36 @@ export default function AdminDashboardPage() {
   if (!unlocked) {
     return (
       <div className="min-h-screen pt-32 pb-20 px-4 flex items-center justify-center">
-        <div className="w-full max-w-md bg-black/85 border border-white/15 p-8 space-y-6">
+        <div className="w-full max-w-md bg-black/90 border border-[#d4af37]/35 p-8 space-y-6">
           <div className="space-y-2">
-            <span className="text-[10px] font-mono tracking-[0.26em] uppercase text-[#d4af37] block">
-              ACCESO ADMINISTRATIVO
+            <span className="text-[10px] font-mono tracking-[0.26em] uppercase text-[#d4af37] flex items-center gap-2">
+              <Lock className="w-3.5 h-3.5" />
+              ACCESO ADMINISTRATIVO PRIVADO
             </span>
             <h1 className="font-monument text-2xl text-white uppercase">
               Panel de Control DPS
             </h1>
+            <p className="text-xs text-white/60">
+              Ingresa la contraseña maestra del estudio para editar precios,
+              galerías y películas.
+            </p>
           </div>
           <form
             onSubmit={(e) => {
               e.preventDefault();
+              const clean = pinInput.trim();
               if (
-                pinInput.trim().toUpperCase() === 'DPS2026' ||
-                pinInput.trim() === '2026'
+                clean === 'DPS2026!' ||
+                clean.toUpperCase() === 'DPS2026!' ||
+                clean.toUpperCase() === 'DPS2026'
               ) {
                 setUnlocked(true);
                 setPinError(false);
+                try {
+                  sessionStorage.setItem('dps_admin_unlocked', 'true');
+                } catch {
+                  // ignore
+                }
               } else {
                 setPinError(true);
               }
@@ -340,16 +362,16 @@ export default function AdminDashboardPage() {
               type="password"
               value={pinInput}
               onChange={(e) => setPinInput(e.target.value)}
-              placeholder="PIN de Acceso (2026)"
-              className="w-full px-4 py-3 bg-black border border-white/20 text-white text-sm focus:border-[#d4af37] focus:outline-none"
+              placeholder="Contraseña de Administrador..."
+              className="w-full px-4 py-3.5 bg-black border border-white/20 text-white text-sm focus:border-[#d4af37] focus:outline-none"
             />
             {pinError && (
               <p className="text-xs text-red-400">
-                PIN incorrecto. Usa 2026 o DPS2026.
+                Contraseña incorrecta. Verifica tus credenciales de administrador.
               </p>
             )}
-            <button type="submit" className="btn-gold w-full py-3.5 text-xs">
-              Entrar al Panel
+            <button type="submit" className="cursor-pointer btn-gold w-full py-3.5 text-xs">
+              Desbloquear Panel de Administración
             </button>
           </form>
         </div>
@@ -480,6 +502,24 @@ export default function AdminDashboardPage() {
             >
               <RotateCcw className="w-4 h-4" />
               <span className="hidden xl:inline">Restaurar</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                setUnlocked(false);
+                setPinInput('');
+                try {
+                  sessionStorage.removeItem('dps_admin_unlocked');
+                } catch {
+                  // ignore
+                }
+              }}
+              title="Bloquear Panel"
+              className="cursor-pointer px-3.5 py-3 bg-black/70 border border-white/15 hover:border-[#d4af37] text-white/80 hover:text-[#f3dc8a] text-xs flex items-center gap-1.5"
+            >
+              <Lock className="w-4 h-4 text-[#d4af37]" />
+              <span className="hidden xl:inline">Bloquear</span>
             </button>
           </div>
         </div>

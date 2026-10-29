@@ -169,15 +169,6 @@ export default function Footer() {
                   Paquetes y Precios
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/client-galleries"
-                  className="hover:text-[#f3dc8a] transition-colors inline-flex items-center gap-1.5 text-[#e6d28a]"
-                >
-                  <Lock className="w-3 h-3" />
-                  <span>Portal Privado Pixieset</span>
-                </Link>
-              </li>
             </ul>
           </div>
 
@@ -200,10 +191,12 @@ export default function Footer() {
               <li className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-[#d4af37] shrink-0" />
                 <a
-                  href="tel:+15025550199"
+                  href="https://wa.me/17022739854"
+                  target="_blank"
+                  rel="noreferrer"
                   className="hover:text-[#f3dc8a] transition-colors"
                 >
-                  (502) 555-0199 • WhatsApp
+                  +1 (702) 273-9854 • WhatsApp
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
@@ -237,13 +230,6 @@ export default function Footer() {
           </p>
           <div className="flex items-center gap-6">
             <span>Louisville, KY</span>
-            <span>•</span>
-            <Link
-              href="/client-galleries"
-              className="hover:text-[#f3dc8a] transition-colors"
-            >
-              Acceso Clientes
-            </Link>
             <span>•</span>
             <Link
               href="/contact"
