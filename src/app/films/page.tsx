@@ -48,12 +48,13 @@ export default function FilmsPage() {
           </div>
 
           <h1 className="font-monument hero-headline text-white uppercase">
-            Películas y Cinematografía
+            Producción Profesional. Visión Cinematográfica.
           </h1>
 
           <p className="font-editorial italic text-xl sm:text-3xl text-[#e2cf97] max-w-3xl mx-auto">
-            Tráilers de boda en 4K, highlights reales de quinceañera, videos
-            musicales oficiales y cine narrativo original.
+            Dirigido por Daniel Anthony Jesús Cudina — Wedding films en 4K,
+            producciones de quinceañera, videoclips oficiales (DMedia Records) y
+            cine original.
           </p>
         </div>
       </section>

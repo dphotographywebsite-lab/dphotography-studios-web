@@ -33,10 +33,13 @@ export default function Footer() {
             </Link>
 
             <p className="text-sm text-[#a6aab8] leading-relaxed max-w-sm">
-              Estudio de fotografía editorial de lujo y productora de cine.
-              Ubicados en Louisville, Kentucky y disponibles para bodas,
-              quinceañeras, videos musicales y producciones en cualquier
-              destino.
+              Fundado y dirigido por{' '}
+              <strong className="text-white font-medium">
+                Daniel Anthony Jesús Cudina
+              </strong>
+              . Fotografía profesional y producción cinematográfica de alto
+              impacto. Donde tus historias se convierten en películas y tus
+              sueños se convierten en vida.
             </p>
 
             {/* DMedia Records Division Pill */}

@@ -164,16 +164,17 @@ function ContactContent() {
         <div className="max-w-[1300px] mx-auto text-center space-y-5">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full spatial-capsule text-[#f3dc8a] text-[10px] tracking-[0.26em] uppercase font-semibold">
             <Sparkles className="w-3.5 h-3.5 text-[#d4af37]" />
-            <span>RESERVA TU FECHA Y AGENDA TU CONSULTA</span>
+            <span>MÁS QUE UN SERVICIO, UNA EXPERIENCIA • TU VISIÓN, NUESTRA CREATIVIDAD</span>
           </div>
 
           <h1 className="font-monument hero-headline text-white uppercase">
             Hagamos Tu Historia Realidad
           </h1>
 
-          <p className="font-editorial italic text-2xl sm:text-3xl text-[#e2cf97] max-w-3xl mx-auto">
-            Completa el formulario de reserva y te responderemos en menos de 24
-            horas con disponibilidad de fecha y una propuesta a tu medida.
+          <p className="font-editorial italic text-xl sm:text-3xl text-[#e2cf97] max-w-3xl mx-auto">
+            “Estoy aquí para convertir tus ideas en imágenes, tus momentos en
+            recuerdos y tus sueños en una realidad cinematográfica.” — Daniel
+            Anthony Jesús Cudina
           </p>
         </div>
       </section>

@@ -369,28 +369,37 @@ export default function HomePage() {
           {/* Manifiesto Editorial */}
           <div data-reveal="up" className="lg:col-span-5 space-y-4 sm:space-y-6">
             <span className="text-[10px] font-mono tracking-[0.28em] uppercase text-[#d4af37] block">
-              02 / EL ESTUDIO Y EL DIRECTOR
+              02 / EL DIRECTOR Y EL ESTUDIO
             </span>
 
-            <h2 className="font-monument display-headline text-white uppercase">
-              Elegancia Editorial y Rigor Cinematográfico
-            </h2>
+            <div className="space-y-1.5">
+              <h2 className="font-monument display-headline text-white uppercase">
+                Daniel Anthony Jesús Cudina
+              </h2>
+              <p className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.18em] text-[#f3dc8a]">
+                Founder & Creative Director • Filmmaker • Cinematographer • Photographer
+              </p>
+            </div>
 
-            <p className="font-editorial italic text-lg sm:text-2xl text-[#e2cf97]">
-              “Cada cliente merece sentirse como el protagonista de una obra de
-              cine.”
+            <p className="font-editorial italic text-lg sm:text-2xl text-[#e2cf97] border-l-2 border-[#d4af37] pl-3.5">
+              “No solo capturo imágenes, creo historias que merecen ser
+              recordadas para siempre.”
             </p>
 
             <p className="text-xs sm:text-base text-[#b8bcc8] leading-relaxed">
-              Con sede en Louisville, Kentucky, DPhotography Studios & Films
-              integra iluminación de estudio, óptica de cine y dirección
-              artística en bodas, quinceañeras, retratos editoriales y videos
-              musicales a través de nuestra división DMedia Records.
+              Para mí, una cámara es mucho más que una herramienta de trabajo:
+              es una manera de contar historias, transmitir emociones y
+              convertir ideas en experiencias visuales extraordinarias. En{' '}
+              <strong className="text-white">
+                DPhotography Studios & DMedia Records
+              </strong>{' '}
+              llevamos la fotografía profesional y la producción cinematográfica
+              a otro nivel.
             </p>
 
             <div className="pt-1 sm:pt-2">
               <Link href="/about" className="editorial-link">
-                <span>Conocer la Historia del Estudio</span>
+                <span>Conocer Sobre Mí y el Estudio</span>
                 <span>→</span>
               </Link>
             </div>
@@ -610,11 +619,15 @@ export default function HomePage() {
             className="pt-12 border-t border-white/15 text-center space-y-6"
           >
             <span className="text-[10px] font-mono tracking-[0.28em] uppercase text-[#d4af37] block">
-              LOUISVILLE, KENTUCKY • DISPONIBLES PARA VIAJAR
+              TU VISIÓN • NUESTRA CREATIVIDAD — DANIEL ANTHONY JESÚS CUDINA
             </span>
-            <h2 className="font-monument display-headline text-white uppercase max-w-3xl mx-auto">
-              Creemos Algo Extraordinario
+            <h2 className="font-monument display-headline text-white uppercase max-w-4xl mx-auto">
+              Donde Tus Historias Se Convierten en Películas y Tus Sueños Se
+              Convierten en Vida
             </h2>
+            <p className="font-editorial italic text-xl sm:text-2xl text-[#f3dc8a]">
+              “Let&apos;s Create Something Extraordinary.”
+            </p>
             <div className="pt-2 flex justify-center">
               <Link
                 href="/contact"
