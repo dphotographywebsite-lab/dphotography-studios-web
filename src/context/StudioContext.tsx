@@ -128,10 +128,20 @@ interface StudioContextType {
   testimonials: TestimonialItem[];
   faqs: FAQItem[];
   mediaLibrary: string[];
+  supabaseConnected: boolean;
   updateCmsData: (
     partial: Partial<StudioCmsPayload>,
     options?: { commitToGithub?: boolean; githubToken?: string }
-  ) => Promise<{ ok: boolean; savedLocally?: boolean; githubSynced?: boolean; error?: string }>;
+  ) => Promise<{
+    ok: boolean;
+    savedLocally?: boolean;
+    supabaseSynced?: boolean;
+    githubSynced?: boolean;
+    error?: string;
+  }>;
+  uploadMediaFiles: (
+    files: FileList | File[]
+  ) => Promise<{ ok: boolean; uploadedUrls?: string[]; error?: string }>;
   resetCmsToDefaults: () => Promise<void>;
 }
 
@@ -177,9 +187,10 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
   const [activeFilm, setActiveFilm] = useState<FilmProduction | null>(null);
   const [cms, setCms] = useState<StudioCmsPayload>(buildInitialCmsState);
   const [mediaLibrary, setMediaLibrary] = useState<string[]>(DEFAULT_MEDIA_LIBRARY);
+  const [supabaseConnected, setSupabaseConnected] = useState<boolean>(false);
 
   useEffect(() => {
-    // 1. Cargar de localStorage inmediatamente si existe
+    // 1. Cargar de localStorage inmediatamente para render instantáneo
     try {
       const saved = window.localStorage.getItem(STORAGE_KEY);
       if (saved) {
@@ -209,34 +220,47 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
       // Ignorar errores de lectura de localStorage
     }
 
-    // 2. Consultar servidor para biblioteca de medios y overrides guardados en disco
+    // 2. Consultar Supabase Cloud / servidor para obtener el estado oficial más reciente
     fetch('/api/studio-cms', { cache: 'no-store' })
       .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
         if (!data) return;
+        if (Boolean(data.supabaseConnected)) {
+          setSupabaseConnected(true);
+        }
         if (Array.isArray(data.mediaLibrary) && data.mediaLibrary.length > 0) {
           setMediaLibrary(data.mediaLibrary);
         }
         const srv = data.overrides as Partial<StudioCmsPayload> | undefined;
-        if (srv && Object.keys(srv).length > 0 && !window.localStorage.getItem(STORAGE_KEY)) {
-          setCms((prev) => ({
-            packages: Array.isArray(srv.packages) ? srv.packages : prev.packages,
-            projectGalleries: Array.isArray(srv.projectGalleries)
-              ? srv.projectGalleries
-              : prev.projectGalleries,
-            photoCategories: Array.isArray(srv.photoCategories)
-              ? srv.photoCategories
-              : prev.photoCategories,
-            carouselItems: Array.isArray(srv.carouselItems)
-              ? srv.carouselItems
-              : prev.carouselItems,
-            films: Array.isArray(srv.films) ? srv.films : prev.films,
-            clientGalleries: Array.isArray(srv.clientGalleries)
-              ? srv.clientGalleries
-              : prev.clientGalleries,
-            testimonials: Array.isArray(srv.testimonials) ? srv.testimonials : prev.testimonials,
-            faqs: Array.isArray(srv.faqs) ? srv.faqs : prev.faqs,
-          }));
+        if (srv && Object.keys(srv).length > 0) {
+          setCms((prev) => {
+            const merged: StudioCmsPayload = {
+              packages: Array.isArray(srv.packages) ? srv.packages : prev.packages,
+              projectGalleries: Array.isArray(srv.projectGalleries)
+                ? srv.projectGalleries
+                : prev.projectGalleries,
+              photoCategories: Array.isArray(srv.photoCategories)
+                ? srv.photoCategories
+                : prev.photoCategories,
+              carouselItems: Array.isArray(srv.carouselItems)
+                ? srv.carouselItems
+                : prev.carouselItems,
+              films: Array.isArray(srv.films) ? srv.films : prev.films,
+              clientGalleries: Array.isArray(srv.clientGalleries)
+                ? srv.clientGalleries
+                : prev.clientGalleries,
+              testimonials: Array.isArray(srv.testimonials)
+                ? srv.testimonials
+                : prev.testimonials,
+              faqs: Array.isArray(srv.faqs) ? srv.faqs : prev.faqs,
+            };
+            try {
+              window.localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
+            } catch {
+              // ignore
+            }
+            return merged;
+          });
         }
       })
       .catch(() => {});
@@ -269,16 +293,21 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
           }),
         });
         const data = await res.json();
+        if (data.supabaseSynced) {
+          setSupabaseConnected(true);
+        }
         return {
           ok: Boolean(data.ok),
           savedLocally: data.savedLocally,
+          supabaseSynced: data.supabaseSynced,
           githubSynced: data.githubSynced,
-          error: data.githubError || data.error,
+          error: data.supabaseError || data.githubError || data.error,
         };
       } catch (err) {
         return {
           ok: true,
           savedLocally: false,
+          supabaseSynced: false,
           githubSynced: false,
           error: err instanceof Error ? err.message : undefined,
         };
@@ -286,6 +315,31 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
     },
     [cms]
   );
+
+  const uploadMediaFiles = useCallback(async (files: FileList | File[]) => {
+    try {
+      const formData = new FormData();
+      Array.from(files).forEach((file) => {
+        formData.append('files', file);
+      });
+      const res = await fetch('/api/studio-cms/upload', {
+        method: 'POST',
+        body: formData,
+      });
+      const data = await res.json();
+      if (data.ok && Array.isArray(data.uploadedUrls) && data.uploadedUrls.length > 0) {
+        setMediaLibrary((prev) => [...data.uploadedUrls, ...prev]);
+        setSupabaseConnected(true);
+        return { ok: true, uploadedUrls: data.uploadedUrls as string[] };
+      }
+      return { ok: false, error: data.error || 'No se pudieron subir las fotos' };
+    } catch (err) {
+      return {
+        ok: false,
+        error: err instanceof Error ? err.message : 'Error de red al subir archivos',
+      };
+    }
+  }, []);
 
   const resetCmsToDefaults = useCallback(async () => {
     const defaults: StudioCmsPayload = {
@@ -339,7 +393,9 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
         testimonials: cms.testimonials,
         faqs: cms.faqs,
         mediaLibrary,
+        supabaseConnected,
         updateCmsData,
+        uploadMediaFiles,
         resetCmsToDefaults,
       }}
     >

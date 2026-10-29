@@ -80,7 +80,9 @@ export default function AdminDashboardPage() {
     faqs,
     testimonials,
     mediaLibrary,
+    supabaseConnected,
     updateCmsData,
+    uploadMediaFiles,
     resetCmsToDefaults,
   } = useStudio();
 
@@ -219,11 +221,17 @@ export default function AdminDashboardPage() {
         );
       }
     } else {
-      showToast(
-        res.savedLocally
-          ? 'Cambios guardados en el sitio y en el servidor local.'
-          : 'Cambios aplicados y guardados en este navegador.'
-      );
+      if (res.supabaseSynced) {
+        showToast(
+          'Cambios guardados en Supabase Cloud en tiempo real (visible en todos los dispositivos).'
+        );
+      } else {
+        showToast(
+          res.savedLocally
+            ? 'Cambios guardados en el sitio y en el servidor local.'
+            : 'Cambios aplicados y guardados en este navegador.'
+        );
+      }
     }
   };
 
@@ -280,18 +288,19 @@ export default function AdminDashboardPage() {
     reader.readAsText(file);
   };
 
-  // Subir imagen desde dispositivo (optimizada en canvas para DataURL ligera)
+  // Subir imagen desde dispositivo directo a Supabase Storage (optimizada en canvas)
   const handleLocalImageUpload = (
     e: React.ChangeEvent<HTMLInputElement>,
     onResult: (dataUrl: string) => void
   ) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    showToast('Optimizando y subiendo fotografía a Supabase Cloud...');
     const reader = new FileReader();
     reader.onload = () => {
       const img = new Image();
       img.onload = () => {
-        const maxDim = 1600;
+        const maxDim = 1920;
         let w = img.width;
         let h = img.height;
         if (w > maxDim || h > maxDim) {
@@ -309,9 +318,27 @@ export default function AdminDashboardPage() {
         const ctx = canvas.getContext('2d');
         if (ctx) {
           ctx.drawImage(img, 0, 0, w, h);
-          const compressed = canvas.toDataURL('image/jpeg', 0.84);
-          onResult(compressed);
-          showToast('Fotografía cargada y optimizada.');
+          canvas.toBlob(
+            async (blob) => {
+              if (blob) {
+                const baseName = file.name.replace(/\.[^/.]+$/, '') || 'foto';
+                const optimizedFile = new File([blob], `${baseName}.jpg`, {
+                  type: 'image/jpeg',
+                });
+                const upRes = await uploadMediaFiles([optimizedFile]);
+                if (upRes.ok && upRes.uploadedUrls?.[0]) {
+                  onResult(upRes.uploadedUrls[0]);
+                  showToast('Fotografía subida a Supabase Cloud correctamente.');
+                  return;
+                }
+              }
+              const compressed = canvas.toDataURL('image/jpeg', 0.86);
+              onResult(compressed);
+              showToast('Fotografía cargada y optimizada.');
+            },
+            'image/jpeg',
+            0.88
+          );
         }
       };
       img.src = String(reader.result);
@@ -423,12 +450,15 @@ export default function AdminDashboardPage() {
         ================================================================= */}
         <div className="bg-black/80 backdrop-blur-xl border border-white/15 p-6 sm:p-8 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="space-y-1.5">
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
               <span className="text-[10px] font-mono tracking-[0.28em] uppercase text-[#d4af37]">
                 ESTUDIO CMS • PANEL DE ADMINISTRACIÓN
               </span>
               <span className="text-[10px] font-mono px-2 py-0.5 bg-[#d4af37]/15 border border-[#d4af37]/40 text-[#f3dc8a]">
                 EN VIVO
+              </span>
+              <span className="text-[10px] font-mono px-2 py-0.5 bg-emerald-500/15 border border-emerald-500/40 text-emerald-300">
+                {supabaseConnected ? 'SUPABASE CLOUD CONECTADO' : 'SUPABASE CLOUD LISTO'}
               </span>
             </div>
             <h1 className="font-monument text-2xl sm:text-3xl text-white uppercase">
